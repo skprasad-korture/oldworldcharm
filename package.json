@@ -20,25 +20,26 @@
     "lint": "eslint packages/*/src --ext .ts,.tsx",
     "format": "prettier --write .",
     "type-check": "pnpm -r type-check",
-    "prepare": "husky"
+    "prepare": "is-ci || husky"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@types/node": "^20.10.0",
-    "typescript": "^5.3.0",
-    "prettier": "^3.1.0",
-    "prettier-plugin-tailwindcss": "^0.5.7",
-    "eslint": "^8.55.0",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
+    "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.33.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
+    "is-ci": "^4.1.0",
     "lint-staged": "^15.2.0",
-    "@changesets/cli": "^2.27.1"
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "typescript": "^5.3.0"
   },
   "engines": {
     "node": ">=18.0.0",
