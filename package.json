@@ -17,7 +17,7 @@
     "build": "pnpm -r build",
     "dev": "pnpm -r --parallel dev",
     "test": "pnpm -r test",
-    "lint": "pnpm -r lint",
+    "lint": "eslint packages/*/src --ext .ts,.tsx",
     "format": "prettier --write .",
     "type-check": "pnpm -r type-check",
     "prepare": "husky"

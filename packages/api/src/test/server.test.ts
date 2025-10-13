@@ -7,9 +7,7 @@ import errorHandlerPlugin from '../plugins/error-handler.js';
 import authPlugin from '../plugins/auth.js';
 import validationPlugin from '../plugins/validation.js';
 
-// Import routes
-import healthRoutes from '../routes/health.js';
-import authRoutes from '../routes/auth.js';
+// Import routes - removed unused imports
 
 let app: FastifyInstance;
 

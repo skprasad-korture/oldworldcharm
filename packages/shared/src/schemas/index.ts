@@ -141,7 +141,7 @@ export const MediaAssetSchema = z.object({
   id: z.string().min(1, 'Media asset ID is required'),
   filename: z.string().min(1, 'Filename is required'),
   originalName: z.string().min(1, 'Original name is required'),
-  mimeType: z.string().regex(/^[a-z]+\/[a-z0-9\-\+]+$/, 'Invalid MIME type'),
+  mimeType: z.string().regex(/^[a-z]+\/[a-z0-9\-+]+$/, 'Invalid MIME type'),
   size: z.number().int().positive('File size must be positive'),
   url: z.string().url('Invalid URL'),
   thumbnailUrl: z.string().url('Invalid thumbnail URL').optional(),

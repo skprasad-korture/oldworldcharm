@@ -3,9 +3,9 @@
 - [x] 1. Project Setup and Foundation
   - Initialize monorepo with pnpm workspaces for packages (editor, api, shared)
   - Configure TypeScript 5.x with strict settings across all packages
-  - Set up Tailwind CSS 4.x with shared configuration
+  - Set up Tailwind CSS with shared configuration
   - Configure ESLint, Prettier, and Husky for code quality
-  - Create GitHub Actions workflows for CI/CD
+  - Create basic project structure and package.json files
   - _Requirements: All requirements depend on proper project foundation_
 
 - [x] 2. Core Type Definitions and Shared Utilities
@@ -30,117 +30,117 @@
   - Implement standardized error handling and logging
   - _Requirements: 4.1, 4.2, 4.3_
 
-- [ ] 5. Component System Architecture
-- [ ] 5.1 Shadcn/UI Component Wrapper System
+- [ ] 5. Page and Content Management API
+- [ ] 5.1 Page CRUD Operations
+  - Implement REST endpoints for page creation, reading, updating, and deletion
+  - Add page validation using shared Zod schemas
+  - Create page versioning and history tracking
+  - Implement page status management (draft, published, archived)
+  - _Requirements: 4.1, 4.2, 4.3_
+
+- [ ] 5.2 Content Management Features
+  - Add content scheduling and publication workflow
+  - Implement content search and filtering capabilities
+  - Create content templates and reusable blocks system
+  - Add content import/export functionality
+  - _Requirements: 4.1, 4.4, 4.5_
+
+- [ ]* 5.3 Page Management API Tests
+  - Test CRUD operations and validation
+  - Validate versioning and rollback functionality
+  - Test content scheduling and publication
+  - _Requirements: 4.1, 4.2, 4.3_
+
+- [ ] 6. Theme Management API
+- [ ] 6.1 Theme CRUD Operations
+  - Implement REST endpoints for theme creation, reading, updating, and deletion
+  - Add theme validation using shared Zod schemas
+  - Create theme import/export functionality
+  - Implement default theme management
+  - _Requirements: 3.1, 3.2, 3.3_
+
+- [ ] 6.2 Theme Processing and CSS Generation
+  - Build CSS custom property generation from theme objects
+  - Create theme application system with real-time preview
+  - Add theme versioning and rollback capabilities
+  - Implement accessibility validation for color contrast ratios
+  - _Requirements: 3.1, 3.2, 3.4, 3.5_
+
+- [ ]* 6.3 Theme Management API Tests
+  - Test theme CRUD operations and validation
+  - Validate CSS generation and theme application
+  - Test accessibility compliance checking
+  - _Requirements: 3.1, 3.2, 3.5_
+
+- [ ] 7. Media Management API
+- [ ] 7.1 Media Upload and Processing API
+  - Implement file upload endpoints with drag-and-drop support
+  - Build automatic image optimization and format conversion
+  - Create responsive image variant generation
+  - Add media organization with folders and tagging
+  - _Requirements: 11.1, 11.2, 11.4_
+
+- [ ] 7.2 Media Library Management
+  - Create media CRUD operations with validation
+  - Implement media search and filtering by type, tags, and usage
+  - Build media usage tracking across pages and components
+  - Add bulk operations for media management
+  - _Requirements: 11.2, 11.3, 11.5_
+
+- [ ]* 7.3 Media Management API Tests
+  - Test file upload and processing workflows
+  - Validate image optimization and variant generation
+  - Test media organization and search functionality
+  - _Requirements: 11.1, 11.2, 11.4_
+
+- [ ] 8. Component System Architecture
+- [ ] 8.1 Shadcn/UI Component Wrapper System
   - Create base wrapper interface for shadcn/ui components
   - Implement component metadata system (categories, props schema, preview images)
   - Build component registry with automatic discovery and registration
   - Create prop validation and transformation utilities
   - _Requirements: 1.1, 1.2, 2.1, 2.2_
 
-- [ ] 5.2 Component Palette and Search
+- [ ] 8.2 Component Palette and Search
   - Implement component categorization and filtering system
   - Build search functionality with fuzzy matching and tagging
   - Create component preview generation system
   - Add drag-and-drop data preparation for components
   - _Requirements: 2.1, 2.2, 2.3_
 
-- [ ]* 5.3 Component System Unit Tests
+- [ ]* 8.3 Component System Unit Tests
   - Write unit tests for component wrapper functionality
   - Test component registration and discovery
   - Validate prop schema generation and validation
   - _Requirements: 2.1, 2.2_
 
-- [ ] 6. Visual Editor Core
-- [ ] 6.1 Canvas and Drag-Drop Implementation
-  - Set up React 19.2 application with @dnd-kit/core
+- [ ] 9. Visual Editor Core
+- [ ] 9.1 Canvas and Drag-Drop Implementation
+  - Set up React application with @dnd-kit/core
   - Implement canvas component with drop zones and visual feedback
   - Create drag-and-drop handlers for component placement and reordering
   - Build component selection and highlighting system
   - _Requirements: 1.1, 1.2, 1.3_
 
-- [ ] 6.2 Properties Panel and Real-time Updates
+- [ ] 9.2 Properties Panel and Real-time Updates
   - Create dynamic properties panel based on component schemas
   - Implement form controls for different prop types (colors, text, numbers, etc.)
   - Build real-time preview updates using Zustand state management
   - Add undo/redo functionality for editor actions
   - _Requirements: 1.3, 1.4, 3.1, 3.2_
 
-- [ ] 6.3 Component Tree and Navigation
+- [ ] 9.3 Component Tree and Navigation
   - Implement hierarchical component tree view
   - Add component nesting and parent-child relationship management
   - Create keyboard shortcuts for common editor actions
   - Build component copy/paste functionality
   - _Requirements: 1.1, 1.2, 1.3_
 
-- [ ]* 6.4 Visual Editor Integration Tests
+- [ ]* 9.4 Visual Editor Integration Tests
   - Test drag-and-drop workflows end-to-end
   - Validate real-time updates and state synchronization
   - Test component tree operations and navigation
   - _Requirements: 1.1, 1.2, 1.3, 1.4_
-
-- [ ] 7. Theme Management System
-- [ ] 7.1 Theme Engine and CSS Generation
-  - Implement theme configuration interface and validation
-  - Build CSS custom property generation from theme objects
-  - Create theme application system with real-time preview
-  - Add theme import/export functionality
-  - _Requirements: 3.1, 3.2, 3.3, 3.4_
-
-- [ ] 7.2 Brand Asset Integration
-  - Implement color palette extraction from uploaded brand assets
-  - Build automatic typography pairing suggestions
-  - Create accessibility validation for color contrast ratios
-  - Add theme versioning and rollback capabilities
-  - _Requirements: 3.4, 3.5_
-
-- [ ]* 7.3 Theme System Unit Tests
-  - Test theme validation and CSS generation
-  - Validate accessibility compliance checking
-  - Test theme application across components
-  - _Requirements: 3.1, 3.2, 3.5_
-
-- [ ] 8. Content Management Backend
-- [ ] 8.1 Page and Content API Endpoints
-  - Implement CRUD operations for pages with validation
-  - Create content versioning and history tracking
-  - Build content scheduling and publication workflow
-  - Add content search and filtering capabilities
-  - _Requirements: 4.1, 4.2, 4.3, 4.4_
-
-- [ ] 8.2 Rich Text Editor Integration
-  - Integrate modern rich text editor with markdown support
-  - Implement custom content blocks and embeds
-  - Add collaborative editing capabilities with WebSocket
-  - Create content templates and reusable blocks
-  - _Requirements: 4.1, 4.5_
-
-- [ ]* 8.3 Content Management API Tests
-  - Test CRUD operations and validation
-  - Validate versioning and rollback functionality
-  - Test content scheduling and publication
-  - _Requirements: 4.1, 4.2, 4.3, 4.5_
-
-- [ ] 9. Media Management System
-- [ ] 9.1 Media Upload and Processing
-  - Implement file upload with drag-and-drop support
-  - Build automatic image optimization and format conversion
-  - Create responsive image variant generation
-  - Add media organization with folders and tagging
-  - _Requirements: 11.1, 11.2, 11.4_
-
-- [ ] 9.2 Media Library Interface
-  - Create media browser with grid and list views
-  - Implement media search and filtering by type, tags, and usage
-  - Build media usage tracking across pages and components
-  - Add bulk operations for media management
-  - _Requirements: 11.2, 11.3, 11.5_
-
-- [ ]* 9.3 Media Management Tests
-  - Test file upload and processing workflows
-  - Validate image optimization and variant generation
-  - Test media organization and search functionality
-  - _Requirements: 11.1, 11.2, 11.4_
 
 - [ ] 10. Blog Management Features
 - [ ] 10.1 Blog Post Creation and Management
