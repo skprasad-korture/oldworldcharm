@@ -5,7 +5,7 @@ import './styles/globals.css';
 function App() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <h1 className="text-2xl font-bold p-4">Old World Charm</h1>
+      <h1 className="p-4 text-2xl font-bold">Old World Charm</h1>
       <p className="p-4 text-muted-foreground">
         Visual Website Builder - Editor interface coming soon...
       </p>

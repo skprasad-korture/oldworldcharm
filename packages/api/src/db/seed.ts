@@ -109,7 +109,8 @@ const samplePageContent = {
 // Sample SEO data
 const sampleSeoData = {
   metaTitle: 'Old World Charm - Visual Website Builder',
-  metaDescription: 'Create beautiful, fast websites with our intuitive visual editor. No coding required.',
+  metaDescription:
+    'Create beautiful, fast websites with our intuitive visual editor. No coding required.',
   keywords: ['website builder', 'visual editor', 'no code', 'static site'],
   ogImage: '/images/og-image.jpg',
   structuredData: {
@@ -125,104 +126,126 @@ async function seedDatabase() {
 
   try {
     // Insert default theme
-    const [defaultThemeRecord] = await db.insert(themes).values({
-      name: 'Default Theme',
-      config: defaultTheme,
-      isDefault: true,
-    }).returning();
+    const [defaultThemeRecord] = await db
+      .insert(themes)
+      .values({
+        name: 'Default Theme',
+        config: defaultTheme,
+        isDefault: true,
+      })
+      .returning();
 
-    console.log('✅ Default theme created:', defaultThemeRecord?.name || 'Default Theme');
+    console.log(
+      '✅ Default theme created:',
+      defaultThemeRecord?.name || 'Default Theme'
+    );
 
     // Insert sample homepage
-    const [homePage] = await db.insert(pages).values({
-      slug: 'home',
-      title: 'Home',
-      description: 'Welcome to Old World Charm - the visual website builder that brings craftsmanship to web development',
-      content: samplePageContent,
-      seoData: sampleSeoData,
-      status: 'published',
-      publishedAt: new Date(),
-    }).returning();
+    const [homePage] = await db
+      .insert(pages)
+      .values({
+        slug: 'home',
+        title: 'Home',
+        description:
+          'Welcome to Old World Charm - the visual website builder that brings craftsmanship to web development',
+        content: samplePageContent,
+        seoData: sampleSeoData,
+        status: 'published',
+        publishedAt: new Date(),
+      })
+      .returning();
 
     console.log('✅ Homepage created:', homePage?.title || 'Home');
 
     // Insert sample about page
-    const [aboutPage] = await db.insert(pages).values({
-      slug: 'about',
-      title: 'About Us',
-      description: 'Learn more about Old World Charm and our mission',
-      content: {
-        components: [
-          {
-            id: 'about-hero-1',
-            type: 'hero',
-            props: {
-              title: 'About Old World Charm',
-              subtitle: 'Bringing craftsmanship to modern web development',
+    const [aboutPage] = await db
+      .insert(pages)
+      .values({
+        slug: 'about',
+        title: 'About Us',
+        description: 'Learn more about Old World Charm and our mission',
+        content: {
+          components: [
+            {
+              id: 'about-hero-1',
+              type: 'hero',
+              props: {
+                title: 'About Old World Charm',
+                subtitle: 'Bringing craftsmanship to modern web development',
+              },
+              children: [],
             },
-            children: [],
-          },
-          {
-            id: 'about-content-1',
-            type: 'content',
-            props: {
-              content: 'We believe in combining the best of traditional craftsmanship with modern technology to create beautiful, functional websites.',
+            {
+              id: 'about-content-1',
+              type: 'content',
+              props: {
+                content:
+                  'We believe in combining the best of traditional craftsmanship with modern technology to create beautiful, functional websites.',
+              },
+              children: [],
             },
-            children: [],
-          },
-        ],
-      },
-      seoData: {
-        metaTitle: 'About Us - Old World Charm',
-        metaDescription: 'Learn about our mission to bring craftsmanship to web development',
-        keywords: ['about', 'mission', 'web development'],
-      },
-      status: 'published',
-      publishedAt: new Date(),
-    }).returning();
+          ],
+        },
+        seoData: {
+          metaTitle: 'About Us - Old World Charm',
+          metaDescription:
+            'Learn about our mission to bring craftsmanship to web development',
+          keywords: ['about', 'mission', 'web development'],
+        },
+        status: 'published',
+        publishedAt: new Date(),
+      })
+      .returning();
 
     console.log('✅ About page created:', aboutPage?.title || 'About Us');
 
     // Insert sample blog post
-    const [blogPage] = await db.insert(pages).values({
-      slug: 'getting-started-with-visual-website-builder',
-      title: 'Getting Started with Visual Website Builder',
-      description: 'Learn how to create your first website using our visual editor',
-      content: {
-        components: [
-          {
-            id: 'blog-hero-1',
-            type: 'hero',
-            props: {
-              title: 'Getting Started with Visual Website Builder',
-              subtitle: 'A comprehensive guide to building your first site',
+    const [blogPage] = await db
+      .insert(pages)
+      .values({
+        slug: 'getting-started-with-visual-website-builder',
+        title: 'Getting Started with Visual Website Builder',
+        description:
+          'Learn how to create your first website using our visual editor',
+        content: {
+          components: [
+            {
+              id: 'blog-hero-1',
+              type: 'hero',
+              props: {
+                title: 'Getting Started with Visual Website Builder',
+                subtitle: 'A comprehensive guide to building your first site',
+              },
+              children: [],
             },
-            children: [],
-          },
-          {
-            id: 'blog-content-1',
-            type: 'content',
-            props: {
-              content: 'In this guide, we\'ll walk you through the process of creating your first website using our intuitive visual editor...',
+            {
+              id: 'blog-content-1',
+              type: 'content',
+              props: {
+                content:
+                  "In this guide, we'll walk you through the process of creating your first website using our intuitive visual editor...",
+              },
+              children: [],
             },
-            children: [],
-          },
-        ],
-      },
-      seoData: {
-        metaTitle: 'Getting Started Guide - Old World Charm',
-        metaDescription: 'Learn how to create your first website with our visual editor',
-        keywords: ['tutorial', 'getting started', 'website builder'],
-      },
-      status: 'published',
-      publishedAt: new Date(),
-    }).returning();
+          ],
+        },
+        seoData: {
+          metaTitle: 'Getting Started Guide - Old World Charm',
+          metaDescription:
+            'Learn how to create your first website with our visual editor',
+          keywords: ['tutorial', 'getting started', 'website builder'],
+        },
+        status: 'published',
+        publishedAt: new Date(),
+      })
+      .returning();
 
     // Create blog post entry
     if (blogPage?.id) {
       await db.insert(blogPosts).values({
         pageId: blogPage.id,
-        excerpt: 'Learn how to create your first website using our visual editor with this comprehensive guide.',
+        excerpt:
+          'Learn how to create your first website using our visual editor with this comprehensive guide.',
         featuredImage: '/images/blog/getting-started.jpg',
         categories: ['Tutorial', 'Getting Started'],
         tags: ['beginner', 'tutorial', 'visual editor'],
@@ -231,7 +254,10 @@ async function seedDatabase() {
       });
     }
 
-    console.log('✅ Sample blog post created:', blogPage?.title || 'Getting Started Guide');
+    console.log(
+      '✅ Sample blog post created:',
+      blogPage?.title || 'Getting Started Guide'
+    );
 
     // Insert sample media assets
     const sampleAssets = [

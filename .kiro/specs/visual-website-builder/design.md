@@ -5,6 +5,7 @@
 The Visual Website Builder is an open-source platform that combines Astro's static site generation capabilities with a powerful visual editor and CMS. Designed as a gift to the developer community, this tool addresses the complexity issues found in existing CMSs while being optimized for AI-powered code builders like Claude, Cursor, and Kiro. The system architecture follows a modular approach with clear separation between the builder interface, content management, and static site generation. The platform leverages Astro's island architecture for optimal performance while providing a rich editing experience through a React 19.2-based visual editor.
 
 ### Open Source Philosophy
+
 - **MIT License** for maximum adoption and contribution
 - **Modular Architecture** allowing developers to extend and customize
 - **AI-First Design** with clean APIs and predictable code generation
@@ -22,13 +23,13 @@ graph TB
         PV[Preview Interface]
         CMS[CMS Dashboard]
     end
-    
+
     subgraph "API Layer"
         API[REST API - Node.js/Express]
         WS[WebSocket Server]
         AUTH[Authentication Service]
     end
-    
+
     subgraph "Core Services"
         CB[Code Builder Service]
         TM[Theme Manager]
@@ -37,19 +38,19 @@ graph TB
         SEO[SEO Service]
         AB[A/B Testing Engine]
     end
-    
+
     subgraph "Storage Layer"
         DB[(Database - PostgreSQL)]
         FS[File System/CDN]
         CACHE[Redis Cache]
     end
-    
+
     subgraph "Build Pipeline"
         ASTRO[Astro Build Engine]
         OPT[Asset Optimizer]
         DEPLOY[Deployment Service]
     end
-    
+
     VE --> API
     CMS --> API
     API --> CB
@@ -75,7 +76,7 @@ graph LR
         CB[Component Builder]
         CP[Component Palette]
     end
-    
+
     SC --> WC
     WC --> CB
     CB --> CP
@@ -87,6 +88,7 @@ graph LR
 ### 1. Visual Editor Interface
 
 **Technology Stack:**
+
 - React 19.2 with TypeScript
 - @dnd-kit/core for modern drag-and-drop functionality
 - Zustand for state management
@@ -253,6 +255,7 @@ interface SEOAnalysis {
 ### Database Schema
 
 **Pages Table:**
+
 ```sql
 CREATE TABLE pages (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -269,6 +272,7 @@ CREATE TABLE pages (
 ```
 
 **Themes Table:**
+
 ```sql
 CREATE TABLE themes (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -280,6 +284,7 @@ CREATE TABLE themes (
 ```
 
 **Media Assets Table:**
+
 ```sql
 CREATE TABLE media_assets (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -297,6 +302,7 @@ CREATE TABLE media_assets (
 ```
 
 **A/B Tests Table:**
+
 ```sql
 CREATE TABLE ab_tests (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -340,7 +346,7 @@ class ErrorHandler {
       type: 'validation',
       message: error.message,
       field: error.field,
-      code: 'VALIDATION_FAILED'
+      code: 'VALIDATION_FAILED',
     };
   }
 
@@ -349,7 +355,7 @@ class ErrorHandler {
       type: 'build',
       message: 'Build failed. Please check your components and try again.',
       details: error.details,
-      code: 'BUILD_FAILED'
+      code: 'BUILD_FAILED',
     };
   }
 
@@ -358,7 +364,7 @@ class ErrorHandler {
     return {
       type: 'runtime',
       message: 'An unexpected error occurred. Please try again.',
-      code: 'RUNTIME_ERROR'
+      code: 'RUNTIME_ERROR',
     };
   }
 }
@@ -367,26 +373,31 @@ class ErrorHandler {
 ## Testing Strategy
 
 ### 1. Unit Testing
+
 - **Component Testing:** Test individual wrapped components and their prop handling
 - **Service Testing:** Test theme manager, content manager, and SEO service logic
 - **Utility Testing:** Test helper functions and validation logic
 
 ### 2. Integration Testing
+
 - **API Testing:** Test REST endpoints and WebSocket connections
 - **Database Testing:** Test data persistence and retrieval
 - **Build Pipeline Testing:** Test Astro code generation and optimization
 
 ### 3. End-to-End Testing
+
 - **User Workflows:** Test complete user journeys from component selection to site deployment
 - **Performance Testing:** Test build times and generated site performance
 - **Cross-browser Testing:** Ensure compatibility across different browsers
 
 ### 4. Visual Regression Testing
+
 - **Component Rendering:** Ensure components render consistently across updates
 - **Theme Application:** Verify theme changes apply correctly across all components
 - **Responsive Design:** Test component behavior across different screen sizes
 
 **Testing Tools:**
+
 - Vitest for unit testing (faster than Jest)
 - React Testing Library for component testing
 - Playwright for E2E testing
@@ -396,6 +407,7 @@ class ErrorHandler {
 ### Open Source Development Considerations
 
 **Developer Experience:**
+
 - **Monorepo Structure** using pnpm workspaces for better dependency management
 - **TypeScript-first** with strict type checking for better AI code generation
 - **ESLint + Prettier** with standardized configurations
@@ -404,6 +416,7 @@ class ErrorHandler {
 - **GitHub Actions** for CI/CD with automated testing and releases
 
 **AI-Friendly Architecture:**
+
 - **Clear API Contracts** with OpenAPI specifications
 - **Predictable File Structure** following established conventions
 - **Comprehensive JSDoc** comments for better AI understanding
@@ -412,15 +425,19 @@ class ErrorHandler {
 - **Modular Components** with clear separation of concerns
 
 ### 5. Performance Monitoring
+
 - **Build Performance:** Monitor Astro build times and optimization effectiveness
 - **Runtime Performance:** Track editor responsiveness and user interaction latency
 - **Generated Site Performance:** Continuous monitoring of Lighthouse scores and Core Web Vitals
 
 The design ensures scalability, maintainability, and performance while providing a rich user experience for both content creators and end users. The modular architecture allows for independent development and testing of different system components while maintaining clear interfaces between them.
-## 
+
+##
+
 Technical Stack Summary
 
 **Frontend:**
+
 - React 19.2 with TypeScript 5.x
 - Tailwind CSS 4.x for styling
 - @dnd-kit/core for modern drag-and-drop
@@ -428,17 +445,20 @@ Technical Stack Summary
 - TanStack Query v5 for server state
 
 **Backend:**
+
 - Node.js with Fastify (faster than Express)
 - PostgreSQL with Drizzle ORM for type-safe queries
 - Redis for caching and sessions
 
 **Build & Development:**
+
 - Astro 5.x for static site generation
 - Vite 6.x for fast development and building
 - pnpm for efficient package management
 - Vitest for testing (faster than Jest)
 
 **Open Source & AI-Friendly Features:**
+
 - MIT License for maximum adoption
 - Monorepo structure with clear module boundaries
 - Comprehensive TypeScript definitions for AI code generation

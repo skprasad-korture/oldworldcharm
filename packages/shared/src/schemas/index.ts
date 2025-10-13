@@ -7,18 +7,20 @@ export const ComponentMetadataSchema = z.object({
   previewImage: z.string().url().optional(),
   tags: z.array(z.string()).default([]),
   isContainer: z.boolean().default(false),
-  version: z.string().regex(/^\d+\.\d+\.\d+$/, 'Version must be in semver format'),
+  version: z
+    .string()
+    .regex(/^\d+\.\d+\.\d+$/, 'Version must be in semver format'),
 });
 
 export const ComponentCategorySchema = z.enum([
   'layout',
-  'typography', 
+  'typography',
   'forms',
   'navigation',
   'media',
   'feedback',
   'data-display',
-  'overlay'
+  'overlay',
 ]);
 
 const BaseComponentInstanceSchema = z.object({
@@ -28,9 +30,10 @@ const BaseComponentInstanceSchema = z.object({
   metadata: ComponentMetadataSchema.optional(),
 });
 
-export const ComponentInstanceSchema: z.ZodType<any> = BaseComponentInstanceSchema.extend({
-  children: z.array(z.lazy(() => ComponentInstanceSchema)).optional(),
-});
+export const ComponentInstanceSchema: z.ZodType<any> =
+  BaseComponentInstanceSchema.extend({
+    children: z.array(z.lazy(() => ComponentInstanceSchema)).optional(),
+  });
 
 export const ComponentDefinitionSchema = z.object({
   id: z.string().min(1, 'Component ID is required'),
@@ -58,9 +61,13 @@ export const ThemeColorsSchema = z.object({
   background: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
   foreground: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
   muted: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
-  'muted-foreground': z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
+  'muted-foreground': z
+    .string()
+    .regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
   popover: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
-  'popover-foreground': z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
+  'popover-foreground': z
+    .string()
+    .regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
   card: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
   'card-foreground': z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
   border: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'Invalid hex color'),
@@ -79,7 +86,10 @@ export const ThemeTypographySchema = z.object({
 
 export const ThemeSchema = z.object({
   id: z.string().min(1, 'Theme ID is required'),
-  name: z.string().min(1, 'Theme name is required').max(100, 'Theme name too long'),
+  name: z
+    .string()
+    .min(1, 'Theme name is required')
+    .max(100, 'Theme name too long'),
   colors: ThemeColorsSchema,
   typography: ThemeTypographySchema,
   spacing: z.record(z.string()).default({}),
@@ -94,15 +104,35 @@ export const ThemeSchema = z.object({
 export const PageStatusSchema = z.enum(['draft', 'published', 'archived']);
 
 export const SEODataSchema = z.object({
-  metaTitle: z.string().max(60, 'Meta title should be under 60 characters').optional(),
-  metaDescription: z.string().max(160, 'Meta description should be under 160 characters').optional(),
+  metaTitle: z
+    .string()
+    .max(60, 'Meta title should be under 60 characters')
+    .optional(),
+  metaDescription: z
+    .string()
+    .max(160, 'Meta description should be under 160 characters')
+    .optional(),
   keywords: z.array(z.string()).optional(),
-  ogTitle: z.string().max(60, 'OG title should be under 60 characters').optional(),
-  ogDescription: z.string().max(160, 'OG description should be under 160 characters').optional(),
+  ogTitle: z
+    .string()
+    .max(60, 'OG title should be under 60 characters')
+    .optional(),
+  ogDescription: z
+    .string()
+    .max(160, 'OG description should be under 160 characters')
+    .optional(),
   ogImage: z.string().url('Invalid OG image URL').optional(),
-  twitterCard: z.enum(['summary', 'summary_large_image', 'app', 'player']).optional(),
-  twitterTitle: z.string().max(60, 'Twitter title should be under 60 characters').optional(),
-  twitterDescription: z.string().max(160, 'Twitter description should be under 160 characters').optional(),
+  twitterCard: z
+    .enum(['summary', 'summary_large_image', 'app', 'player'])
+    .optional(),
+  twitterTitle: z
+    .string()
+    .max(60, 'Twitter title should be under 60 characters')
+    .optional(),
+  twitterDescription: z
+    .string()
+    .max(160, 'Twitter description should be under 160 characters')
+    .optional(),
   twitterImage: z.string().url('Invalid Twitter image URL').optional(),
   canonicalUrl: z.string().url('Invalid canonical URL').optional(),
   noIndex: z.boolean().optional(),
@@ -112,9 +142,13 @@ export const SEODataSchema = z.object({
 
 export const PageSchema = z.object({
   id: z.string().min(1, 'Page ID is required'),
-  slug: z.string()
+  slug: z
+    .string()
     .min(1, 'Slug is required')
-    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug must be lowercase with hyphens only'),
+    .regex(
+      /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+      'Slug must be lowercase with hyphens only'
+    ),
   title: z.string().min(1, 'Title is required').max(200, 'Title too long'),
   description: z.string().max(500, 'Description too long').optional(),
   components: z.array(ComponentInstanceSchema).default([]),
@@ -156,7 +190,10 @@ export const MediaAssetSchema = z.object({
 
 export const MediaFolderSchema = z.object({
   id: z.string().min(1, 'Folder ID is required'),
-  name: z.string().min(1, 'Folder name is required').max(100, 'Folder name too long'),
+  name: z
+    .string()
+    .min(1, 'Folder name is required')
+    .max(100, 'Folder name too long'),
   parentId: z.string().optional(),
   path: z.string().min(1, 'Path is required'),
   createdAt: z.date(),
@@ -164,13 +201,25 @@ export const MediaFolderSchema = z.object({
 });
 
 // A/B Testing Schemas
-export const ABTestStatusSchema = z.enum(['draft', 'running', 'paused', 'completed', 'archived']);
+export const ABTestStatusSchema = z.enum([
+  'draft',
+  'running',
+  'paused',
+  'completed',
+  'archived',
+]);
 
 export const ABTestVariantSchema = z.object({
   id: z.string().min(1, 'Variant ID is required'),
-  name: z.string().min(1, 'Variant name is required').max(100, 'Variant name too long'),
+  name: z
+    .string()
+    .min(1, 'Variant name is required')
+    .max(100, 'Variant name too long'),
   components: z.array(ComponentInstanceSchema).default([]),
-  trafficPercentage: z.number().min(0).max(100, 'Traffic percentage must be between 0 and 100'),
+  trafficPercentage: z
+    .number()
+    .min(0)
+    .max(100, 'Traffic percentage must be between 0 and 100'),
   isControl: z.boolean().default(false),
 });
 
@@ -183,27 +232,37 @@ export const ABTestResultsSchema = z.object({
   confidence: z.number().min(0).max(1),
 });
 
-export const ABTestSchema = z.object({
-  id: z.string().min(1, 'A/B test ID is required'),
-  name: z.string().min(1, 'Test name is required').max(100, 'Test name too long'),
-  description: z.string().max(500, 'Description too long').optional(),
-  pageId: z.string().min(1, 'Page ID is required'),
-  variants: z.array(ABTestVariantSchema).min(2, 'At least 2 variants required'),
-  trafficSplit: z.record(z.number().min(0).max(100)),
-  status: ABTestStatusSchema.default('draft'),
-  startDate: z.date().optional(),
-  endDate: z.date().optional(),
-  conversionGoal: z.string().min(1, 'Conversion goal is required'),
-  results: ABTestResultsSchema.optional(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-}).refine(
-  (data) => {
-    const totalTraffic = Object.values(data.trafficSplit).reduce((sum, val) => sum + val, 0);
-    return Math.abs(totalTraffic - 100) < 0.01; // Allow for floating point precision
-  },
-  { message: 'Traffic split must total 100%', path: ['trafficSplit'] }
-);
+export const ABTestSchema = z
+  .object({
+    id: z.string().min(1, 'A/B test ID is required'),
+    name: z
+      .string()
+      .min(1, 'Test name is required')
+      .max(100, 'Test name too long'),
+    description: z.string().max(500, 'Description too long').optional(),
+    pageId: z.string().min(1, 'Page ID is required'),
+    variants: z
+      .array(ABTestVariantSchema)
+      .min(2, 'At least 2 variants required'),
+    trafficSplit: z.record(z.number().min(0).max(100)),
+    status: ABTestStatusSchema.default('draft'),
+    startDate: z.date().optional(),
+    endDate: z.date().optional(),
+    conversionGoal: z.string().min(1, 'Conversion goal is required'),
+    results: ABTestResultsSchema.optional(),
+    createdAt: z.date(),
+    updatedAt: z.date(),
+  })
+  .refine(
+    data => {
+      const totalTraffic = Object.values(data.trafficSplit).reduce(
+        (sum, val) => sum + val,
+        0
+      );
+      return Math.abs(totalTraffic - 100) < 0.01; // Allow for floating point precision
+    },
+    { message: 'Traffic split must total 100%', path: ['trafficSplit'] }
+  );
 
 // User and Authentication Schemas
 export const UserRoleSchema = z.enum(['admin', 'editor', 'author', 'viewer']);
@@ -282,7 +341,13 @@ export const BuildConfigSchema = z.object({
   createdAt: z.date(),
 });
 
-export const DeploymentStatusSchema = z.enum(['pending', 'building', 'deploying', 'success', 'failed']);
+export const DeploymentStatusSchema = z.enum([
+  'pending',
+  'building',
+  'deploying',
+  'success',
+  'failed',
+]);
 
 export const DeploymentResultSchema = z.object({
   id: z.string().min(1, 'Deployment result ID is required'),
@@ -297,19 +362,25 @@ export const DeploymentResultSchema = z.object({
 });
 
 // Validation helper functions
-export const validateComponentInstance = (data: unknown) => ComponentInstanceSchema.parse(data);
+export const validateComponentInstance = (data: unknown) =>
+  ComponentInstanceSchema.parse(data);
 export const validateTheme = (data: unknown) => ThemeSchema.parse(data);
 export const validatePage = (data: unknown) => PageSchema.parse(data);
 export const validateBlogPost = (data: unknown) => BlogPostSchema.parse(data);
-export const validateMediaAsset = (data: unknown) => MediaAssetSchema.parse(data);
+export const validateMediaAsset = (data: unknown) =>
+  MediaAssetSchema.parse(data);
 export const validateABTest = (data: unknown) => ABTestSchema.parse(data);
 export const validateUser = (data: unknown) => UserSchema.parse(data);
 
 // Safe validation functions that return results instead of throwing
-export const safeValidateComponentInstance = (data: unknown) => ComponentInstanceSchema.safeParse(data);
+export const safeValidateComponentInstance = (data: unknown) =>
+  ComponentInstanceSchema.safeParse(data);
 export const safeValidateTheme = (data: unknown) => ThemeSchema.safeParse(data);
 export const safeValidatePage = (data: unknown) => PageSchema.safeParse(data);
-export const safeValidateBlogPost = (data: unknown) => BlogPostSchema.safeParse(data);
-export const safeValidateMediaAsset = (data: unknown) => MediaAssetSchema.safeParse(data);
-export const safeValidateABTest = (data: unknown) => ABTestSchema.safeParse(data);
+export const safeValidateBlogPost = (data: unknown) =>
+  BlogPostSchema.safeParse(data);
+export const safeValidateMediaAsset = (data: unknown) =>
+  MediaAssetSchema.safeParse(data);
+export const safeValidateABTest = (data: unknown) =>
+  ABTestSchema.safeParse(data);
 export const safeValidateUser = (data: unknown) => UserSchema.safeParse(data);

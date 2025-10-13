@@ -7,6 +7,7 @@ An open-source visual website builder that brings the elegance of old-world craf
 ## 🎯 Vision
 
 We're creating a visual website builder that combines:
+
 - **Artisan Quality**: Every component crafted with attention to detail
 - **Modern Performance**: Lightning-fast static sites powered by Astro
 - **Developer Experience**: Built by developers, for developers
@@ -15,6 +16,7 @@ We're creating a visual website builder that combines:
 ## ✨ What We're Building
 
 ### Core Features
+
 - 🎨 **Visual Drag-and-Drop Editor** - Intuitive interface for building pages without code
 - 🧩 **Component Library** - Extensive collection based on shadcn/ui components
 - 🎯 **Theme System** - Comprehensive customization with design tokens
@@ -26,6 +28,7 @@ We're creating a visual website builder that combines:
 - ⚡ **Performance First** - Optimized for Core Web Vitals
 
 ### Target Users
+
 - **Content Creators** - Build beautiful websites without technical knowledge
 - **Developers** - Rapid prototyping and client work with extensible architecture
 - **Agencies** - White-label solution for client projects
@@ -34,18 +37,21 @@ We're creating a visual website builder that combines:
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - **React 18.2** - Modern UI library with hooks and concurrent features
 - **TypeScript 5.x** - Type-safe development with strict configuration
 - **Tailwind CSS 3.x** - Utility-first CSS with shadcn/ui design system
 - **Vite 5.x** - Lightning-fast build tool and dev server
 
 ### Backend
+
 - **Fastify** - High-performance Node.js web framework
 - **PostgreSQL** - Robust relational database for content storage
 - **Redis** - Caching and session management
 - **Drizzle ORM** - Type-safe database operations
 
 ### Build & Deploy
+
 - **Astro 5.x** - Static site generation with partial hydration
 - **pnpm Workspaces** - Efficient monorepo management
 - **GitHub Actions** - Automated CI/CD pipeline
@@ -54,7 +60,8 @@ We're creating a visual website builder that combines:
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - pnpm 8+
 - Git
 
@@ -125,12 +132,14 @@ packages/
 ## 🎨 Design Philosophy
 
 ### Old World Craftsmanship Meets Modern Technology
+
 - **Attention to Detail**: Every pixel matters, every interaction is thoughtful
 - **Quality Over Quantity**: Fewer, better-crafted features
 - **Timeless Design**: Classic aesthetics that won't feel dated
 - **Artisan Tools**: Professional-grade capabilities for creators
 
 ### Developer Experience
+
 - **Type Safety**: Comprehensive TypeScript coverage
 - **Modern Tooling**: Latest versions of proven technologies
 - **Clear Architecture**: Well-organized, maintainable codebase
@@ -139,24 +148,28 @@ packages/
 ## 🗺 Development Roadmap
 
 ### Phase 1: Foundation (Current)
+
 - [x] Project setup and monorepo architecture
 - [ ] Core type definitions and shared utilities
 - [ ] Basic component library integration
 - [ ] Visual editor foundation
 
 ### Phase 2: Core Features
+
 - [ ] Drag-and-drop functionality
 - [ ] Component property editing
 - [ ] Page management system
 - [ ] Theme customization
 
 ### Phase 3: Advanced Features
+
 - [ ] Content management system
 - [ ] A/B testing framework
 - [ ] SEO optimization tools
 - [ ] Performance monitoring
 
 ### Phase 4: Production Ready
+
 - [ ] User authentication and authorization
 - [ ] Multi-tenant architecture
 - [ ] Advanced deployment options
@@ -167,6 +180,7 @@ packages/
 We welcome contributions from the community! This project is built with love by developers who believe in the power of open source.
 
 ### How to Contribute
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes with proper tests
@@ -175,6 +189,7 @@ We welcome contributions from the community! This project is built with love by 
 6. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow TypeScript strict mode
 - Write tests for new features
 - Use conventional commits
@@ -195,4 +210,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ by [Prasad Korture](https://github.com/skprasad-korture)**
 
-*Creating beautiful websites should be as enjoyable as using them.*
+_Creating beautiful websites should be as enjoyable as using them._

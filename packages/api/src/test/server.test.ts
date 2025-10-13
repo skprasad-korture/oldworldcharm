@@ -13,68 +13,87 @@ let app: FastifyInstance;
 
 beforeAll(async () => {
   app = Fastify({ logger: false });
-  
+
   // Register plugins
   await app.register(sensiblePlugin);
   await app.register(errorHandlerPlugin);
   await app.register(authPlugin);
   await app.register(validationPlugin);
-  
+
   // Register routes without swagger schemas to avoid reference issues
-  await app.register(async function(fastify) {
+  await app.register(async function (fastify) {
     // Simple health route for testing
     fastify.get('/health', async () => {
       return { status: 'ok', timestamp: new Date().toISOString() };
     });
   });
-  
-  await app.register(async function(fastify) {
-    // Simple auth routes for testing
-    fastify.post('/login', {
-      preHandler: fastify.validate({ 
-        body: (await import('zod')).z.object({
-          email: (await import('zod')).z.string().email(),
-          password: (await import('zod')).z.string().min(6),
-        })
-      }),
-    }, async (request, reply) => {
-      const { email, password } = request.body as any;
-      
-      // Mock authentication
-      if (email === 'admin@example.com' && password === 'password123') {
-        const token = fastify.generateToken({
-          userId: '1',
-          email: 'admin@example.com',
-          role: 'admin',
-        });
-        
-        fastify.sendSuccess(reply, {
-          user: { id: '1', email: 'admin@example.com', name: 'Admin', role: 'admin' },
-          token,
-        });
-      } else {
-        reply.code(401).send({
-          success: false,
-          error: { code: 'INVALID_CREDENTIALS', message: 'Invalid credentials' },
-          timestamp: new Date().toISOString(),
-        });
-      }
-    });
-    
-    fastify.get('/me', {
-      preHandler: fastify.authenticate,
-    }, async (request, reply) => {
-      fastify.sendSuccess(reply, {
-        user: { 
-          id: request.user.userId, 
-          email: request.user.email, 
-          name: 'Admin', 
-          role: request.user.role 
+
+  await app.register(
+    async function (fastify) {
+      // Simple auth routes for testing
+      fastify.post(
+        '/login',
+        {
+          preHandler: fastify.validate({
+            body: (await import('zod')).z.object({
+              email: (await import('zod')).z.string().email(),
+              password: (await import('zod')).z.string().min(6),
+            }),
+          }),
         },
-      });
-    });
-  }, { prefix: '/api/auth' });
-  
+        async (request, reply) => {
+          const { email, password } = request.body as any;
+
+          // Mock authentication
+          if (email === 'admin@example.com' && password === 'password123') {
+            const token = fastify.generateToken({
+              userId: '1',
+              email: 'admin@example.com',
+              role: 'admin',
+            });
+
+            fastify.sendSuccess(reply, {
+              user: {
+                id: '1',
+                email: 'admin@example.com',
+                name: 'Admin',
+                role: 'admin',
+              },
+              token,
+            });
+          } else {
+            reply.code(401).send({
+              success: false,
+              error: {
+                code: 'INVALID_CREDENTIALS',
+                message: 'Invalid credentials',
+              },
+              timestamp: new Date().toISOString(),
+            });
+          }
+        }
+      );
+
+      fastify.get(
+        '/me',
+        {
+          preHandler: fastify.authenticate,
+        },
+        async (request, reply) => {
+          fastify.sendSuccess(reply, {
+            user: {
+              id: request.user.userId,
+              email: request.user.email,
+              name: 'Admin',
+              role: request.user.role,
+            },
+          });
+        }
+      );
+    },
+    { prefix: '/api/auth' }
+  );
+
   await app.ready();
 });
 
@@ -121,7 +140,7 @@ test('Login endpoint exists and validates input', async () => {
   });
 
   expect(invalidResponse.statusCode).toBe(400);
-  
+
   // Test with valid input but wrong credentials
   const wrongCredsResponse = await app.inject({
     method: 'POST',
@@ -133,7 +152,7 @@ test('Login endpoint exists and validates input', async () => {
   });
 
   expect(wrongCredsResponse.statusCode).toBe(401);
-  
+
   // Test with correct credentials
   const validResponse = await app.inject({
     method: 'POST',
@@ -159,7 +178,7 @@ test('Protected endpoint requires authentication', async () => {
   });
 
   expect(unauthResponse.statusCode).toBe(401);
-  
+
   // Test with authentication
   const loginResponse = await app.inject({
     method: 'POST',
@@ -171,7 +190,7 @@ test('Protected endpoint requires authentication', async () => {
   });
 
   const { token } = JSON.parse(loginResponse.body).data;
-  
+
   const authResponse = await app.inject({
     method: 'GET',
     url: '/api/auth/me',

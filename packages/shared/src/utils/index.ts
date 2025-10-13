@@ -1,9 +1,9 @@
 // Shared utility functions
-import type { 
-  ComponentInstance, 
-  Theme, 
-  Page, 
-  MediaAsset
+import type {
+  ComponentInstance,
+  Theme,
+  Page,
+  MediaAsset,
 } from '../types/index.js';
 
 // ID Generation
@@ -12,9 +12,9 @@ export const generateId = (): string => {
 };
 
 export const generateUUID = (): string => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    const r = Math.random() * 16 | 0;
-    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 };
@@ -24,12 +24,15 @@ export class ComponentUtils {
   /**
    * Find a component by ID in a component tree
    */
-  static findComponentById(components: ComponentInstance[], id: string): ComponentInstance | null {
+  static findComponentById(
+    components: ComponentInstance[],
+    id: string
+  ): ComponentInstance | null {
     for (const component of components) {
       if (component.id === id) {
         return component;
       }
-      
+
       if (component.children) {
         const found = this.findComponentById(component.children, id);
         if (found) return found;
@@ -41,19 +44,22 @@ export class ComponentUtils {
   /**
    * Find all components of a specific type
    */
-  static findComponentsByType(components: ComponentInstance[], type: string): ComponentInstance[] {
+  static findComponentsByType(
+    components: ComponentInstance[],
+    type: string
+  ): ComponentInstance[] {
     const results: ComponentInstance[] = [];
-    
+
     for (const component of components) {
       if (component.type === type) {
         results.push(component);
       }
-      
+
       if (component.children) {
         results.push(...this.findComponentsByType(component.children, type));
       }
     }
-    
+
     return results;
   }
 
@@ -61,7 +67,7 @@ export class ComponentUtils {
    * Get the parent component of a given component ID
    */
   static findParentComponent(
-    components: ComponentInstance[], 
+    components: ComponentInstance[],
     childId: string
   ): ComponentInstance | null {
     for (const component of components) {
@@ -70,7 +76,7 @@ export class ComponentUtils {
         if (component.children.some(child => child.id === childId)) {
           return component;
         }
-        
+
         // Recursively search in children
         const found = this.findParentComponent(component.children, childId);
         if (found) return found;
@@ -87,10 +93,12 @@ export class ComponentUtils {
       id: generateId(),
       type: component.type,
       props: { ...component.props },
-      ...(component.children && { children: component.children.map(child => this.cloneComponent(child)) }),
+      ...(component.children && {
+        children: component.children.map(child => this.cloneComponent(child)),
+      }),
       ...(component.metadata && { metadata: component.metadata }),
     };
-    
+
     return cloned;
   }
 
@@ -98,25 +106,25 @@ export class ComponentUtils {
    * Update a component's props by ID
    */
   static updateComponentProps(
-    components: ComponentInstance[], 
-    id: string, 
+    components: ComponentInstance[],
+    id: string,
     newProps: Record<string, unknown>
   ): ComponentInstance[] {
     return components.map(component => {
       if (component.id === id) {
         return {
           ...component,
-          props: { ...component.props, ...newProps }
+          props: { ...component.props, ...newProps },
         };
       }
-      
+
       if (component.children) {
         return {
           ...component,
-          children: this.updateComponentProps(component.children, id, newProps)
+          children: this.updateComponentProps(component.children, id, newProps),
         };
       }
-      
+
       return component;
     });
   }
@@ -124,14 +132,17 @@ export class ComponentUtils {
   /**
    * Remove a component by ID
    */
-  static removeComponent(components: ComponentInstance[], id: string): ComponentInstance[] {
+  static removeComponent(
+    components: ComponentInstance[],
+    id: string
+  ): ComponentInstance[] {
     return components
       .filter(component => component.id !== id)
       .map(component => {
         if (component.children) {
           return {
             ...component,
-            children: this.removeComponent(component.children, id)
+            children: this.removeComponent(component.children, id),
           };
         }
         return component;
@@ -142,9 +153,9 @@ export class ComponentUtils {
    * Insert a component at a specific position
    */
   static insertComponent(
-    components: ComponentInstance[], 
-    newComponent: ComponentInstance, 
-    parentId: string | null, 
+    components: ComponentInstance[],
+    newComponent: ComponentInstance,
+    parentId: string | null,
     index: number
   ): ComponentInstance[] {
     if (parentId === null) {
@@ -159,20 +170,25 @@ export class ComponentUtils {
         const children = component.children || [];
         const newChildren = [...children];
         newChildren.splice(index, 0, newComponent);
-        
+
         return {
           ...component,
-          children: newChildren
+          children: newChildren,
         };
       }
-      
+
       if (component.children) {
         return {
           ...component,
-          children: this.insertComponent(component.children, newComponent, parentId, index)
+          children: this.insertComponent(
+            component.children,
+            newComponent,
+            parentId,
+            index
+          ),
         };
       }
-      
+
       return component;
     });
   }
@@ -181,9 +197,9 @@ export class ComponentUtils {
    * Move a component to a new position
    */
   static moveComponent(
-    components: ComponentInstance[], 
-    componentId: string, 
-    newParentId: string | null, 
+    components: ComponentInstance[],
+    componentId: string,
+    newParentId: string | null,
     newIndex: number
   ): ComponentInstance[] {
     // First, find and remove the component
@@ -191,9 +207,14 @@ export class ComponentUtils {
     if (!componentToMove) return components;
 
     const withoutComponent = this.removeComponent(components, componentId);
-    
+
     // Then insert it at the new position
-    return this.insertComponent(withoutComponent, componentToMove, newParentId, newIndex);
+    return this.insertComponent(
+      withoutComponent,
+      componentToMove,
+      newParentId,
+      newIndex
+    );
   }
 
   /**
@@ -201,37 +222,42 @@ export class ComponentUtils {
    */
   static getComponentDepth(components: ComponentInstance[]): number {
     let maxDepth = 0;
-    
+
     for (const component of components) {
       if (component.children && component.children.length > 0) {
         const childDepth = this.getComponentDepth(component.children);
         maxDepth = Math.max(maxDepth, childDepth + 1);
       }
     }
-    
+
     return maxDepth;
   }
 
   /**
    * Flatten component tree to array
    */
-  static flattenComponents(components: ComponentInstance[]): ComponentInstance[] {
+  static flattenComponents(
+    components: ComponentInstance[]
+  ): ComponentInstance[] {
     const flattened: ComponentInstance[] = [];
-    
+
     for (const component of components) {
       flattened.push(component);
       if (component.children) {
         flattened.push(...this.flattenComponents(component.children));
       }
     }
-    
+
     return flattened;
   }
 
   /**
    * Validate component tree structure
    */
-  static validateComponentTree(components: ComponentInstance[]): { isValid: boolean; errors: string[] } {
+  static validateComponentTree(components: ComponentInstance[]): {
+    isValid: boolean;
+    errors: string[];
+  } {
     const errors: string[] = [];
     const seenIds = new Set<string>();
 
@@ -265,7 +291,7 @@ export class ComponentUtils {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 }
@@ -323,22 +349,27 @@ export class ThemeUtils {
   /**
    * Validate color contrast ratio for accessibility
    */
-  static validateColorContrast(foreground: string, background: string): { ratio: number; isValid: boolean } {
+  static validateColorContrast(
+    foreground: string,
+    background: string
+  ): { ratio: number; isValid: boolean } {
     const getLuminance = (hex: string): number => {
       const rgb = this.hexToRgb(hex);
       if (!rgb) return 0;
 
       const { r, g, b } = rgb;
-      
+
       const normalizeColor = (c: number): number => {
         const normalized = c / 255;
-        return normalized <= 0.03928 ? normalized / 12.92 : Math.pow((normalized + 0.055) / 1.055, 2.4);
+        return normalized <= 0.03928
+          ? normalized / 12.92
+          : Math.pow((normalized + 0.055) / 1.055, 2.4);
       };
 
       const rNorm = normalizeColor(r);
       const gNorm = normalizeColor(g);
       const bNorm = normalizeColor(b);
-      
+
       return 0.2126 * rNorm + 0.7152 * gNorm + 0.0722 * bNorm;
     };
 
@@ -348,7 +379,7 @@ export class ThemeUtils {
 
     return {
       ratio,
-      isValid: ratio >= 4.5 // WCAG AA standard
+      isValid: ratio >= 4.5, // WCAG AA standard
     };
   }
 
@@ -358,11 +389,11 @@ export class ThemeUtils {
   static hexToRgb(hex: string): { r: number; g: number; b: number } | null {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if (!result || result.length < 4) return null;
-    
+
     return {
       r: parseInt(result[1]!, 16),
       g: parseInt(result[2]!, 16),
-      b: parseInt(result[3]!, 16)
+      b: parseInt(result[3]!, 16),
     };
   }
 
@@ -370,7 +401,7 @@ export class ThemeUtils {
    * Convert RGB to hex color
    */
   static rgbToHex(r: number, g: number, b: number): string {
-    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   }
 
   /**
@@ -382,7 +413,7 @@ export class ThemeUtils {
 
     const variations: Record<string, string> = {};
     const { r, g, b } = rgb;
-    
+
     // Generate lighter variations
     for (let i = 1; i <= 4; i++) {
       const factor = i * 0.1;
@@ -417,7 +448,10 @@ export class ThemeUtils {
       colors: { ...baseTheme.colors, ...overrideTheme.colors },
       typography: { ...baseTheme.typography, ...overrideTheme.typography },
       spacing: { ...baseTheme.spacing, ...overrideTheme.spacing },
-      borderRadius: { ...baseTheme.borderRadius, ...overrideTheme.borderRadius },
+      borderRadius: {
+        ...baseTheme.borderRadius,
+        ...overrideTheme.borderRadius,
+      },
       shadows: { ...baseTheme.shadows, ...overrideTheme.shadows },
       updatedAt: new Date(),
     };
@@ -470,13 +504,19 @@ export class PageUtils {
 
     const extractText = (component: ComponentInstance) => {
       // Extract text from common text props
-      if (component.props.children && typeof component.props.children === 'string') {
+      if (
+        component.props.children &&
+        typeof component.props.children === 'string'
+      ) {
         textContent.push(component.props.children);
       }
       if (component.props.text && typeof component.props.text === 'string') {
         textContent.push(component.props.text);
       }
-      if (component.props.content && typeof component.props.content === 'string') {
+      if (
+        component.props.content &&
+        typeof component.props.content === 'string'
+      ) {
         textContent.push(component.props.content);
       }
 
@@ -495,7 +535,7 @@ export class PageUtils {
    */
   static generateMetaDescription(page: Page, maxLength = 160): string {
     const textContent = this.extractTextFromComponents(page.components);
-    
+
     if (textContent.length <= maxLength) {
       return textContent;
     }
@@ -503,8 +543,8 @@ export class PageUtils {
     // Truncate at word boundary
     const truncated = textContent.substring(0, maxLength);
     const lastSpace = truncated.lastIndexOf(' ');
-    
-    return lastSpace > 0 
+
+    return lastSpace > 0
       ? truncated.substring(0, lastSpace) + '...'
       : truncated + '...';
   }
@@ -512,7 +552,10 @@ export class PageUtils {
   /**
    * Validate page structure
    */
-  static validatePageStructure(page: Page): { isValid: boolean; errors: string[] } {
+  static validatePageStructure(page: Page): {
+    isValid: boolean;
+    errors: string[];
+  } {
     const errors: string[] = [];
 
     // Validate required fields
@@ -527,14 +570,16 @@ export class PageUtils {
     }
 
     // Validate components
-    const componentValidation = ComponentUtils.validateComponentTree(page.components);
+    const componentValidation = ComponentUtils.validateComponentTree(
+      page.components
+    );
     if (!componentValidation.isValid) {
       errors.push(...componentValidation.errors);
     }
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 }
@@ -578,22 +623,28 @@ export class MediaUtils {
   /**
    * Generate responsive image sizes
    */
-  static generateResponsiveSizes(originalWidth: number, originalHeight: number): Array<{ width: number; height: number }> {
+  static generateResponsiveSizes(
+    originalWidth: number,
+    originalHeight: number
+  ): Array<{ width: number; height: number }> {
     const aspectRatio = originalWidth / originalHeight;
     const sizes = [320, 640, 768, 1024, 1280, 1920];
-    
+
     return sizes
       .filter(width => width <= originalWidth)
       .map(width => ({
         width,
-        height: Math.round(width / aspectRatio)
+        height: Math.round(width / aspectRatio),
       }));
   }
 
   /**
    * Validate media asset
    */
-  static validateMediaAsset(asset: MediaAsset): { isValid: boolean; errors: string[] } {
+  static validateMediaAsset(asset: MediaAsset): {
+    isValid: boolean;
+    errors: string[];
+  } {
     const errors: string[] = [];
 
     if (!asset.filename?.trim()) {
@@ -611,7 +662,7 @@ export class MediaUtils {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 }
@@ -622,7 +673,7 @@ export const debounce = <T extends (...args: any[]) => any>(
   wait: number
 ): ((...args: Parameters<T>) => void) => {
   let timeout: ReturnType<typeof setTimeout>;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
@@ -634,12 +685,12 @@ export const throttle = <T extends (...args: any[]) => any>(
   limit: number
 ): ((...args: Parameters<T>) => void) => {
   let inThrottle: boolean;
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      setTimeout(() => (inThrottle = false), limit);
     }
   };
 };
@@ -647,7 +698,8 @@ export const throttle = <T extends (...args: any[]) => any>(
 export const deepClone = <T>(obj: T): T => {
   if (obj === null || typeof obj !== 'object') return obj;
   if (obj instanceof Date) return new Date(obj.getTime()) as unknown as T;
-  if (obj instanceof Array) return obj.map(item => deepClone(item)) as unknown as T;
+  if (obj instanceof Array)
+    return obj.map(item => deepClone(item)) as unknown as T;
   if (typeof obj === 'object') {
     const clonedObj = {} as T;
     for (const key in obj) {

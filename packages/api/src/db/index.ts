@@ -1,15 +1,20 @@
 // Export database connection and utilities
-export { db, client, checkDatabaseConnection, closeDatabaseConnection } from './connection.js';
+export {
+  db,
+  client,
+  checkDatabaseConnection,
+  closeDatabaseConnection,
+} from './connection.js';
 
 // Export Redis utilities
-export { 
-  redis, 
-  initializeRedis, 
-  checkRedisConnection, 
+export {
+  redis,
+  initializeRedis,
+  checkRedisConnection,
   closeRedisConnection,
   SessionManager,
   CacheManager,
-  ABTestManager 
+  ABTestManager,
 } from './redis.js';
 
 // Export schema

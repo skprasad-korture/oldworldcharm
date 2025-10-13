@@ -9,7 +9,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    
+
     /* Strict Type-Checking Options */
     "strict": true,
     "noUnusedLocals": true,
@@ -21,11 +21,11 @@
     "noImplicitOverride": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    
+
     /* Additional Checks */
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    
+
     /* Path Mapping */
     "baseUrl": ".",
     "paths": {

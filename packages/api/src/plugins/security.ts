@@ -59,7 +59,7 @@ async function securityPlugin(fastify: FastifyInstance) {
     max: 100, // Maximum 100 requests
     timeWindow: '1 minute', // Per minute
     skipOnError: true, // Don't count failed requests
-    keyGenerator: (request) => {
+    keyGenerator: request => {
       // Use IP address as key, but consider user ID if authenticated
       return request.user?.userId || request.ip;
     },
@@ -91,34 +91,43 @@ async function securityPlugin(fastify: FastifyInstance) {
     reply.header('X-Frame-Options', 'DENY');
     reply.header('X-Content-Type-Options', 'nosniff');
     reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
-    reply.header('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
-    
+    reply.header(
+      'Permissions-Policy',
+      'geolocation=(), microphone=(), camera=()'
+    );
+
     // Add API version header
     reply.header('X-API-Version', '1.0.0');
-    
+
     return payload;
   });
 
   // Request logging hook
   fastify.addHook('onRequest', async (request, _reply) => {
-    fastify.log.info({
-      method: request.method,
-      url: request.url,
-      userAgent: request.headers['user-agent'],
-      ip: request.ip,
-      userId: request.user?.userId,
-    }, 'Incoming request');
+    fastify.log.info(
+      {
+        method: request.method,
+        url: request.url,
+        userAgent: request.headers['user-agent'],
+        ip: request.ip,
+        userId: request.user?.userId,
+      },
+      'Incoming request'
+    );
   });
 
   // Response logging hook
   fastify.addHook('onResponse', async (request, reply) => {
-    fastify.log.info({
-      method: request.method,
-      url: request.url,
-      statusCode: reply.statusCode,
-      responseTime: reply.getResponseTime(),
-      userId: request.user?.userId,
-    }, 'Request completed');
+    fastify.log.info(
+      {
+        method: request.method,
+        url: request.url,
+        statusCode: reply.statusCode,
+        responseTime: reply.getResponseTime(),
+        userId: request.user?.userId,
+      },
+      'Request completed'
+    );
   });
 }
 

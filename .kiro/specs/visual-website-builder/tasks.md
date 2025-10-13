@@ -45,7 +45,7 @@
   - Add content import/export functionality
   - _Requirements: 4.1, 4.4, 4.5_
 
-- [ ]* 5.3 Page Management API Tests
+- [ ]\* 5.3 Page Management API Tests
   - Test CRUD operations and validation
   - Validate versioning and rollback functionality
   - Test content scheduling and publication
@@ -66,7 +66,7 @@
   - Implement accessibility validation for color contrast ratios
   - _Requirements: 3.1, 3.2, 3.4, 3.5_
 
-- [ ]* 6.3 Theme Management API Tests
+- [ ]\* 6.3 Theme Management API Tests
   - Test theme CRUD operations and validation
   - Validate CSS generation and theme application
   - Test accessibility compliance checking
@@ -87,7 +87,7 @@
   - Add bulk operations for media management
   - _Requirements: 11.2, 11.3, 11.5_
 
-- [ ]* 7.3 Media Management API Tests
+- [ ]\* 7.3 Media Management API Tests
   - Test file upload and processing workflows
   - Validate image optimization and variant generation
   - Test media organization and search functionality
@@ -108,7 +108,7 @@
   - Add drag-and-drop data preparation for components
   - _Requirements: 2.1, 2.2, 2.3_
 
-- [ ]* 8.3 Component System Unit Tests
+- [ ]\* 8.3 Component System Unit Tests
   - Write unit tests for component wrapper functionality
   - Test component registration and discovery
   - Validate prop schema generation and validation
@@ -136,7 +136,7 @@
   - Build component copy/paste functionality
   - _Requirements: 1.1, 1.2, 1.3_
 
-- [ ]* 9.4 Visual Editor Integration Tests
+- [ ]\* 9.4 Visual Editor Integration Tests
   - Test drag-and-drop workflows end-to-end
   - Validate real-time updates and state synchronization
   - Test component tree operations and navigation
@@ -157,7 +157,7 @@
   - Add related posts and content recommendations
   - _Requirements: 5.4, 5.5, 9.1, 9.2, 9.3_
 
-- [ ]* 10.3 Blog System Tests
+- [ ]\* 10.3 Blog System Tests
   - Test blog post creation and publication workflow
   - Validate RSS feed generation and social sharing
   - Test commenting and moderation functionality
@@ -178,7 +178,7 @@
   - Add multilingual SEO support with hreflang annotations
   - _Requirements: 6.4, 10.1, 10.2, 10.3, 10.4_
 
-- [ ]* 11.3 SEO Engine Tests
+- [ ]\* 11.3 SEO Engine Tests
   - Test SEO analysis and scoring algorithms
   - Validate sitemap generation and URL management
   - Test structured data generation for different content types
@@ -199,7 +199,7 @@
   - Add test result export and integration capabilities
   - _Requirements: 8.3, 8.4, 8.5_
 
-- [ ]* 12.3 A/B Testing System Tests
+- [ ]\* 12.3 A/B Testing System Tests
   - Test variant creation and traffic splitting
   - Validate statistical analysis and winner detection
   - Test conversion tracking and reporting
@@ -220,7 +220,7 @@
   - Add Lighthouse score monitoring and optimization
   - _Requirements: 7.2, 7.3, 7.4, 7.5_
 
-- [ ]* 13.3 Build Pipeline Tests
+- [ ]\* 13.3 Build Pipeline Tests
   - Test Astro code generation and compilation
   - Validate performance optimizations and Lighthouse scores
   - Test asset optimization and caching strategies
@@ -241,7 +241,7 @@
   - Add social login integration for user convenience
   - _Requirements: 9.2, 9.3_
 
-- [ ]* 14.3 Social Features Tests
+- [ ]\* 14.3 Social Features Tests
   - Test social sharing and Open Graph generation
   - Validate commenting system and moderation tools
   - Test social analytics and engagement tracking
@@ -262,7 +262,7 @@
   - Create backup and disaster recovery procedures
   - _Requirements: Security and performance across all features_
 
-- [ ]* 15.3 End-to-End Testing Suite
+- [ ]\* 15.3 End-to-End Testing Suite
   - Create comprehensive E2E tests covering all user workflows
   - Implement performance testing and monitoring
   - Add accessibility testing and compliance validation

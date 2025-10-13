@@ -10,7 +10,8 @@ async function swaggerPlugin(fastify: FastifyInstance) {
       openapi: '3.0.0',
       info: {
         title: 'Visual Website Builder API',
-        description: 'API for the Visual Website Builder with CMS functionality built on Astro',
+        description:
+          'API for the Visual Website Builder with CMS functionality built on Astro',
         version: '1.0.0',
         contact: {
           name: 'API Support',
@@ -88,7 +89,15 @@ async function swaggerPlugin(fastify: FastifyInstance) {
                   hasNext: { type: 'boolean' },
                   hasPrev: { type: 'boolean' },
                 },
-                required: ['items', 'total', 'page', 'pageSize', 'totalPages', 'hasNext', 'hasPrev'],
+                required: [
+                  'items',
+                  'total',
+                  'page',
+                  'pageSize',
+                  'totalPages',
+                  'hasNext',
+                  'hasPrev',
+                ],
               },
               timestamp: { type: 'string', format: 'date-time' },
             },
@@ -136,7 +145,17 @@ async function swaggerPlugin(fastify: FastifyInstance) {
                   warning: { type: 'string', pattern: '^#[0-9A-Fa-f]{6}$' },
                   error: { type: 'string', pattern: '^#[0-9A-Fa-f]{6}$' },
                 },
-                required: ['primary', 'secondary', 'accent', 'neutral', 'base', 'info', 'success', 'warning', 'error'],
+                required: [
+                  'primary',
+                  'secondary',
+                  'accent',
+                  'neutral',
+                  'base',
+                  'info',
+                  'success',
+                  'warning',
+                  'error',
+                ],
               },
               typography: {
                 type: 'object',
@@ -156,14 +175,21 @@ async function swaggerPlugin(fastify: FastifyInstance) {
               createdAt: { type: 'string', format: 'date-time' },
               updatedAt: { type: 'string', format: 'date-time' },
             },
-            required: ['id', 'name', 'colors', 'typography', 'createdAt', 'updatedAt'],
+            required: [
+              'id',
+              'name',
+              'colors',
+              'typography',
+              'createdAt',
+              'updatedAt',
+            ],
           },
           Page: {
             type: 'object',
             properties: {
               id: { type: 'string', minLength: 1 },
-              slug: { 
-                type: 'string', 
+              slug: {
+                type: 'string',
                 minLength: 1,
                 pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$',
               },
@@ -187,8 +213,8 @@ async function swaggerPlugin(fastify: FastifyInstance) {
                   noFollow: { type: 'boolean' },
                 },
               },
-              status: { 
-                type: 'string', 
+              status: {
+                type: 'string',
                 enum: ['draft', 'published', 'archived'],
               },
               publishedAt: { type: 'string', format: 'date-time' },
@@ -196,7 +222,16 @@ async function swaggerPlugin(fastify: FastifyInstance) {
               updatedAt: { type: 'string', format: 'date-time' },
               version: { type: 'integer', minimum: 1 },
             },
-            required: ['id', 'slug', 'title', 'components', 'status', 'createdAt', 'updatedAt', 'version'],
+            required: [
+              'id',
+              'slug',
+              'title',
+              'components',
+              'status',
+              'createdAt',
+              'updatedAt',
+              'version',
+            ],
           },
         },
       },
@@ -233,7 +268,7 @@ async function swaggerPlugin(fastify: FastifyInstance) {
       },
     },
     staticCSP: true,
-    transformStaticCSP: (header) => header,
+    transformStaticCSP: header => header,
     transformSpecification: (swaggerObject, _request, _reply) => {
       return swaggerObject;
     },

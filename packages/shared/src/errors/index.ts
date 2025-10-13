@@ -7,14 +7,19 @@ export abstract class AppError extends Error {
   readonly timestamp: Date;
   readonly details: Record<string, unknown>;
 
-  constructor(message: string, code: string, statusCode: number, details: Record<string, unknown> = {}) {
+  constructor(
+    message: string,
+    code: string,
+    statusCode: number,
+    details: Record<string, unknown> = {}
+  ) {
     super(message);
     this.name = this.constructor.name;
     this.code = code;
     this.statusCode = statusCode;
     this.timestamp = new Date();
     this.details = details;
-    
+
     // Maintains proper stack trace for where our error was thrown (only available on V8)
     if (typeof (Error as any).captureStackTrace === 'function') {
       (Error as any).captureStackTrace(this, this.constructor);
@@ -38,7 +43,11 @@ export abstract class AppError extends Error {
 export class ValidationError extends AppError {
   readonly field: string | undefined;
 
-  constructor(message: string, field?: string, details: Record<string, unknown> = {}) {
+  constructor(
+    message: string,
+    field?: string,
+    details: Record<string, unknown> = {}
+  ) {
     super(message, 'VALIDATION_ERROR', 400, details);
     this.field = field;
   }
@@ -57,11 +66,11 @@ export class ComponentError extends AppError {
   readonly componentType: string | undefined;
 
   constructor(
-    message: string, 
+    message: string,
     code: string,
     statusCode: number,
-    componentId?: string, 
-    componentType?: string, 
+    componentId?: string,
+    componentType?: string,
     details: Record<string, unknown> = {}
   ) {
     super(message, code, statusCode, details);
@@ -93,10 +102,10 @@ export class ComponentNotFoundError extends ComponentError {
 export class ComponentRegistrationError extends ComponentError {
   constructor(componentType: string, reason: string) {
     super(
-      `Failed to register component ${componentType}: ${reason}`, 
+      `Failed to register component ${componentType}: ${reason}`,
       'COMPONENT_REGISTRATION_ERROR',
       500,
-      undefined, 
+      undefined,
       componentType
     );
   }
@@ -106,7 +115,13 @@ export class ComponentRegistrationError extends ComponentError {
 export class ThemeError extends AppError {
   readonly themeId: string | undefined;
 
-  constructor(message: string, code: string, statusCode: number, themeId?: string, details: Record<string, unknown> = {}) {
+  constructor(
+    message: string,
+    code: string,
+    statusCode: number,
+    themeId?: string,
+    details: Record<string, unknown> = {}
+  ) {
     super(message, code, statusCode, details);
     this.themeId = themeId;
   }
@@ -126,8 +141,18 @@ export class ThemeNotFoundError extends ThemeError {
 }
 
 export class ThemeValidationError extends ThemeError {
-  constructor(message: string, themeId?: string, details: Record<string, unknown> = {}) {
-    super(`Theme validation failed: ${message}`, 'THEME_VALIDATION_ERROR', 400, themeId, details);
+  constructor(
+    message: string,
+    themeId?: string,
+    details: Record<string, unknown> = {}
+  ) {
+    super(
+      `Theme validation failed: ${message}`,
+      'THEME_VALIDATION_ERROR',
+      400,
+      themeId,
+      details
+    );
   }
 }
 
@@ -136,7 +161,14 @@ export class PageError extends AppError {
   readonly pageId: string | undefined;
   readonly slug: string | undefined;
 
-  constructor(message: string, code: string, statusCode: number, pageId?: string, slug?: string, details: Record<string, unknown> = {}) {
+  constructor(
+    message: string,
+    code: string,
+    statusCode: number,
+    pageId?: string,
+    slug?: string,
+    details: Record<string, unknown> = {}
+  ) {
     super(message, code, statusCode, details);
     this.pageId = pageId;
     this.slug = slug;
@@ -165,7 +197,13 @@ export class PageNotFoundError extends PageError {
 
 export class SlugConflictError extends PageError {
   constructor(slug: string, existingPageId?: string) {
-    super(`Slug already exists: ${slug}`, 'SLUG_CONFLICT', 409, existingPageId, slug);
+    super(
+      `Slug already exists: ${slug}`,
+      'SLUG_CONFLICT',
+      409,
+      existingPageId,
+      slug
+    );
   }
 }
 
@@ -174,7 +212,14 @@ export class MediaError extends AppError {
   readonly mediaId: string | undefined;
   readonly filename: string | undefined;
 
-  constructor(message: string, code: string, statusCode: number, mediaId?: string, filename?: string, details: Record<string, unknown> = {}) {
+  constructor(
+    message: string,
+    code: string,
+    statusCode: number,
+    mediaId?: string,
+    filename?: string,
+    details: Record<string, unknown> = {}
+  ) {
     super(message, code, statusCode, details);
     this.mediaId = mediaId;
     this.filename = filename;
@@ -203,13 +248,24 @@ export class MediaNotFoundError extends MediaError {
 
 export class MediaUploadError extends MediaError {
   constructor(filename: string, reason: string) {
-    super(`Failed to upload ${filename}: ${reason}`, 'MEDIA_UPLOAD_ERROR', 400, undefined, filename);
+    super(
+      `Failed to upload ${filename}: ${reason}`,
+      'MEDIA_UPLOAD_ERROR',
+      400,
+      undefined,
+      filename
+    );
   }
 }
 
 export class MediaProcessingError extends MediaError {
   constructor(mediaId: string, operation: string, reason: string) {
-    super(`Failed to process media ${mediaId} (${operation}): ${reason}`, 'MEDIA_PROCESSING_ERROR', 500, mediaId);
+    super(
+      `Failed to process media ${mediaId} (${operation}): ${reason}`,
+      'MEDIA_PROCESSING_ERROR',
+      500,
+      mediaId
+    );
   }
 }
 
@@ -218,7 +274,14 @@ export class BuildError extends AppError {
   readonly buildId: string | undefined;
   readonly stage: string | undefined;
 
-  constructor(message: string, code: string, statusCode: number, buildId?: string, stage?: string, details: Record<string, unknown> = {}) {
+  constructor(
+    message: string,
+    code: string,
+    statusCode: number,
+    buildId?: string,
+    stage?: string,
+    details: Record<string, unknown> = {}
+  ) {
     super(message, code, statusCode, details);
     this.buildId = buildId;
     this.stage = stage;
@@ -235,20 +298,36 @@ export class BuildError extends AppError {
 
 export class CodeGenerationError extends BuildError {
   constructor(reason: string, buildId?: string) {
-    super(`Code generation failed: ${reason}`, 'CODE_GENERATION_ERROR', 500, buildId, 'code-generation');
+    super(
+      `Code generation failed: ${reason}`,
+      'CODE_GENERATION_ERROR',
+      500,
+      buildId,
+      'code-generation'
+    );
   }
 }
 
 export class AssetOptimizationError extends BuildError {
   constructor(assetPath: string, reason: string, buildId?: string) {
-    super(`Asset optimization failed for ${assetPath}: ${reason}`, 'ASSET_OPTIMIZATION_ERROR', 500, buildId, 'asset-optimization');
+    super(
+      `Asset optimization failed for ${assetPath}: ${reason}`,
+      'ASSET_OPTIMIZATION_ERROR',
+      500,
+      buildId,
+      'asset-optimization'
+    );
   }
 }
 
 export class DeploymentError extends AppError {
   readonly deploymentId: string | undefined;
 
-  constructor(message: string, deploymentId?: string, details: Record<string, unknown> = {}) {
+  constructor(
+    message: string,
+    deploymentId?: string,
+    details: Record<string, unknown> = {}
+  ) {
     super(message, 'DEPLOYMENT_ERROR', 500, details);
     this.deploymentId = deploymentId;
   }
@@ -263,7 +342,11 @@ export class DeploymentError extends AppError {
 
 // Authentication and authorization errors
 export class AuthError extends AppError {
-  constructor(message: string, code: string = 'AUTH_ERROR', statusCode: number = 401) {
+  constructor(
+    message: string,
+    code: string = 'AUTH_ERROR',
+    statusCode: number = 401
+  ) {
     super(message, code, statusCode);
   }
 }
@@ -290,7 +373,11 @@ export class TokenExpiredError extends AuthError {
 export class DatabaseError extends AppError {
   readonly operation: string | undefined;
 
-  constructor(message: string, operation?: string, details: Record<string, unknown> = {}) {
+  constructor(
+    message: string,
+    operation?: string,
+    details: Record<string, unknown> = {}
+  ) {
     super(message, 'DATABASE_ERROR', 500, details);
     this.operation = operation;
   }
@@ -306,7 +393,11 @@ export class DatabaseError extends AppError {
 export class ExternalServiceError extends AppError {
   readonly service: string | undefined;
 
-  constructor(message: string, service?: string, details: Record<string, unknown> = {}) {
+  constructor(
+    message: string,
+    service?: string,
+    details: Record<string, unknown> = {}
+  ) {
     super(message, 'EXTERNAL_SERVICE_ERROR', 502, details);
     this.service = service;
   }
@@ -339,7 +430,11 @@ export class RateLimitError extends AppError {
 // Generic errors
 export class NotFoundError extends AppError {
   constructor(resource: string, identifier?: string) {
-    super(`${resource} not found${identifier ? `: ${identifier}` : ''}`, 'NOT_FOUND', 404);
+    super(
+      `${resource} not found${identifier ? `: ${identifier}` : ''}`,
+      'NOT_FOUND',
+      404
+    );
   }
 }
 
@@ -350,7 +445,10 @@ export class ConflictError extends AppError {
 }
 
 export class InternalServerError extends AppError {
-  constructor(message = 'An internal server error occurred', details: Record<string, unknown> = {}) {
+  constructor(
+    message = 'An internal server error occurred',
+    details: Record<string, unknown> = {}
+  ) {
     super(message, 'INTERNAL_SERVER_ERROR', 500, details);
   }
 }
@@ -373,10 +471,14 @@ export class ErrorHandler {
     }
 
     if (error instanceof Error) {
-      return new InternalServerError(error.message, { originalError: error.name });
+      return new InternalServerError(error.message, {
+        originalError: error.name,
+      });
     }
 
-    return new InternalServerError('An unknown error occurred', { originalError: String(error) });
+    return new InternalServerError('An unknown error occurred', {
+      originalError: String(error),
+    });
   }
 
   /**
@@ -384,14 +486,16 @@ export class ErrorHandler {
    */
   static formatForAPI(error: unknown) {
     const normalizedError = this.normalize(error);
-    
+
     return {
       success: false,
       error: {
         code: normalizedError.code,
         message: normalizedError.message,
         details: normalizedError.details,
-        ...(normalizedError instanceof ValidationError && { field: normalizedError.field }),
+        ...(normalizedError instanceof ValidationError && {
+          field: normalizedError.field,
+        }),
       },
       timestamp: normalizedError.timestamp.toISOString(),
     };
@@ -402,7 +506,7 @@ export class ErrorHandler {
    */
   static log(error: unknown, context?: Record<string, unknown>) {
     const normalizedError = this.normalize(error);
-    
+
     const logData = {
       error: normalizedError.toJSON(),
       context,
@@ -428,7 +532,7 @@ export class ErrorHandler {
     }
 
     const field = firstIssue.path?.join('.') || undefined;
-    const message = context 
+    const message = context
       ? `${context}: ${firstIssue.message}`
       : firstIssue.message;
 
@@ -439,26 +543,26 @@ export class ErrorHandler {
 }
 
 // Type guards for error checking
-export const isValidationError = (error: unknown): error is ValidationError => 
+export const isValidationError = (error: unknown): error is ValidationError =>
   error instanceof ValidationError;
 
-export const isComponentError = (error: unknown): error is ComponentError => 
+export const isComponentError = (error: unknown): error is ComponentError =>
   error instanceof ComponentError;
 
-export const isThemeError = (error: unknown): error is ThemeError => 
+export const isThemeError = (error: unknown): error is ThemeError =>
   error instanceof ThemeError;
 
-export const isPageError = (error: unknown): error is PageError => 
+export const isPageError = (error: unknown): error is PageError =>
   error instanceof PageError;
 
-export const isMediaError = (error: unknown): error is MediaError => 
+export const isMediaError = (error: unknown): error is MediaError =>
   error instanceof MediaError;
 
-export const isBuildError = (error: unknown): error is BuildError => 
+export const isBuildError = (error: unknown): error is BuildError =>
   error instanceof BuildError;
 
-export const isAuthError = (error: unknown): error is AuthError => 
+export const isAuthError = (error: unknown): error is AuthError =>
   error instanceof AuthError;
 
-export const isDatabaseError = (error: unknown): error is DatabaseError => 
+export const isDatabaseError = (error: unknown): error is DatabaseError =>
   error instanceof DatabaseError;

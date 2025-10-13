@@ -3,7 +3,9 @@ import postgres from 'postgres';
 import { schema } from './schema.js';
 
 // Database configuration
-const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/oldworldcharm';
+const DATABASE_URL =
+  process.env.DATABASE_URL ||
+  'postgresql://postgres:postgres@localhost:5432/oldworldcharm';
 
 // Create postgres client
 const client = postgres(DATABASE_URL, {

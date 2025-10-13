@@ -29,14 +29,14 @@ export interface ComponentMetadata {
   version: string;
 }
 
-export type ComponentCategory = 
-  | 'layout' 
-  | 'typography' 
-  | 'forms' 
-  | 'navigation' 
-  | 'media' 
-  | 'feedback' 
-  | 'data-display' 
+export type ComponentCategory =
+  | 'layout'
+  | 'typography'
+  | 'forms'
+  | 'navigation'
+  | 'media'
+  | 'feedback'
+  | 'data-display'
   | 'overlay';
 
 // Theme System Types
@@ -173,7 +173,12 @@ export interface ABTest {
   updatedAt: Date;
 }
 
-export type ABTestStatus = 'draft' | 'running' | 'paused' | 'completed' | 'archived';
+export type ABTestStatus =
+  | 'draft'
+  | 'running'
+  | 'paused'
+  | 'completed'
+  | 'archived';
 
 export interface ABTestVariant {
   id: string;
@@ -281,4 +286,9 @@ export interface DeploymentResult {
   completedAt?: Date;
 }
 
-export type DeploymentStatus = 'pending' | 'building' | 'deploying' | 'success' | 'failed';
+export type DeploymentStatus =
+  | 'pending'
+  | 'building'
+  | 'deploying'
+  | 'success'
+  | 'failed';

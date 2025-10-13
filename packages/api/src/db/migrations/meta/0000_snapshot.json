@@ -64,30 +64,22 @@
       "indexes": {
         "ab_test_results_test_id_idx": {
           "name": "ab_test_results_test_id_idx",
-          "columns": [
-            "test_id"
-          ],
+          "columns": ["test_id"],
           "isUnique": false
         },
         "ab_test_results_variant_id_idx": {
           "name": "ab_test_results_variant_id_idx",
-          "columns": [
-            "variant_id"
-          ],
+          "columns": ["variant_id"],
           "isUnique": false
         },
         "ab_test_results_session_id_idx": {
           "name": "ab_test_results_session_id_idx",
-          "columns": [
-            "session_id"
-          ],
+          "columns": ["session_id"],
           "isUnique": false
         },
         "ab_test_results_converted_idx": {
           "name": "ab_test_results_converted_idx",
-          "columns": [
-            "converted"
-          ],
+          "columns": ["converted"],
           "isUnique": false
         }
       },
@@ -96,12 +88,8 @@
           "name": "ab_test_results_test_id_ab_tests_id_fk",
           "tableFrom": "ab_test_results",
           "tableTo": "ab_tests",
-          "columnsFrom": [
-            "test_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["test_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -181,23 +169,17 @@
       "indexes": {
         "ab_tests_page_id_idx": {
           "name": "ab_tests_page_id_idx",
-          "columns": [
-            "page_id"
-          ],
+          "columns": ["page_id"],
           "isUnique": false
         },
         "ab_tests_status_idx": {
           "name": "ab_tests_status_idx",
-          "columns": [
-            "status"
-          ],
+          "columns": ["status"],
           "isUnique": false
         },
         "ab_tests_start_date_idx": {
           "name": "ab_tests_start_date_idx",
-          "columns": [
-            "start_date"
-          ],
+          "columns": ["start_date"],
           "isUnique": false
         }
       },
@@ -206,12 +188,8 @@
           "name": "ab_tests_page_id_pages_id_fk",
           "tableFrom": "ab_tests",
           "tableTo": "pages",
-          "columnsFrom": [
-            "page_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["page_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -293,16 +271,12 @@
       "indexes": {
         "blog_posts_page_id_idx": {
           "name": "blog_posts_page_id_idx",
-          "columns": [
-            "page_id"
-          ],
+          "columns": ["page_id"],
           "isUnique": false
         },
         "blog_posts_author_idx": {
           "name": "blog_posts_author_idx",
-          "columns": [
-            "author"
-          ],
+          "columns": ["author"],
           "isUnique": false
         }
       },
@@ -311,12 +285,8 @@
           "name": "blog_posts_page_id_pages_id_fk",
           "tableFrom": "blog_posts",
           "tableTo": "pages",
-          "columnsFrom": [
-            "page_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["page_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -408,30 +378,22 @@
       "indexes": {
         "media_assets_filename_idx": {
           "name": "media_assets_filename_idx",
-          "columns": [
-            "filename"
-          ],
+          "columns": ["filename"],
           "isUnique": false
         },
         "media_assets_mime_type_idx": {
           "name": "media_assets_mime_type_idx",
-          "columns": [
-            "mime_type"
-          ],
+          "columns": ["mime_type"],
           "isUnique": false
         },
         "media_assets_folder_idx": {
           "name": "media_assets_folder_idx",
-          "columns": [
-            "folder"
-          ],
+          "columns": ["folder"],
           "isUnique": false
         },
         "media_assets_created_at_idx": {
           "name": "media_assets_created_at_idx",
-          "columns": [
-            "created_at"
-          ],
+          "columns": ["created_at"],
           "isUnique": false
         }
       },
@@ -511,23 +473,17 @@
       "indexes": {
         "pages_slug_idx": {
           "name": "pages_slug_idx",
-          "columns": [
-            "slug"
-          ],
+          "columns": ["slug"],
           "isUnique": false
         },
         "pages_status_idx": {
           "name": "pages_status_idx",
-          "columns": [
-            "status"
-          ],
+          "columns": ["status"],
           "isUnique": false
         },
         "pages_published_at_idx": {
           "name": "pages_published_at_idx",
-          "columns": [
-            "published_at"
-          ],
+          "columns": ["published_at"],
           "isUnique": false
         }
       },
@@ -537,9 +493,7 @@
         "pages_slug_unique": {
           "name": "pages_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       }
     },
@@ -591,16 +545,12 @@
       "indexes": {
         "themes_name_idx": {
           "name": "themes_name_idx",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "isUnique": false
         },
         "themes_is_default_idx": {
           "name": "themes_is_default_idx",
-          "columns": [
-            "is_default"
-          ],
+          "columns": ["is_default"],
           "isUnique": false
         }
       },
@@ -662,16 +612,12 @@
       "indexes": {
         "user_sessions_session_id_idx": {
           "name": "user_sessions_session_id_idx",
-          "columns": [
-            "session_id"
-          ],
+          "columns": ["session_id"],
           "isUnique": false
         },
         "user_sessions_user_id_idx": {
           "name": "user_sessions_user_id_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         }
       },
@@ -681,9 +627,7 @@
         "user_sessions_session_id_unique": {
           "name": "user_sessions_session_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "session_id"
-          ]
+          "columns": ["session_id"]
         }
       }
     }

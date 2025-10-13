@@ -5,12 +5,12 @@
  * Run with: tsx src/db/test-connection.ts
  */
 
-import { 
-  checkDatabaseConnection, 
+import {
+  checkDatabaseConnection,
   closeDatabaseConnection,
   initializeRedis,
   checkRedisConnection,
-  closeRedisConnection
+  closeRedisConnection,
 } from './index.js';
 
 async function testConnections() {
@@ -45,7 +45,6 @@ async function testConnections() {
         console.log('- REDIS_URL is correct');
       }
     }
-
   } catch (error) {
     console.error('❌ Connection test failed:', error);
   } finally {

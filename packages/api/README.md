@@ -63,12 +63,14 @@ ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
 ## API Endpoints
 
 ### Health Check
+
 - `GET /health` - Basic health check
 - `GET /health/detailed` - Detailed health with system metrics
 - `GET /ready` - Readiness probe (Kubernetes)
 - `GET /live` - Liveness probe (Kubernetes)
 
 ### Authentication
+
 - `POST /api/auth/login` - User login
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/logout` - User logout
@@ -76,6 +78,7 @@ ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
 - `POST /api/auth/refresh` - Refresh token (placeholder)
 
 ### Documentation
+
 - `GET /docs` - Swagger UI documentation
 
 ## Architecture
@@ -93,6 +96,7 @@ The API uses Fastify's plugin architecture for modularity:
 ### Authentication
 
 Supports multiple authentication methods:
+
 - JWT tokens via Authorization header (`Bearer <token>`)
 - JWT tokens via HTTP-only cookies
 - Session-based authentication
@@ -100,6 +104,7 @@ Supports multiple authentication methods:
 ### Error Handling
 
 Standardized error responses with:
+
 - Error codes and messages
 - Field-level validation errors
 - Request context logging
@@ -108,6 +113,7 @@ Standardized error responses with:
 ### Validation
 
 Type-safe request validation using Zod schemas:
+
 - Request body validation
 - Query parameter validation
 - Route parameter validation
@@ -195,6 +201,7 @@ The API provides health check endpoints for monitoring:
 ### Logging
 
 Structured logging with Pino:
+
 - Request/response logging
 - Error logging with context
 - Performance metrics
@@ -205,6 +212,7 @@ Structured logging with Pino:
 Interactive API documentation is available at `/docs` when the server is running.
 
 The API follows OpenAPI 3.0 specification with:
+
 - Complete endpoint documentation
 - Request/response schemas
 - Authentication requirements

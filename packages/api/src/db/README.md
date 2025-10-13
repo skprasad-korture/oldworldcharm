@@ -5,11 +5,13 @@ This directory contains the database schema, migrations, and utilities for the O
 ## Quick Start
 
 1. **Start the database services:**
+
    ```bash
    docker-compose up -d postgres redis
    ```
 
 2. **Run migrations:**
+
    ```bash
    pnpm db:migrate
    ```
@@ -50,6 +52,7 @@ This directory contains the database schema, migrations, and utilities for the O
 ## Redis Configuration
 
 Redis is used for:
+
 - **Session Management** - User session storage and tracking
 - **Caching** - Page and component caching for performance
 - **A/B Testing** - User variant assignments and counters

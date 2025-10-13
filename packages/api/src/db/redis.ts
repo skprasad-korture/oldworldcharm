@@ -20,7 +20,7 @@ redis.on('ready', () => {
   console.log('✅ Redis client ready');
 });
 
-redis.on('error', (error) => {
+redis.on('error', error => {
   console.error('❌ Redis client error:', error);
 });
 
@@ -57,7 +57,11 @@ export class SessionManager {
   private static readonly SESSION_PREFIX = 'session:';
   private static readonly DEFAULT_TTL = 24 * 60 * 60; // 24 hours in seconds
 
-  static async createSession(sessionId: string, data: any, ttl: number = this.DEFAULT_TTL): Promise<void> {
+  static async createSession(
+    sessionId: string,
+    data: any,
+    ttl: number = this.DEFAULT_TTL
+  ): Promise<void> {
     const key = `${this.SESSION_PREFIX}${sessionId}`;
     await redis.setEx(key, ttl, JSON.stringify(data));
   }
@@ -68,7 +72,11 @@ export class SessionManager {
     return data ? JSON.parse(data) : null;
   }
 
-  static async updateSession(sessionId: string, data: any, ttl: number = this.DEFAULT_TTL): Promise<void> {
+  static async updateSession(
+    sessionId: string,
+    data: any,
+    ttl: number = this.DEFAULT_TTL
+  ): Promise<void> {
     const key = `${this.SESSION_PREFIX}${sessionId}`;
     await redis.setEx(key, ttl, JSON.stringify(data));
   }
@@ -78,7 +86,10 @@ export class SessionManager {
     await redis.del(key);
   }
 
-  static async extendSession(sessionId: string, ttl: number = this.DEFAULT_TTL): Promise<boolean> {
+  static async extendSession(
+    sessionId: string,
+    ttl: number = this.DEFAULT_TTL
+  ): Promise<boolean> {
     const key = `${this.SESSION_PREFIX}${sessionId}`;
     const result = await redis.expire(key, ttl);
     return result;
@@ -90,7 +101,11 @@ export class CacheManager {
   private static readonly CACHE_PREFIX = 'cache:';
   private static readonly DEFAULT_TTL = 60 * 60; // 1 hour in seconds
 
-  static async set(key: string, value: any, ttl: number = this.DEFAULT_TTL): Promise<void> {
+  static async set(
+    key: string,
+    value: any,
+    ttl: number = this.DEFAULT_TTL
+  ): Promise<void> {
     const cacheKey = `${this.CACHE_PREFIX}${key}`;
     await redis.setEx(cacheKey, ttl, JSON.stringify(value));
   }
@@ -125,22 +140,35 @@ export class CacheManager {
 export class ABTestManager {
   private static readonly AB_TEST_PREFIX = 'ab_test:';
 
-  static async assignUserToVariant(testId: string, sessionId: string, variant: string): Promise<void> {
+  static async assignUserToVariant(
+    testId: string,
+    sessionId: string,
+    variant: string
+  ): Promise<void> {
     const key = `${this.AB_TEST_PREFIX}${testId}:${sessionId}`;
     await redis.set(key, variant);
   }
 
-  static async getUserVariant(testId: string, sessionId: string): Promise<string | null> {
+  static async getUserVariant(
+    testId: string,
+    sessionId: string
+  ): Promise<string | null> {
     const key = `${this.AB_TEST_PREFIX}${testId}:${sessionId}`;
     return await redis.get(key);
   }
 
-  static async incrementVariantCount(testId: string, variant: string): Promise<number> {
+  static async incrementVariantCount(
+    testId: string,
+    variant: string
+  ): Promise<number> {
     const key = `${this.AB_TEST_PREFIX}${testId}:count:${variant}`;
     return await redis.incr(key);
   }
 
-  static async getVariantCount(testId: string, variant: string): Promise<number> {
+  static async getVariantCount(
+    testId: string,
+    variant: string
+  ): Promise<number> {
     const key = `${this.AB_TEST_PREFIX}${testId}:count:${variant}`;
     const count = await redis.get(key);
     return count ? parseInt(count, 10) : 0;

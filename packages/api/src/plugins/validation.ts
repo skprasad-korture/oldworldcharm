@@ -13,8 +13,8 @@ interface ValidationOptions {
 
 async function validationPlugin(fastify: FastifyInstance) {
   // Validation decorator
-  fastify.decorate('validate', function(schemas: ValidationOptions) {
-    return async function(request: FastifyRequest, reply: FastifyReply) {
+  fastify.decorate('validate', function (schemas: ValidationOptions) {
+    return async function (request: FastifyRequest, reply: FastifyReply) {
       try {
         // Validate request body
         if (schemas.body && request.body !== undefined) {
@@ -22,7 +22,10 @@ async function validationPlugin(fastify: FastifyInstance) {
             request.body = schemas.body.parse(request.body);
           } catch (error) {
             if (error instanceof ZodError) {
-              throw ErrorHandler.fromZodError(error, 'Request body validation failed');
+              throw ErrorHandler.fromZodError(
+                error,
+                'Request body validation failed'
+              );
             }
             throw new ValidationError('Invalid request body');
           }
@@ -34,7 +37,10 @@ async function validationPlugin(fastify: FastifyInstance) {
             request.query = schemas.querystring.parse(request.query);
           } catch (error) {
             if (error instanceof ZodError) {
-              throw ErrorHandler.fromZodError(error, 'Query parameters validation failed');
+              throw ErrorHandler.fromZodError(
+                error,
+                'Query parameters validation failed'
+              );
             }
             throw new ValidationError('Invalid query parameters');
           }
@@ -46,7 +52,10 @@ async function validationPlugin(fastify: FastifyInstance) {
             request.params = schemas.params.parse(request.params);
           } catch (error) {
             if (error instanceof ZodError) {
-              throw ErrorHandler.fromZodError(error, 'Route parameters validation failed');
+              throw ErrorHandler.fromZodError(
+                error,
+                'Route parameters validation failed'
+              );
             }
             throw new ValidationError('Invalid route parameters');
           }
@@ -57,21 +66,26 @@ async function validationPlugin(fastify: FastifyInstance) {
           try {
             // Only validate specified headers, not all headers
             const headersToValidate: Record<string, unknown> = {};
-            
+
             // Get schema keys - this is a simplified approach
             // In production, you might want to use a more robust method
-            const schemaKeys = Object.keys((schemas.headers as any)._def?.shape || {});
-            
+            const schemaKeys = Object.keys(
+              (schemas.headers as any)._def?.shape || {}
+            );
+
             for (const key of schemaKeys) {
               if (request.headers[key] !== undefined) {
                 headersToValidate[key] = request.headers[key];
               }
             }
-            
+
             schemas.headers.parse(headersToValidate);
           } catch (error) {
             if (error instanceof ZodError) {
-              throw ErrorHandler.fromZodError(error, 'Headers validation failed');
+              throw ErrorHandler.fromZodError(
+                error,
+                'Headers validation failed'
+              );
             }
             throw new ValidationError('Invalid headers');
           }
@@ -84,7 +98,10 @@ async function validationPlugin(fastify: FastifyInstance) {
   });
 
   // Helper to create Fastify JSON schema from Zod schema
-  fastify.decorate('zodToJsonSchema', function(_zodSchema: ZodSchema): Record<string, unknown> {
+  fastify.decorate('zodToJsonSchema', function (_zodSchema: ZodSchema): Record<
+    string,
+    unknown
+  > {
     // This is a simplified conversion - in production you might want to use a library like zod-to-json-schema
     return {
       type: 'object',
@@ -102,7 +119,9 @@ async function validationPlugin(fastify: FastifyInstance) {
 // Extend Fastify instance type
 declare module 'fastify' {
   interface FastifyInstance {
-    validate: (schemas: ValidationOptions) => (request: FastifyRequest, reply: FastifyReply) => Promise<void>;
+    validate: (
+      schemas: ValidationOptions
+    ) => (request: FastifyRequest, reply: FastifyReply) => Promise<void>;
     zodToJsonSchema: (zodSchema: ZodSchema) => Record<string, unknown>;
   }
 }

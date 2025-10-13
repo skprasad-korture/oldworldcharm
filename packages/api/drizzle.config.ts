@@ -5,7 +5,9 @@ export default {
   out: './src/db/migrations',
   driver: 'pg',
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/oldworldcharm',
+    connectionString:
+      process.env.DATABASE_URL ||
+      'postgresql://postgres:postgres@localhost:5432/oldworldcharm',
   },
   verbose: true,
   strict: true,

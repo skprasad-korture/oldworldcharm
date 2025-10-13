@@ -3,7 +3,7 @@ import { db, client } from './connection.js';
 
 async function runMigrations() {
   console.log('Running database migrations...');
-  
+
   try {
     await migrate(db, { migrationsFolder: './src/db/migrations' });
     console.log('✅ Database migrations completed successfully');
