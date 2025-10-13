@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    
+    /* Additional Checks */
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    /* Path Mapping */
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["./packages/shared/src/*"],
+      "@editor/*": ["./packages/editor/src/*"],
+      "@api/*": ["./packages/api/src/*"]
+    }
+  },
+  "include": [],
+  "references": [
+    { "path": "./packages/shared" },
+    { "path": "./packages/editor" },
+    { "path": "./packages/api" }
+  ]
+}

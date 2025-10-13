@@ -1,0 +1,48 @@
+{
+  "name": "oldworldcharm",
+  "version": "0.1.0",
+  "description": "An open-source visual website builder that brings old-world craftsmanship to modern web development",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skprasad-korture/oldworldcharm.git"
+  },
+  "author": "Prasad Korture <skprasad.korture@gmail.com>",
+  "homepage": "https://github.com/skprasad-korture/oldworldcharm#readme",
+  "bugs": {
+    "url": "https://github.com/skprasad-korture/oldworldcharm/issues"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "format": "prettier --write .",
+    "type-check": "pnpm -r type-check",
+    "prepare": "husky"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "@changesets/cli": "^2.27.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.12.0"
+}

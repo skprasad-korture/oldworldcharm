@@ -1,0 +1,48 @@
+{
+  "name": "@oldworldcharm/api",
+  "version": "0.1.0",
+  "description": "Backend API server built with Fastify",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "eslint src --ext .ts",
+    "type-check": "tsc --noEmit",
+    "test": "vitest --run",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:studio": "drizzle-kit studio",
+    "db:reset": "pnpm db:generate && pnpm db:migrate && pnpm db:seed",
+    "db:test": "tsx src/db/test-connection.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^9.4.0",
+    "@fastify/cors": "^8.4.0",
+    "@fastify/helmet": "^11.1.1",
+    "@fastify/jwt": "^8.0.1",
+    "@fastify/multipart": "^8.0.0",
+    "@fastify/rate-limit": "^9.1.0",
+    "@fastify/sensible": "^5.6.0",
+    "@fastify/session": "^10.9.0",
+    "@fastify/swagger": "^8.15.0",
+    "@fastify/swagger-ui": "^1.10.2",
+    "@oldworldcharm/shared": "workspace:*",
+    "drizzle-orm": "^0.29.1",
+    "fastify": "^4.24.3",
+    "fastify-plugin": "^5.1.0",
+    "pino": "^10.0.0",
+    "postgres": "^3.4.3",
+    "redis": "^4.6.11",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "drizzle-kit": "^0.20.6",
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.4"
+  }
+}
