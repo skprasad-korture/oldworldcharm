@@ -22,7 +22,7 @@ beforeAll(async () => {
 
   // Register routes without swagger schemas to avoid reference issues
   await app.register(async function (fastify) {
-    // Simple health route for testing
+    // Simple health route for testing (no database dependencies)
     fastify.get('/health', async () => {
       return { status: 'ok', timestamp: new Date().toISOString() };
     });

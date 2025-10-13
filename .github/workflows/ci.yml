@@ -82,6 +82,8 @@ jobs:
 
       - name: Run tests
         run: pnpm test
+        env:
+          NODE_ENV: test
 
   build:
     runs-on: ubuntu-latest
