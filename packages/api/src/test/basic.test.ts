@@ -3,7 +3,7 @@ import Fastify from 'fastify';
 
 test('Fastify server can be created', async () => {
   const app = Fastify({ logger: false });
-  
+
   app.get('/test', async () => {
     return { message: 'Hello World' };
   });

@@ -37,16 +37,28 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          echo "Installing dependencies..."
+          pnpm install --frozen-lockfile
+          echo "Dependencies installed successfully"
 
       - name: Lint
-        run: pnpm lint
+        run: |
+          echo "Running linter..."
+          pnpm lint
+          echo "Linting completed"
 
       - name: Type check
-        run: pnpm type-check
+        run: |
+          echo "Running type check..."
+          pnpm type-check
+          echo "Type check completed"
 
       - name: Format check
-        run: pnpm prettier --check .
+        run: |
+          echo "Running format check..."
+          pnpm prettier --check .
+          echo "Format check completed"
 
   test:
     runs-on: ubuntu-latest
@@ -78,10 +90,16 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          echo "Installing dependencies for tests..."
+          pnpm install --frozen-lockfile
+          echo "Dependencies installed successfully"
 
       - name: Run tests
-        run: pnpm test
+        run: |
+          echo "Running tests..."
+          pnpm test
+          echo "Tests completed successfully"
         env:
           NODE_ENV: test
 
@@ -116,7 +134,13 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          echo "Installing dependencies for build..."
+          pnpm install --frozen-lockfile
+          echo "Dependencies installed successfully"
 
       - name: Build packages
-        run: pnpm build
+        run: |
+          echo "Building packages..."
+          pnpm build
+          echo "Build completed successfully"
