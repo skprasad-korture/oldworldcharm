@@ -51,15 +51,15 @@
   - Test content scheduling and publication
   - _Requirements: 4.1, 4.2, 4.3_
 
-- [ ] 6. Theme Management API
-- [ ] 6.1 Theme CRUD Operations
+- [x] 6. Theme Management API
+- [x] 6.1 Theme CRUD Operations
   - Implement REST endpoints for theme creation, reading, updating, and deletion
   - Add theme validation using shared Zod schemas
   - Create theme import/export functionality
   - Implement default theme management
   - _Requirements: 3.1, 3.2, 3.3_
 
-- [ ] 6.2 Theme Processing and CSS Generation
+- [x] 6.2 Theme Processing and CSS Generation
   - Build CSS custom property generation from theme objects
   - Create theme application system with real-time preview
   - Add theme versioning and rollback capabilities
