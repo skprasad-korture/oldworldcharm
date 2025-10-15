@@ -17,6 +17,8 @@ import swaggerPlugin from './plugins/swagger.js';
 // Import routes
 import healthRoutes from './routes/health.js';
 import authRoutes from './routes/auth.js';
+import pageRoutes from './routes/pages.js';
+import templateRoutes from './routes/templates.js';
 
 const fastify = Fastify({
   logger:
@@ -67,9 +69,10 @@ async function registerRoutes() {
   await fastify.register(
     async function (fastify) {
       await fastify.register(authRoutes, { prefix: '/auth' });
+      await fastify.register(pageRoutes, { prefix: '/pages' });
+      await fastify.register(templateRoutes, { prefix: '/templates' });
 
       // Placeholder for other route groups
-      // await fastify.register(pageRoutes, { prefix: '/pages' });
       // await fastify.register(componentRoutes, { prefix: '/components' });
       // await fastify.register(themeRoutes, { prefix: '/themes' });
       // await fastify.register(mediaRoutes, { prefix: '/media' });

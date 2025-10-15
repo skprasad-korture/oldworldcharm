@@ -163,6 +163,61 @@ export const userSessions = pgTable(
   })
 );
 
+// Page versions table - stores historical versions of pages for versioning and rollback
+export const pageVersions = pgTable(
+  'page_versions',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    pageId: uuid('page_id')
+      .notNull()
+      .references(() => pages.id, { onDelete: 'cascade' }),
+    version: integer('version').notNull(),
+    title: varchar('title', { length: 255 }).notNull(),
+    description: text('description'),
+    content: jsonb('content').notNull(), // Component tree structure
+    seoData: jsonb('seo_data'), // SEO metadata
+    status: varchar('status', { length: 20 }).notNull(),
+    publishedAt: timestamp('published_at'),
+    createdBy: varchar('created_by', { length: 255 }), // User ID who created this version
+    changeNote: text('change_note'), // Optional note about what changed
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+  },
+  table => ({
+    pageIdIdx: index('page_versions_page_id_idx').on(table.pageId),
+    versionIdx: index('page_versions_version_idx').on(table.version),
+    pageVersionIdx: index('page_versions_page_version_idx').on(table.pageId, table.version),
+    createdAtIdx: index('page_versions_created_at_idx').on(table.createdAt),
+  })
+);
+
+// Content templates table - stores reusable page templates and blocks
+export const contentTemplates = pgTable(
+  'content_templates',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    name: varchar('name', { length: 255 }).notNull(),
+    description: text('description'),
+    type: varchar('type', { length: 50 }).notNull(), // 'page', 'block', 'section'
+    category: varchar('category', { length: 100 }), // 'landing', 'blog', 'header', 'footer', etc.
+    content: jsonb('content').notNull(), // Component tree structure
+    previewImage: varchar('preview_image', { length: 500 }),
+    tags: jsonb('tags').notNull().default('[]'), // Array of tag strings
+    isPublic: boolean('is_public').notNull().default(false), // Whether template is available to all users
+    createdBy: varchar('created_by', { length: 255 }), // User ID who created the template
+    usageCount: integer('usage_count').notNull().default(0), // Track how often template is used
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  },
+  table => ({
+    nameIdx: index('content_templates_name_idx').on(table.name),
+    typeIdx: index('content_templates_type_idx').on(table.type),
+    categoryIdx: index('content_templates_category_idx').on(table.category),
+    isPublicIdx: index('content_templates_is_public_idx').on(table.isPublic),
+    createdByIdx: index('content_templates_created_by_idx').on(table.createdBy),
+    usageCountIdx: index('content_templates_usage_count_idx').on(table.usageCount),
+  })
+);
+
 // Define relationships between tables
 export const pagesRelations = relations(pages, ({ many, one }) => ({
   blogPost: one(blogPosts, {
@@ -170,6 +225,7 @@ export const pagesRelations = relations(pages, ({ many, one }) => ({
     references: [blogPosts.pageId],
   }),
   abTests: many(abTests),
+  versions: many(pageVersions),
 }));
 
 export const blogPostsRelations = relations(blogPosts, ({ one }) => ({
@@ -194,6 +250,17 @@ export const abTestResultsRelations = relations(abTestResults, ({ one }) => ({
   }),
 }));
 
+export const pageVersionsRelations = relations(pageVersions, ({ one }) => ({
+  page: one(pages, {
+    fields: [pageVersions.pageId],
+    references: [pages.id],
+  }),
+}));
+
+export const contentTemplatesRelations = relations(contentTemplates, ({ }) => ({
+  // Templates don't have direct relations but could be extended in the future
+}));
+
 // Export all tables for use in migrations and queries
 export const schema = {
   pages,
@@ -203,8 +270,12 @@ export const schema = {
   abTests,
   abTestResults,
   userSessions,
+  pageVersions,
+  contentTemplates,
   pagesRelations,
   blogPostsRelations,
   abTestsRelations,
   abTestResultsRelations,
+  pageVersionsRelations,
+  contentTemplatesRelations,
 };

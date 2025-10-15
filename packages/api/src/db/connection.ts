@@ -12,8 +12,6 @@ const client = postgres(DATABASE_URL, {
   max: 10, // Maximum number of connections
   idle_timeout: 20, // Close idle connections after 20 seconds
   connect_timeout: 10, // Connection timeout in seconds
-  // Don't attempt connection in test environment without database
-  lazy: process.env.NODE_ENV === 'test' || process.env.CI === 'true',
 });
 
 // Create Drizzle database instance with schema
