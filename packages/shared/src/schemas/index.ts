@@ -200,6 +200,41 @@ export const MediaFolderSchema = z.object({
   updatedAt: z.date(),
 });
 
+export const MediaUploadSchema = z.object({
+  altText: z.string().max(200, 'Alt text too long').optional(),
+  tags: z.array(z.string()).default([]),
+  folder: z.string().optional(),
+});
+
+export const MediaUpdateSchema = z.object({
+  altText: z.string().max(200, 'Alt text too long').optional(),
+  tags: z.array(z.string()).optional(),
+  folder: z.string().optional(),
+});
+
+export const MediaQuerySchema = z.object({
+  page: z.coerce.number().int().positive().default(1),
+  pageSize: z.coerce.number().int().positive().max(100).default(20),
+  search: z.string().optional(),
+  mimeType: z.string().optional(),
+  folder: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  sortBy: z.enum(['filename', 'size', 'createdAt', 'updatedAt']).default('createdAt'),
+  sortOrder: z.enum(['asc', 'desc']).default('desc'),
+});
+
+export const BulkMediaDeleteSchema = z.object({
+  ids: z.array(z.string().min(1, 'Media asset ID is required')).min(1, 'At least one ID is required'),
+});
+
+export const BulkMediaUpdateSchema = z.object({
+  ids: z.array(z.string().min(1, 'Media asset ID is required')).min(1, 'At least one ID is required'),
+  updates: z.object({
+    tags: z.array(z.string()).optional(),
+    folder: z.string().optional(),
+  }),
+});
+
 // A/B Testing Schemas
 export const ABTestStatusSchema = z.enum([
   'draft',

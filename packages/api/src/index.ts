@@ -13,6 +13,8 @@ import securityPlugin from './plugins/security.js';
 import authPlugin from './plugins/auth.js';
 import validationPlugin from './plugins/validation.js';
 import swaggerPlugin from './plugins/swagger.js';
+import staticPlugin from '@fastify/static';
+import multipartPlugin from '@fastify/multipart';
 
 // Import routes
 import healthRoutes from './routes/health.js';
@@ -20,6 +22,7 @@ import authRoutes from './routes/auth.js';
 import pageRoutes from './routes/pages.js';
 import templateRoutes from './routes/templates.js';
 import themeRoutes from './routes/themes.js';
+import mediaRoutes from './routes/media.js';
 
 const fastify = Fastify({
   logger:
@@ -53,6 +56,19 @@ async function registerPlugins() {
   // Security plugins
   await fastify.register(securityPlugin);
 
+  // Static file serving for uploads
+  await fastify.register(staticPlugin, {
+    root: process.env.UPLOAD_DIR || './uploads',
+    prefix: '/uploads/',
+  });
+
+  // Multipart file upload support
+  await fastify.register(multipartPlugin, {
+    limits: {
+      fileSize: 50 * 1024 * 1024, // 50MB
+    },
+  });
+
   // Authentication and validation
   await fastify.register(authPlugin);
   await fastify.register(validationPlugin);
@@ -72,12 +88,11 @@ async function registerRoutes() {
       await fastify.register(authRoutes, { prefix: '/auth' });
       await fastify.register(pageRoutes, { prefix: '/pages' });
       await fastify.register(templateRoutes, { prefix: '/templates' });
-
       await fastify.register(themeRoutes, { prefix: '/themes' });
+      await fastify.register(mediaRoutes, { prefix: '/media' });
 
       // Placeholder for other route groups
       // await fastify.register(componentRoutes, { prefix: '/components' });
-      // await fastify.register(mediaRoutes, { prefix: '/media' });
     },
     { prefix: '/api' }
   );
