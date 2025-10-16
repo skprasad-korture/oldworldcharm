@@ -419,3 +419,150 @@ export const safeValidateMediaAsset = (data: unknown) =>
 export const safeValidateABTest = (data: unknown) =>
   ABTestSchema.safeParse(data);
 export const safeValidateUser = (data: unknown) => UserSchema.safeParse(data);
+// SEO Analysis and Optimization Schemas
+export const SEOIssueTypeSchema = z.enum([
+  'missing_title',
+  'title_too_long',
+  'title_too_short',
+  'missing_description',
+  'description_too_long',
+  'description_too_short',
+  'missing_h1',
+  'multiple_h1',
+  'missing_alt_text',
+  'broken_links',
+  'slow_loading_images',
+  'missing_structured_data',
+  'poor_keyword_density',
+  'duplicate_content',
+  'missing_canonical',
+  'poor_url_structure',
+  'missing_og_tags',
+  'missing_twitter_cards',
+  'low_text_content',
+  'poor_heading_structure',
+]);
+
+export const SEOIssueSeveritySchema = z.enum(['low', 'medium', 'high', 'critical']);
+
+export const SEOIssueSchema = z.object({
+  type: SEOIssueTypeSchema,
+  severity: SEOIssueSeveritySchema,
+  message: z.string().min(1, 'Issue message is required'),
+  element: z.string().optional(), // CSS selector or element identifier
+  recommendation: z.string().min(1, 'Recommendation is required'),
+  impact: z.string().optional(), // Description of SEO impact
+});
+
+export const SEORecommendationSchema = z.object({
+  type: z.string().min(1, 'Recommendation type is required'),
+  priority: z.enum(['low', 'medium', 'high']),
+  title: z.string().min(1, 'Recommendation title is required'),
+  description: z.string().min(1, 'Recommendation description is required'),
+  action: z.string().min(1, 'Recommended action is required'),
+  estimatedImpact: z.string().optional(),
+});
+
+export const SEOAnalysisSchema = z.object({
+  score: z.number().min(0).max(100, 'SEO score must be between 0 and 100'),
+  issues: z.array(SEOIssueSchema).default([]),
+  recommendations: z.array(SEORecommendationSchema).default([]),
+  keywords: z.array(z.string()).default([]),
+  readabilityScore: z.number().min(0).max(100).optional(),
+  performanceScore: z.number().min(0).max(100).optional(),
+  analyzedAt: z.date(),
+});
+
+export const StructuredDataTypeSchema = z.enum([
+  'Article',
+  'BlogPosting',
+  'WebPage',
+  'Organization',
+  'Person',
+  'Product',
+  'Review',
+  'Event',
+  'Recipe',
+  'FAQ',
+  'BreadcrumbList',
+]);
+
+export const StructuredDataSchema = z.object({
+  '@context': z.string().default('https://schema.org'),
+  '@type': StructuredDataTypeSchema,
+  name: z.string().optional(),
+  headline: z.string().optional(),
+  description: z.string().optional(),
+  author: z.object({
+    '@type': z.string().default('Person'),
+    name: z.string(),
+  }).optional(),
+  datePublished: z.string().optional(),
+  dateModified: z.string().optional(),
+  image: z.string().url().optional(),
+  url: z.string().url().optional(),
+  publisher: z.object({
+    '@type': z.string().default('Organization'),
+    name: z.string(),
+    logo: z.object({
+      '@type': z.string().default('ImageObject'),
+      url: z.string().url(),
+    }).optional(),
+  }).optional(),
+});
+
+export const MetaTagsSchema = z.object({
+  title: z.string().optional(),
+  description: z.string().optional(),
+  keywords: z.string().optional(),
+  robots: z.string().optional(),
+  canonical: z.string().url().optional(),
+  'og:title': z.string().optional(),
+  'og:description': z.string().optional(),
+  'og:image': z.string().url().optional(),
+  'og:url': z.string().url().optional(),
+  'og:type': z.string().optional(),
+  'og:site_name': z.string().optional(),
+  'twitter:card': z.string().optional(),
+  'twitter:title': z.string().optional(),
+  'twitter:description': z.string().optional(),
+  'twitter:image': z.string().url().optional(),
+  'twitter:site': z.string().optional(),
+  'twitter:creator': z.string().optional(),
+});
+
+export const SitemapEntrySchema = z.object({
+  url: z.string().url('Invalid URL'),
+  lastModified: z.date(),
+  changeFrequency: z.enum(['always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never']).optional(),
+  priority: z.number().min(0).max(1).optional(),
+});
+
+export const SitemapSchema = z.object({
+  entries: z.array(SitemapEntrySchema),
+  generatedAt: z.date(),
+});
+
+export const URLRedirectSchema = z.object({
+  id: z.string().min(1, 'Redirect ID is required'),
+  fromUrl: z.string().min(1, 'Source URL is required'),
+  toUrl: z.string().url('Invalid destination URL'),
+  statusCode: z.enum(['301', '302', '307', '308']).default('301'),
+  isActive: z.boolean().default(true),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+// SEO validation helper functions
+export const validateSEOAnalysis = (data: unknown) => SEOAnalysisSchema.parse(data);
+export const validateStructuredData = (data: unknown) => StructuredDataSchema.parse(data);
+export const validateMetaTags = (data: unknown) => MetaTagsSchema.parse(data);
+export const validateSitemap = (data: unknown) => SitemapSchema.parse(data);
+export const validateURLRedirect = (data: unknown) => URLRedirectSchema.parse(data);
+
+// Safe SEO validation functions
+export const safeValidateSEOAnalysis = (data: unknown) => SEOAnalysisSchema.safeParse(data);
+export const safeValidateStructuredData = (data: unknown) => StructuredDataSchema.safeParse(data);
+export const safeValidateMetaTags = (data: unknown) => MetaTagsSchema.safeParse(data);
+export const safeValidateSitemap = (data: unknown) => SitemapSchema.safeParse(data);
+export const safeValidateURLRedirect = (data: unknown) => URLRedirectSchema.safeParse(data);

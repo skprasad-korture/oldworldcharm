@@ -13,6 +13,7 @@ import securityPlugin from './plugins/security.js';
 import authPlugin from './plugins/auth.js';
 import validationPlugin from './plugins/validation.js';
 import swaggerPlugin from './plugins/swagger.js';
+import redirectHandlerPlugin from './plugins/redirect-handler.js';
 import staticPlugin from '@fastify/static';
 import multipartPlugin from '@fastify/multipart';
 
@@ -27,6 +28,7 @@ import blogRoutes from './routes/blog.js';
 import commentRoutes from './routes/comments.js';
 import socialRoutes from './routes/social.js';
 import rssRoutes from './routes/rss.js';
+import seoRoutes from './routes/seo.js';
 
 const fastify = Fastify({
   logger:
@@ -77,6 +79,9 @@ async function registerPlugins() {
   await fastify.register(authPlugin);
   await fastify.register(validationPlugin);
 
+  // Redirect handler (register after auth but before routes)
+  await fastify.register(redirectHandlerPlugin);
+
   // Documentation (register last to capture all routes)
   await fastify.register(swaggerPlugin);
 }
@@ -98,6 +103,7 @@ async function registerRoutes() {
       await fastify.register(commentRoutes, { prefix: '/comments' });
       await fastify.register(socialRoutes, { prefix: '/social' });
       await fastify.register(rssRoutes, { prefix: '/rss' });
+      await fastify.register(seoRoutes, { prefix: '/seo' });
 
       // Placeholder for other route groups
       // await fastify.register(componentRoutes, { prefix: '/components' });

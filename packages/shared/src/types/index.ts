@@ -292,3 +292,134 @@ export type DeploymentStatus =
   | 'deploying'
   | 'success'
   | 'failed';
+// SEO Analysis and Optimization Types
+export interface SEOAnalysis {
+  score: number;
+  issues: SEOIssue[];
+  recommendations: SEORecommendation[];
+  keywords: string[];
+  readabilityScore?: number | undefined;
+  performanceScore?: number | undefined;
+  analyzedAt: Date;
+}
+
+export interface SEOIssue {
+  type: SEOIssueType;
+  severity: SEOIssueSeverity;
+  message: string;
+  element?: string; // CSS selector or element identifier
+  recommendation: string;
+  impact?: string; // Description of SEO impact
+}
+
+export type SEOIssueType =
+  | 'missing_title'
+  | 'title_too_long'
+  | 'title_too_short'
+  | 'missing_description'
+  | 'description_too_long'
+  | 'description_too_short'
+  | 'missing_h1'
+  | 'multiple_h1'
+  | 'missing_alt_text'
+  | 'broken_links'
+  | 'slow_loading_images'
+  | 'missing_structured_data'
+  | 'poor_keyword_density'
+  | 'duplicate_content'
+  | 'missing_canonical'
+  | 'poor_url_structure'
+  | 'missing_og_tags'
+  | 'missing_twitter_cards'
+  | 'low_text_content'
+  | 'poor_heading_structure';
+
+export type SEOIssueSeverity = 'low' | 'medium' | 'high' | 'critical';
+
+export interface SEORecommendation {
+  type: string;
+  priority: 'low' | 'medium' | 'high';
+  title: string;
+  description: string;
+  action: string;
+  estimatedImpact?: string;
+}
+
+export interface StructuredData {
+  '@context': string;
+  '@type': StructuredDataType;
+  name?: string;
+  headline?: string;
+  description?: string;
+  author?: {
+    '@type': string;
+    name: string;
+  };
+  datePublished?: string;
+  dateModified?: string;
+  image?: string;
+  url?: string;
+  publisher?: {
+    '@type': string;
+    name: string;
+    logo?: {
+      '@type': string;
+      url: string;
+    };
+  };
+}
+
+export type StructuredDataType =
+  | 'Article'
+  | 'BlogPosting'
+  | 'WebPage'
+  | 'Organization'
+  | 'Person'
+  | 'Product'
+  | 'Review'
+  | 'Event'
+  | 'Recipe'
+  | 'FAQ'
+  | 'BreadcrumbList';
+
+export interface MetaTags {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  robots?: string;
+  canonical?: string;
+  'og:title'?: string;
+  'og:description'?: string;
+  'og:image'?: string;
+  'og:url'?: string;
+  'og:type'?: string;
+  'og:site_name'?: string;
+  'twitter:card'?: string;
+  'twitter:title'?: string;
+  'twitter:description'?: string;
+  'twitter:image'?: string;
+  'twitter:site'?: string;
+  'twitter:creator'?: string;
+}
+
+export interface SitemapEntry {
+  url: string;
+  lastModified: Date;
+  changeFrequency?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+  priority?: number;
+}
+
+export interface Sitemap {
+  entries: SitemapEntry[];
+  generatedAt: Date;
+}
+
+export interface URLRedirect {
+  id: string;
+  fromUrl: string;
+  toUrl: string;
+  statusCode: '301' | '302' | '307' | '308';
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}

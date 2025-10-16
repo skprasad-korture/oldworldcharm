@@ -367,6 +367,91 @@ export const blogPostsRelationsExtended = relations(blogPosts, ({ one, many }) =
   socialShares: many(socialShares),
 }));
 
+// SEO redirects table - manages URL redirects for SEO
+export const seoRedirects = pgTable(
+  'seo_redirects',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    fromUrl: varchar('from_url', { length: 500 }).notNull(),
+    toUrl: varchar('to_url', { length: 500 }).notNull(),
+    statusCode: varchar('status_code', { length: 3 }).notNull().default('301'), // 301, 302, 307, 308
+    isActive: boolean('is_active').notNull().default(true),
+    hitCount: integer('hit_count').notNull().default(0), // Track redirect usage
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  },
+  table => ({
+    fromUrlIdx: index('seo_redirects_from_url_idx').on(table.fromUrl),
+    isActiveIdx: index('seo_redirects_is_active_idx').on(table.isActive),
+    statusCodeIdx: index('seo_redirects_status_code_idx').on(table.statusCode),
+  })
+);
+
+// SEO analysis results table - stores SEO analysis data for pages
+export const seoAnalysis = pgTable(
+  'seo_analysis',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    pageId: uuid('page_id')
+      .notNull()
+      .references(() => pages.id, { onDelete: 'cascade' }),
+    score: integer('score').notNull(), // SEO score 0-100
+    issues: jsonb('issues').notNull().default('[]'), // Array of SEO issues
+    recommendations: jsonb('recommendations').notNull().default('[]'), // Array of recommendations
+    keywords: jsonb('keywords').notNull().default('[]'), // Extracted keywords
+    readabilityScore: integer('readability_score'), // Readability score 0-100
+    performanceScore: integer('performance_score'), // Performance score 0-100
+    analyzedAt: timestamp('analyzed_at').notNull().defaultNow(),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+  },
+  table => ({
+    pageIdIdx: index('seo_analysis_page_id_idx').on(table.pageId),
+    scoreIdx: index('seo_analysis_score_idx').on(table.score),
+    analyzedAtIdx: index('seo_analysis_analyzed_at_idx').on(table.analyzedAt),
+  })
+);
+
+// Sitemap entries table - manages sitemap generation
+export const sitemapEntries = pgTable(
+  'sitemap_entries',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    url: varchar('url', { length: 500 }).notNull().unique(),
+    lastModified: timestamp('last_modified').notNull(),
+    changeFrequency: varchar('change_frequency', { length: 20 }), // always, hourly, daily, weekly, monthly, yearly, never
+    priority: integer('priority'), // 0-100 (will be converted to 0.0-1.0)
+    isActive: boolean('is_active').notNull().default(true),
+    pageId: uuid('page_id').references(() => pages.id, { onDelete: 'cascade' }), // Optional reference to page
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  },
+  table => ({
+    urlIdx: index('sitemap_entries_url_idx').on(table.url),
+    isActiveIdx: index('sitemap_entries_is_active_idx').on(table.isActive),
+    lastModifiedIdx: index('sitemap_entries_last_modified_idx').on(table.lastModified),
+    pageIdIdx: index('sitemap_entries_page_id_idx').on(table.pageId),
+  })
+);
+
+// Define relationships for SEO tables
+export const seoRedirectsRelations = relations(seoRedirects, ({ }) => ({
+  // Redirects don't have direct relations but could be extended
+}));
+
+export const seoAnalysisRelations = relations(seoAnalysis, ({ one }) => ({
+  page: one(pages, {
+    fields: [seoAnalysis.pageId],
+    references: [pages.id],
+  }),
+}));
+
+export const sitemapEntriesRelations = relations(sitemapEntries, ({ one }) => ({
+  page: one(pages, {
+    fields: [sitemapEntries.pageId],
+    references: [pages.id],
+  }),
+}));
+
 // Export all tables for use in migrations and queries
 export const schema = {
   pages,
@@ -381,6 +466,9 @@ export const schema = {
   comments,
   socialShares,
   rssFeeds,
+  seoRedirects,
+  seoAnalysis,
+  sitemapEntries,
   pagesRelations,
   blogPostsRelations: blogPostsRelationsExtended,
   abTestsRelations,
@@ -390,4 +478,7 @@ export const schema = {
   commentsRelations,
   socialSharesRelations,
   rssRelations,
+  seoRedirectsRelations,
+  seoAnalysisRelations,
+  sitemapEntriesRelations,
 };
