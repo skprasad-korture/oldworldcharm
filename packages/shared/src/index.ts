@@ -8,3 +8,6 @@ export * from './schemas';
 
 // Export components
 export * from './components';
+
+// Re-export zod for convenience
+export { z } from 'zod';

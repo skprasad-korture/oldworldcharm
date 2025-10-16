@@ -1,5 +1,6 @@
 // Individual component item in the palette
 import React, { useState } from 'react';
+import { useDraggable } from '@dnd-kit/core';
 import { ComponentItemProps, ComponentDragData } from './types';
 
 /**
@@ -13,34 +14,35 @@ export const ComponentItem: React.FC<ComponentItemProps> = ({
   isSelected = false,
   showPreview = true,
 }) => {
-  const [isDragging, setIsDragging] = useState(false);
+  const dragData: ComponentDragData = {
+    componentId: component.id,
+    componentType: component.type,
+    defaultProps: component.defaultProps as Record<string, unknown>,
+    isContainer: component.isContainer,
+    source: 'palette',
+  };
+
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    isDragging,
+  } = useDraggable({
+    id: `palette-${component.id}`,
+    data: dragData,
+  });
 
   const handleClick = () => {
     onSelect?.(component);
   };
 
-  const handleDragStart = (event: React.DragEvent) => {
-    setIsDragging(true);
-    
-    const dragData: ComponentDragData = {
-      componentId: component.id,
-      componentType: component.type,
-      defaultProps: component.defaultProps as Record<string, unknown>,
-      isContainer: component.isContainer,
-      source: 'palette',
-    };
-
-    // Set drag data
-    event.dataTransfer.setData('application/json', JSON.stringify(dragData));
-    event.dataTransfer.effectAllowed = 'copy';
-
-    // Call callback
-    onDragStart?.(component, dragData);
-  };
-
-  const handleDragEnd = () => {
-    setIsDragging(false);
-  };
+  // Call the onDragStart callback when dragging starts
+  React.useEffect(() => {
+    if (isDragging) {
+      onDragStart?.(component, dragData);
+    }
+  }, [isDragging, component, dragData, onDragStart]);
 
   const getItemClass = () => {
     const baseClass = 'component-item cursor-pointer transition-all duration-200';
@@ -59,14 +61,19 @@ export const ComponentItem: React.FC<ComponentItemProps> = ({
     }
   };
 
+  const style = transform ? {
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+  } : undefined;
+
   return (
     <div
+      ref={setNodeRef}
+      style={style}
       className={getItemClass()}
       onClick={handleClick}
-      draggable
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
       title={component.metadata.description}
+      {...attributes}
+      {...listeners}
     >
       {/* Component Preview */}
       {showPreview && viewMode === 'grid' && (

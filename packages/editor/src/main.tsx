@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { VisualEditor } from './components/editor';
+import { registerSampleComponents } from './utils/sampleComponents';
 import './styles/globals.css';
 
+// Register sample components for testing
+registerSampleComponents();
+
 function App() {
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <h1 className="p-4 text-2xl font-bold">Old World Charm</h1>
-      <p className="p-4 text-muted-foreground">
-        Visual Website Builder - Editor interface coming soon...
-      </p>
-    </div>
-  );
+  return <VisualEditor />;
 }
 
 const root = document.getElementById('root');

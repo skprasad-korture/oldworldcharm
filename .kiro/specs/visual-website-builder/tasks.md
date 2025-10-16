@@ -114,22 +114,22 @@
   - Validate prop schema generation and validation
   - _Requirements: 2.1, 2.2_
 
-- [ ] 9. Visual Editor Core
-- [ ] 9.1 Canvas and Drag-Drop Implementation
+- [x] 9. Visual Editor Core
+- [x] 9.1 Canvas and Drag-Drop Implementation
   - Set up React application with @dnd-kit/core
   - Implement canvas component with drop zones and visual feedback
   - Create drag-and-drop handlers for component placement and reordering
   - Build component selection and highlighting system
   - _Requirements: 1.1, 1.2, 1.3_
 
-- [ ] 9.2 Properties Panel and Real-time Updates
+- [x] 9.2 Properties Panel and Real-time Updates
   - Create dynamic properties panel based on component schemas
   - Implement form controls for different prop types (colors, text, numbers, etc.)
   - Build real-time preview updates using Zustand state management
   - Add undo/redo functionality for editor actions
   - _Requirements: 1.3, 1.4, 3.1, 3.2_
 
-- [ ] 9.3 Component Tree and Navigation
+- [x] 9.3 Component Tree and Navigation
   - Implement hierarchical component tree view
   - Add component nesting and parent-child relationship management
   - Create keyboard shortcuts for common editor actions
