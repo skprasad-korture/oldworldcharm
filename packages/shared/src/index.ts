@@ -1,5 +1,10 @@
 // Shared types and utilities
-export * from './types/index.js';
-export * from './schemas/index.js';
-export * from './errors/index.js';
-export * from './utils/index.js';
+export * from './types';
+export * from './errors';
+export * from './utils';
+
+// Export schemas with specific names to avoid conflicts
+export * from './schemas';
+
+// Export components
+export * from './components';
