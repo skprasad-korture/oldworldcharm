@@ -23,6 +23,10 @@ import pageRoutes from './routes/pages.js';
 import templateRoutes from './routes/templates.js';
 import themeRoutes from './routes/themes.js';
 import mediaRoutes from './routes/media.js';
+import blogRoutes from './routes/blog.js';
+import commentRoutes from './routes/comments.js';
+import socialRoutes from './routes/social.js';
+import rssRoutes from './routes/rss.js';
 
 const fastify = Fastify({
   logger:
@@ -90,6 +94,10 @@ async function registerRoutes() {
       await fastify.register(templateRoutes, { prefix: '/templates' });
       await fastify.register(themeRoutes, { prefix: '/themes' });
       await fastify.register(mediaRoutes, { prefix: '/media' });
+      await fastify.register(blogRoutes, { prefix: '/blog' });
+      await fastify.register(commentRoutes, { prefix: '/comments' });
+      await fastify.register(socialRoutes, { prefix: '/social' });
+      await fastify.register(rssRoutes, { prefix: '/rss' });
 
       // Placeholder for other route groups
       // await fastify.register(componentRoutes, { prefix: '/components' });

@@ -261,6 +261,112 @@ export const contentTemplatesRelations = relations(contentTemplates, ({ }) => ({
   // Templates don't have direct relations but could be extended in the future
 }));
 
+// Comments table - stores user comments on blog posts
+export const comments = pgTable(
+  'comments',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    blogPostId: uuid('blog_post_id')
+      .notNull()
+      .references(() => pages.id, { onDelete: 'cascade' }),
+    parentId: uuid('parent_id'), // For nested comments - will be set up with foreign key later
+    authorName: varchar('author_name', { length: 255 }).notNull(),
+    authorEmail: varchar('author_email', { length: 255 }).notNull(),
+    authorWebsite: varchar('author_website', { length: 500 }),
+    content: text('content').notNull(),
+    status: varchar('status', { length: 20 }).notNull().default('pending'), // pending, approved, rejected, spam
+    ipAddress: varchar('ip_address', { length: 45 }), // IPv4 or IPv6
+    userAgent: text('user_agent'),
+    isVerified: boolean('is_verified').notNull().default(false), // Email verification
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  },
+  table => ({
+    blogPostIdIdx: index('comments_blog_post_id_idx').on(table.blogPostId),
+    parentIdIdx: index('comments_parent_id_idx').on(table.parentId),
+    statusIdx: index('comments_status_idx').on(table.status),
+    createdAtIdx: index('comments_created_at_idx').on(table.createdAt),
+    authorEmailIdx: index('comments_author_email_idx').on(table.authorEmail),
+  })
+);
+
+// Social shares table - tracks social media shares
+export const socialShares = pgTable(
+  'social_shares',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    blogPostId: uuid('blog_post_id')
+      .notNull()
+      .references(() => pages.id, { onDelete: 'cascade' }),
+    platform: varchar('platform', { length: 50 }).notNull(), // twitter, facebook, linkedin, etc.
+    shareCount: integer('share_count').notNull().default(0),
+    lastUpdated: timestamp('last_updated').notNull().defaultNow(),
+  },
+  table => ({
+    blogPostIdIdx: index('social_shares_blog_post_id_idx').on(table.blogPostId),
+    platformIdx: index('social_shares_platform_idx').on(table.platform),
+    blogPostPlatformIdx: index('social_shares_blog_post_platform_idx').on(table.blogPostId, table.platform),
+  })
+);
+
+// RSS feeds table - stores RSS feed configurations
+export const rssFeeds = pgTable(
+  'rss_feeds',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    title: varchar('title', { length: 255 }).notNull(),
+    description: text('description'),
+    link: varchar('link', { length: 500 }).notNull(),
+    language: varchar('language', { length: 10 }).notNull().default('en'),
+    categories: jsonb('categories').notNull().default('[]'), // Array of category filters
+    tags: jsonb('tags').notNull().default('[]'), // Array of tag filters
+    maxItems: integer('max_items').notNull().default(20),
+    isActive: boolean('is_active').notNull().default(true),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  },
+  table => ({
+    isActiveIdx: index('rss_feeds_is_active_idx').on(table.isActive),
+  })
+);
+
+// Define relationships for new tables
+export const commentsRelations = relations(comments, ({ one, many }) => ({
+  blogPost: one(pages, {
+    fields: [comments.blogPostId],
+    references: [pages.id],
+  }),
+  parent: one(comments, {
+    fields: [comments.parentId],
+    references: [comments.id],
+    relationName: 'parentComment',
+  }),
+  replies: many(comments, {
+    relationName: 'parentComment',
+  }),
+}));
+
+export const socialSharesRelations = relations(socialShares, ({ one }) => ({
+  blogPost: one(pages, {
+    fields: [socialShares.blogPostId],
+    references: [pages.id],
+  }),
+}));
+
+export const rssRelations = relations(rssFeeds, ({ }) => ({
+  // RSS feeds don't have direct relations but could be extended in the future
+}));
+
+// Update blog posts relations to include comments and social shares
+export const blogPostsRelationsExtended = relations(blogPosts, ({ one, many }) => ({
+  page: one(pages, {
+    fields: [blogPosts.pageId],
+    references: [pages.id],
+  }),
+  comments: many(comments),
+  socialShares: many(socialShares),
+}));
+
 // Export all tables for use in migrations and queries
 export const schema = {
   pages,
@@ -272,10 +378,16 @@ export const schema = {
   userSessions,
   pageVersions,
   contentTemplates,
+  comments,
+  socialShares,
+  rssFeeds,
   pagesRelations,
-  blogPostsRelations,
+  blogPostsRelations: blogPostsRelationsExtended,
   abTestsRelations,
   abTestResultsRelations,
   pageVersionsRelations,
   contentTemplatesRelations,
+  commentsRelations,
+  socialSharesRelations,
+  rssRelations,
 };

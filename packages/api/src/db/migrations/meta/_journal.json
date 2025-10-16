@@ -8,6 +8,20 @@
       "when": 1760270206778,
       "tag": "0000_good_hiroim",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1760601525000,
+      "tag": "0001_wonderful_bloodstrike",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1760602527365,
+      "tag": "0002_normal_roughhouse",
+      "breakpoints": true
     }
   ]
 }
