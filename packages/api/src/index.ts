@@ -29,6 +29,7 @@ import commentRoutes from './routes/comments.js';
 import socialRoutes from './routes/social.js';
 import rssRoutes from './routes/rss.js';
 import seoRoutes from './routes/seo.js';
+import abTestRoutes from './routes/ab-tests.js';
 
 const fastify = Fastify({
   logger:
@@ -104,6 +105,7 @@ async function registerRoutes() {
       await fastify.register(socialRoutes, { prefix: '/social' });
       await fastify.register(rssRoutes, { prefix: '/rss' });
       await fastify.register(seoRoutes, { prefix: '/seo' });
+      await fastify.register(abTestRoutes);
 
       // Placeholder for other route groups
       // await fastify.register(componentRoutes, { prefix: '/components' });
