@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import { eq, desc, asc, and, or, like, sql } from 'drizzle-orm';
-import { db, pages, blogPosts } from '../db/index.js';
+import { db, pages, blogPosts } from '../db/index';
 import {
   PageStatusSchema,
   SEODataSchema,
@@ -9,6 +9,24 @@ import {
 } from '@oldworldcharm/shared';
 
 // Request schemas for blog API endpoints
+type CreateBlogPostRequest = {
+  Body: {
+    slug: string;
+    title: string;
+    description?: string;
+    excerpt?: string;
+    featuredImage?: string;
+    categories: string[];
+    tags: string[];
+    author: string;
+    content?: string;
+    components: any[];
+    seoData: any;
+    status: string;
+    publishedAt?: Date;
+  };
+};
+
 const CreateBlogPostSchema = z.object({
   slug: z
     .string()
@@ -133,8 +151,8 @@ export default async function blogRoutes(fastify: FastifyInstance) {
       },
       preHandler: [fastify.authenticate, fastify.validate({ body: CreateBlogPostSchema })],
     },
-    async (request: FastifyRequest, reply: FastifyReply) => {
-      const blogPostData = request.body as z.infer<typeof CreateBlogPostSchema>;
+    async (request: FastifyRequest<CreateBlogPostRequest>, reply: FastifyReply) => {
+      const blogPostData = request.body;
 
       try {
         // Check if slug already exists
@@ -169,14 +187,14 @@ export default async function blogRoutes(fastify: FastifyInstance) {
             slug: blogPostData.slug,
             title: blogPostData.title,
             description: blogPostData.description || null,
-            content: blogPostData.components,
+            content: blogPostData.components || [],
             seoData: blogPostData.seoData,
             status: blogPostData.status,
             publishedAt: blogPostData.status === 'published' 
               ? (blogPostData.publishedAt || new Date()) 
               : null,
           })
-          .returning();
+          .returning({ id: pages.id, slug: pages.slug, content: pages.content });
 
         if (!newPage) {
           throw new Error('Failed to create page');
@@ -194,7 +212,7 @@ export default async function blogRoutes(fastify: FastifyInstance) {
             author: blogPostData.author,
             readingTime,
           })
-          .returning();
+          .returning({ id: blogPosts.id, pageId: blogPosts.pageId });
 
         if (!newBlogPost) {
           throw new Error('Failed to create blog post');

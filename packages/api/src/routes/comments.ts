@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
-import { CommentsService } from '../services/comments-service.js';
+import { CommentsService } from '../services/comments-service';
 
 // Request schemas for comment endpoints
 const CreateCommentSchema = z.object({

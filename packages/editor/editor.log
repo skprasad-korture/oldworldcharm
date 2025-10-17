@@ -1,0 +1,264 @@
+
+> @oldworldcharm/editor@0.1.0 dev /Users/skp/Code/shadcn-website-builder/packages/editor
+> vite
+
+Port 5173 is in use, trying another one...
+
+  VITE v5.4.20  ready in 223 ms
+
+  ➜  Local:   http://localhost:5174/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+Error:   Failed to scan for dependencies from entries:
+  /Users/skp/Code/shadcn-website-builder/packages/editor/index.html
+
+  [31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mFailed to resolve entry for package "@oldworldcharm/shared". The package may have incorrect main/module/exports specified in its package.json.[0m [1m[35m[plugin vite:dep-scan][0m
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:21:
+[37m      1225 │         let result = [32m[37mawait callback({
+           ╵                      [32m^[0m
+
+    at packageEntryFailure (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46638:15)
+    at resolvePackageEntry (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46635:3)
+    at tryNodeResolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46451:16)
+    at ResolveIdContext.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46201:19)
+    at PluginContainer.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49018:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async resolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49630:22)
+    at async file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49801:28
+    at async requestCallbacks.on-resolve (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:22)
+    at async handleRequest (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:647:11)
+
+  This error came from the "onResolve" callback registered here:
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:20:
+[37m      1150 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49789:13)
+    at handlePlugins (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:21)
+    at buildOrContextImpl (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:873:5)
+    at Object.buildOrContext (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:699:5)
+    at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:27)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1874:58)
+    at prepareEsbuildScanner (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49576:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    src/utils/sampleComponents.ts:1:37:
+[37m      1 │ import { z, componentRegistry } from [32m'@oldworldcharm/shared'[37m;
+        ╵                                      [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mFailed to resolve entry for package "@oldworldcharm/shared". The package may have incorrect main/module/exports specified in its package.json.[0m [1m[35m[plugin vite:dep-scan][0m
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:21:
+[37m      1225 │         let result = [32m[37mawait callback({
+           ╵                      [32m^[0m
+
+    at packageEntryFailure (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46638:15)
+    at resolvePackageEntry (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46635:3)
+    at tryNodeResolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46451:16)
+    at ResolveIdContext.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46201:19)
+    at PluginContainer.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49018:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async resolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49630:22)
+    at async file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49801:28
+    at async requestCallbacks.on-resolve (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:22)
+    at async handleRequest (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:647:11)
+
+  This error came from the "onResolve" callback registered here:
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:20:
+[37m      1150 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49789:13)
+    at handlePlugins (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:21)
+    at buildOrContextImpl (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:873:5)
+    at Object.buildOrContext (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:699:5)
+    at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:27)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1874:58)
+    at prepareEsbuildScanner (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49576:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    src/components/palette/ComponentPalette.tsx:3:71:
+[37m      3 │ ...omponentCategory, componentRegistry } from [32m'@oldworldcharm/shared'[37m;
+        ╵                                               [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mFailed to resolve entry for package "@oldworldcharm/shared". The package may have incorrect main/module/exports specified in its package.json.[0m [1m[35m[plugin vite:dep-scan][0m
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:21:
+[37m      1225 │         let result = [32m[37mawait callback({
+           ╵                      [32m^[0m
+
+    at packageEntryFailure (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46638:15)
+    at resolvePackageEntry (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46635:3)
+    at tryNodeResolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46451:16)
+    at ResolveIdContext.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46201:19)
+    at PluginContainer.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49018:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async resolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49630:22)
+    at async file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49801:28
+    at async requestCallbacks.on-resolve (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:22)
+    at async handleRequest (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:647:11)
+
+  This error came from the "onResolve" callback registered here:
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:20:
+[37m      1150 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49789:13)
+    at handlePlugins (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:21)
+    at buildOrContextImpl (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:873:5)
+    at Object.buildOrContext (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:699:5)
+    at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:27)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1874:58)
+    at prepareEsbuildScanner (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49576:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    src/components/properties/ComponentPropertyEditor.tsx:2:53:
+[37m      2 │ ...omponentInstance, componentRegistry } from [32m'@oldworldcharm/shared'[37m;
+        ╵                                               [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mFailed to resolve entry for package "@oldworldcharm/shared". The package may have incorrect main/module/exports specified in its package.json.[0m [1m[35m[plugin vite:dep-scan][0m
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:21:
+[37m      1225 │         let result = [32m[37mawait callback({
+           ╵                      [32m^[0m
+
+    at packageEntryFailure (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46638:15)
+    at resolvePackageEntry (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46635:3)
+    at tryNodeResolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46451:16)
+    at ResolveIdContext.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46201:19)
+    at PluginContainer.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49018:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async resolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49630:22)
+    at async file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49801:28
+    at async requestCallbacks.on-resolve (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:22)
+    at async handleRequest (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:647:11)
+
+  This error came from the "onResolve" callback registered here:
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:20:
+[37m      1150 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49789:13)
+    at handlePlugins (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:21)
+    at buildOrContextImpl (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:873:5)
+    at Object.buildOrContext (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:699:5)
+    at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:27)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1874:58)
+    at prepareEsbuildScanner (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49576:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    src/components/palette/ComponentCategory.tsx:3:69:
+[37m      3 │ ... as CategoryType, CATEGORY_METADATA } from [32m'@oldworldcharm/shared'[37m;
+        ╵                                               [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mFailed to resolve entry for package "@oldworldcharm/shared". The package may have incorrect main/module/exports specified in its package.json.[0m [1m[35m[plugin vite:dep-scan][0m
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:21:
+[37m      1225 │         let result = [32m[37mawait callback({
+           ╵                      [32m^[0m
+
+    at packageEntryFailure (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46638:15)
+    at resolvePackageEntry (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46635:3)
+    at tryNodeResolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46451:16)
+    at ResolveIdContext.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46201:19)
+    at PluginContainer.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49018:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async resolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49630:22)
+    at async file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49801:28
+    at async requestCallbacks.on-resolve (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:22)
+    at async handleRequest (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:647:11)
+
+  This error came from the "onResolve" callback registered here:
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:20:
+[37m      1150 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49789:13)
+    at handlePlugins (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:21)
+    at buildOrContextImpl (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:873:5)
+    at Object.buildOrContext (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:699:5)
+    at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:27)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1874:58)
+    at prepareEsbuildScanner (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49576:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    src/utils/componentUtils.ts:2:71:
+[37m      2 │ ...omponentInstance, componentRegistry } from [32m'@oldworldcharm/shared'[37m;
+        ╵                                               [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mFailed to resolve entry for package "@oldworldcharm/shared". The package may have incorrect main/module/exports specified in its package.json.[0m [1m[35m[plugin vite:dep-scan][0m
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:21:
+[37m      1225 │         let result = [32m[37mawait callback({
+           ╵                      [32m^[0m
+
+    at packageEntryFailure (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46638:15)
+    at resolvePackageEntry (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46635:3)
+    at tryNodeResolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46451:16)
+    at ResolveIdContext.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:46201:19)
+    at PluginContainer.resolveId (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49018:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async resolve (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49630:22)
+    at async file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49801:28
+    at async requestCallbacks.on-resolve (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:22)
+    at async handleRequest (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:647:11)
+
+  This error came from the "onResolve" callback registered here:
+
+    ../../node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:20:
+[37m      1150 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49789:13)
+    at handlePlugins (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:21)
+    at buildOrContextImpl (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:873:5)
+    at Object.buildOrContext (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:699:5)
+    at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:68
+    at new Promise (<anonymous>)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:2032:27)
+    at Object.context (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1874:58)
+    at prepareEsbuildScanner (file:///Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/vite@5.4.20_@types+node@20.19.21/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49576:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    src/components/search/SearchFilters.tsx:3:53:
+[37m      3 │ ...omponentCategory, CATEGORY_METADATA } from [32m'@oldworldcharm/shared'[37m;
+        ╵                                               [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+    at failureErrorWithLog (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1472:15)
+    at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:945:25
+    at runOnEndCallbacks (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1315:45)
+    at buildResponseToResult (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:943:7)
+    at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:955:9
+    at new Promise (<anonymous>)
+    at requestCallbacks.on-end (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:954:54)
+    at handleRequest (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:647:17)
+    at handleIncomingPacket (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:672:7)
+    at Socket.readFromStdout (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:600:7)

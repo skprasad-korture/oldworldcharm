@@ -4,32 +4,32 @@ import {
   closeDatabaseConnection,
   initializeRedis,
   closeRedisConnection,
-} from './db/index.js';
+} from './db/index';
 
 // Import plugins
-import sensiblePlugin from './plugins/sensible.js';
-import errorHandlerPlugin from './plugins/error-handler.js';
-import securityPlugin from './plugins/security.js';
-import authPlugin from './plugins/auth.js';
-import validationPlugin from './plugins/validation.js';
-import swaggerPlugin from './plugins/swagger.js';
-import redirectHandlerPlugin from './plugins/redirect-handler.js';
+import sensiblePlugin from './plugins/sensible';
+import errorHandlerPlugin from './plugins/error-handler';
+import securityPlugin from './plugins/security';
+import authPlugin from './plugins/auth';
+import validationPlugin from './plugins/validation';
+import swaggerPlugin from './plugins/swagger';
+import redirectHandlerPlugin from './plugins/redirect-handler';
 import staticPlugin from '@fastify/static';
 import multipartPlugin from '@fastify/multipart';
 
 // Import routes
-import healthRoutes from './routes/health.js';
-import authRoutes from './routes/auth.js';
-import pageRoutes from './routes/pages.js';
-import templateRoutes from './routes/templates.js';
-import themeRoutes from './routes/themes.js';
-import mediaRoutes from './routes/media.js';
-import blogRoutes from './routes/blog.js';
-import commentRoutes from './routes/comments.js';
-import socialRoutes from './routes/social.js';
-import rssRoutes from './routes/rss.js';
-import seoRoutes from './routes/seo.js';
-import abTestRoutes from './routes/ab-tests.js';
+import healthRoutes from './routes/health';
+import authRoutes from './routes/auth';
+import pageRoutes from './routes/pages';
+import templateRoutes from './routes/templates';
+import themeRoutes from './routes/themes';
+import mediaRoutes from './routes/media';
+import blogRoutes from './routes/blog';
+import commentRoutes from './routes/comments';
+import socialRoutes from './routes/social';
+import rssRoutes from './routes/rss';
+import seoRoutes from './routes/seo';
+import abTestRoutes from './routes/ab-tests';
 
 const fastify = Fastify({
   logger:
@@ -65,7 +65,7 @@ async function registerPlugins() {
 
   // Static file serving for uploads
   await fastify.register(staticPlugin, {
-    root: process.env.UPLOAD_DIR || './uploads',
+    root: process.env.UPLOAD_DIR || new URL('../uploads', import.meta.url).pathname,
     prefix: '/uploads/',
   });
 

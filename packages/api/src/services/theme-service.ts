@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { eq } from 'drizzle-orm';
-import { db, themes } from '../db/index.js';
+import { db, themes } from '../db/index';
 import {
   ThemeColorsSchema,
   ThemeTypographySchema,

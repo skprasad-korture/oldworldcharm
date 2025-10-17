@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from 'fastify';
-import { ABTestService } from '../services/ab-test-service.js';
-import type { ABTest } from '@shared/types';
+import { ABTestService } from '../services/ab-test-service';
+import type { ABTest } from '@oldworldcharm/shared';
 
 const abTestRoutes: FastifyPluginAsync = async (fastify) => {
   // Schema definitions for request/response validation

@@ -1,5 +1,5 @@
 import { eq, desc, sql } from 'drizzle-orm';
-import { db, socialShares, pages, blogPosts } from '../db/index.js';
+import { db, socialShares, pages, blogPosts } from '../db/index';
 import type { BlogPost } from '@oldworldcharm/shared';
 
 export interface SocialShare {

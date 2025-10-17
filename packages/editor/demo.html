@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old World Charm - Visual Website Builder Demo</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .component-item {
+            transition: all 0.2s ease;
+        }
+        .component-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .canvas-area {
+            min-height: 500px;
+            background: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f8f9fa 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        .drop-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .drop-zone.drag-over {
+            border-color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Mock API functions
+        const api = {
+            async getPages() {
+                try {
+                    const response = await fetch('http://localhost:3001/api/pages');
+                    const data = await response.json();
+                    return data.success ? data.data : [];
+                } catch (error) {
+                    console.error('API Error:', error);
+                    return [];
+                }
+            },
+            
+            async savePage(pageData) {
+                try {
+                    const response = await fetch('http://localhost:3001/api/pages', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(pageData)
+                    });
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error('Save Error:', error);
+                    return { success: false, error: error.message };
+                }
+            }
+        };
+
+        // Component Library
+        const ComponentLibrary = [
+            {
+                id: 'heading',
+                name: 'Heading',
+                icon: '📝',
+                category: 'Text',
+                defaultProps: { text: 'Your Heading Here', level: 'h1' }
+            },
+            {
+                id: 'paragraph',
+                name: 'Paragraph',
+                icon: '📄',
+                category: 'Text',
+                defaultProps: { text: 'Your paragraph text goes here. Edit this to add your content.' }
+            },
+            {
+                id: 'button',
+                name: 'Button',
+                icon: '🔘',
+                category: 'Interactive',
+                defaultProps: { text: 'Click Me', variant: 'primary' }
+            },
+            {
+                id: 'image',
+                name: 'Image',
+                icon: '🖼️',
+                category: 'Media',
+                defaultProps: { src: 'https://via.placeholder.com/400x200', alt: 'Placeholder image' }
+            },
+            {
+                id: 'container',
+                name: 'Container',
+                icon: '📦',
+                category: 'Layout',
+                defaultProps: { className: 'p-4 border rounded' }
+            }
+        ];
+
+        // Component Renderer
+        function ComponentRenderer({ component, isSelected, onSelect, onUpdate }) {
+            const handleClick = (e) => {
+                e.stopPropagation();
+                onSelect(component.id);
+            };
+
+            const renderComponent = () => {
+                switch (component.type) {
+                    case 'heading':
+                        const HeadingTag = component.props.level || 'h1';
+                        return React.createElement(HeadingTag, {
+                            className: `font-bold ${component.props.level === 'h1' ? 'text-4xl' : component.props.level === 'h2' ? 'text-3xl' : 'text-2xl'} text-gray-800`
+                        }, component.props.text);
+                    
+                    case 'paragraph':
+                        return React.createElement('p', {
+                            className: 'text-gray-600 leading-relaxed'
+                        }, component.props.text);
+                    
+                    case 'button':
+                        return React.createElement('button', {
+                            className: `px-6 py-2 rounded font-medium ${
+                                component.props.variant === 'primary' 
+                                    ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                                    : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                            } transition-colors`
+                        }, component.props.text);
+                    
+                    case 'image':
+                        return React.createElement('img', {
+                            src: component.props.src,
+                            alt: component.props.alt,
+                            className: 'max-w-full h-auto rounded'
+                        });
+                    
+                    case 'container':
+                        return React.createElement('div', {
+                            className: component.props.className || 'p-4 border rounded'
+                        }, component.children?.map(child => 
+                            React.createElement(ComponentRenderer, {
+                                key: child.id,
+                                component: child,
+                                isSelected: false,
+                                onSelect,
+                                onUpdate
+                            })
+                        ) || 'Drop components here');
+                    
+                    default:
+                        return React.createElement('div', {
+                            className: 'p-4 border-2 border-dashed border-gray-300 text-gray-500'
+                        }, `Unknown component: ${component.type}`);
+                }
+            };
+
+            return React.createElement('div', {
+                className: `relative ${isSelected ? 'ring-2 ring-blue-500' : ''} hover:ring-1 hover:ring-gray-300 cursor-pointer`,
+                onClick: handleClick
+            }, renderComponent());
+        }
+
+        // Property Editor
+        function PropertyEditor({ component, onUpdate }) {
+            if (!component) {
+                return React.createElement('div', {
+                    className: 'p-4 text-gray-500'
+                }, 'Select a component to edit its properties');
+            }
+
+            const handleChange = (key, value) => {
+                onUpdate(component.id, { ...component.props, [key]: value });
+            };
+
+            return React.createElement('div', {
+                className: 'p-4 space-y-4'
+            }, [
+                React.createElement('h3', {
+                    key: 'title',
+                    className: 'font-semibold text-lg'
+                }, `Edit ${component.type}`),
+                
+                Object.entries(component.props).map(([key, value]) => 
+                    React.createElement('div', {
+                        key: key,
+                        className: 'space-y-2'
+                    }, [
+                        React.createElement('label', {
+                            key: 'label',
+                            className: 'block text-sm font-medium text-gray-700 capitalize'
+                        }, key.replace(/([A-Z])/g, ' $1').trim()),
+                        
+                        React.createElement('input', {
+                            key: 'input',
+                            type: 'text',
+                            value: value,
+                            onChange: (e) => handleChange(key, e.target.value),
+                            className: 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        })
+                    ])
+                )
+            ]);
+        }
+
+        // Main Visual Editor
+        function VisualEditor() {
+            const [components, setComponents] = useState([]);
+            const [selectedComponent, setSelectedComponent] = useState(null);
+            const [pages, setPages] = useState([]);
+            const [currentPage, setCurrentPage] = useState(null);
+            const [saveStatus, setSaveStatus] = useState('');
+
+            useEffect(() => {
+                loadPages();
+            }, []);
+
+            const loadPages = async () => {
+                const pagesData = await api.getPages();
+                setPages(pagesData);
+                if (pagesData.length > 0) {
+                    setCurrentPage(pagesData[0]);
+                    if (pagesData[0].content && pagesData[0].content.components) {
+                        setComponents(pagesData[0].content.components);
+                    }
+                }
+            };
+
+            const addComponent = (componentType) => {
+                const template = ComponentLibrary.find(c => c.id === componentType);
+                if (!template) return;
+
+                const newComponent = {
+                    id: `${componentType}-${Date.now()}`,
+                    type: componentType,
+                    props: { ...template.defaultProps },
+                    children: []
+                };
+
+                setComponents(prev => [...prev, newComponent]);
+            };
+
+            const updateComponent = (id, newProps) => {
+                setComponents(prev => prev.map(comp => 
+                    comp.id === id ? { ...comp, props: newProps } : comp
+                ));
+            };
+
+            const savePage = async () => {
+                setSaveStatus('Saving...');
+                
+                const pageData = {
+                    title: currentPage?.title || 'New Page',
+                    slug: currentPage?.slug || `page-${Date.now()}`,
+                    content: {
+                        components: components
+                    }
+                };
+
+                const result = await api.savePage(pageData);
+                
+                if (result.success) {
+                    setSaveStatus('✅ Saved!');
+                    setTimeout(() => setSaveStatus(''), 2000);
+                } else {
+                    setSaveStatus('❌ Save failed');
+                    setTimeout(() => setSaveStatus(''), 3000);
+                }
+            };
+
+            const selectedComp = components.find(c => c.id === selectedComponent);
+
+            return React.createElement('div', {
+                className: 'h-screen flex bg-white'
+            }, [
+                // Component Palette
+                React.createElement('div', {
+                    key: 'palette',
+                    className: 'w-64 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto'
+                }, [
+                    React.createElement('h2', {
+                        key: 'title',
+                        className: 'font-semibold text-lg mb-4'
+                    }, 'Components'),
+                    
+                    React.createElement('div', {
+                        key: 'components',
+                        className: 'space-y-2'
+                    }, ComponentLibrary.map(comp => 
+                        React.createElement('div', {
+                            key: comp.id,
+                            className: 'component-item p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:shadow-md',
+                            onClick: () => addComponent(comp.id)
+                        }, [
+                            React.createElement('div', {
+                                key: 'icon',
+                                className: 'text-2xl mb-1'
+                            }, comp.icon),
+                            React.createElement('div', {
+                                key: 'name',
+                                className: 'font-medium text-sm'
+                            }, comp.name),
+                            React.createElement('div', {
+                                key: 'category',
+                                className: 'text-xs text-gray-500'
+                            }, comp.category)
+                        ])
+                    ))
+                ]),
+
+                // Canvas Area
+                React.createElement('div', {
+                    key: 'canvas',
+                    className: 'flex-1 flex flex-col'
+                }, [
+                    // Toolbar
+                    React.createElement('div', {
+                        key: 'toolbar',
+                        className: 'bg-white border-b border-gray-200 p-4 flex items-center justify-between'
+                    }, [
+                        React.createElement('h1', {
+                            key: 'title',
+                            className: 'text-xl font-bold text-gray-800'
+                        }, '🏛️ Old World Charm - Visual Editor'),
+                        
+                        React.createElement('div', {
+                            key: 'actions',
+                            className: 'flex items-center space-x-4'
+                        }, [
+                            React.createElement('span', {
+                                key: 'status',
+                                className: 'text-sm text-gray-600'
+                            }, saveStatus),
+                            
+                            React.createElement('button', {
+                                key: 'save',
+                                onClick: savePage,
+                                className: 'px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors'
+                            }, 'Save Page'),
+                            
+                            React.createElement('button', {
+                                key: 'refresh',
+                                onClick: loadPages,
+                                className: 'px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors'
+                            }, 'Refresh')
+                        ])
+                    ]),
+
+                    // Canvas
+                    React.createElement('div', {
+                        key: 'canvas-area',
+                        className: 'flex-1 canvas-area p-8 overflow-auto'
+                    }, [
+                        React.createElement('div', {
+                            key: 'canvas-content',
+                            className: 'max-w-4xl mx-auto bg-white rounded-lg shadow-lg min-h-96 p-8 drop-zone',
+                            onClick: () => setSelectedComponent(null)
+                        }, components.length === 0 
+                            ? React.createElement('div', {
+                                className: 'text-center text-gray-500 py-16'
+                            }, [
+                                React.createElement('div', {
+                                    key: 'icon',
+                                    className: 'text-6xl mb-4'
+                                }, '🎨'),
+                                React.createElement('h3', {
+                                    key: 'title',
+                                    className: 'text-xl font-medium mb-2'
+                                }, 'Start Building Your Page'),
+                                React.createElement('p', {
+                                    key: 'desc'
+                                }, 'Drag components from the left panel to start building your website')
+                            ])
+                            : React.createElement('div', {
+                                className: 'space-y-4'
+                            }, components.map(comp => 
+                                React.createElement(ComponentRenderer, {
+                                    key: comp.id,
+                                    component: comp,
+                                    isSelected: selectedComponent === comp.id,
+                                    onSelect: setSelectedComponent,
+                                    onUpdate: updateComponent
+                                })
+                            ))
+                        )
+                    ])
+                ]),
+
+                // Properties Panel
+                React.createElement('div', {
+                    key: 'properties',
+                    className: 'w-80 bg-gray-50 border-l border-gray-200 overflow-y-auto'
+                }, [
+                    React.createElement('div', {
+                        key: 'header',
+                        className: 'p-4 border-b border-gray-200'
+                    }, React.createElement('h2', {
+                        className: 'font-semibold text-lg'
+                    }, 'Properties')),
+                    
+                    React.createElement(PropertyEditor, {
+                        key: 'editor',
+                        component: selectedComp,
+                        onUpdate: updateComponent
+                    })
+                ])
+            ]);
+        }
+
+        // Render the app
+        ReactDOM.render(React.createElement(VisualEditor), document.getElementById('root'));
+    </script>
+</body>
+</html>

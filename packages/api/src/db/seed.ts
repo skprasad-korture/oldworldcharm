@@ -1,5 +1,5 @@
-import { db } from './connection.js';
-import { pages, themes, mediaAssets, blogPosts } from './schema.js';
+import { db } from './connection';
+import { pages, themes, mediaAssets, blogPosts } from './schema';
 
 // Default theme configuration
 const defaultTheme = {

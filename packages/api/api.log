@@ -1,0 +1,160 @@
+🎉 Minimal API server is running!
+📡 Server: http://localhost:3001
+📊 Health: http://localhost:3001/health
+📄 Pages: http://localhost:3001/api/pages
+
+✅ Database backend is fully operational!
+[07:02:30 UTC] [32mINFO[39m: [36mServer listening at http://0.0.0.0:3001[39m
+[07:02:50 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-1"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/health",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 53606
+    }
+[07:02:50 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-1"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 27.857874989509583
+[07:07:57 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-2"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/api/pages",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 55421
+    }
+[07:07:57 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-2"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 52.828166007995605
+[07:09:08 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-3"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/api/pages",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 55809
+    }
+[07:09:08 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-3"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 15.882749915122986
+[07:09:56 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-4"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/api/pages",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56110
+    }
+[07:09:56 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-4"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 28.196750044822693
+[07:09:56 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-5"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/favicon.ico",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56110
+    }
+[07:09:56 UTC] [32mINFO[39m: [36mRoute GET:/favicon.ico not found[39m
+    [35mreqId[39m: "req-5"
+[07:09:56 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-5"
+    [35mres[39m: {
+      "statusCode": 404
+    }
+    [35mresponseTime[39m: 0.3666670322418213
+[07:10:13 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-6"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/health",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56212
+    }
+[07:10:13 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-6"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 3.1269999742507935
+[07:10:13 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-7"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/api/pages",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56212
+    }
+[07:10:13 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-7"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 2.667791962623596
+[07:10:13 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-8"
+    [35mreq[39m: {
+      "method": "POST",
+      "url": "/api/pages",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56215
+    }
+[07:10:13 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-8"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 10.31375002861023
+[07:10:13 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-9"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/api/pages/a1f36a0c-e188-4287-8164-cb71eb9992b8",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56212
+    }
+[07:10:13 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-9"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 3.4719159603118896
+[07:10:13 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-a"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/api/pages",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 56215
+    }
+[07:10:13 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-a"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 1.1411659717559814
+Database connection closed

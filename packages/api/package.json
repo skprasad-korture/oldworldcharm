@@ -16,7 +16,8 @@
     "db:seed": "tsx src/db/seed.ts",
     "db:studio": "drizzle-kit studio",
     "db:reset": "pnpm db:generate && pnpm db:migrate && pnpm db:seed",
-    "db:test": "tsx src/db/test-connection.ts"
+    "db:test": "tsx src/db/test-connection.ts",
+    "db:setup": "tsx src/db/setup.ts"
   },
   "dependencies": {
     "@fastify/cookie": "^9.4.0",
@@ -31,21 +32,22 @@
     "@fastify/swagger": "^8.15.0",
     "@fastify/swagger-ui": "^1.10.2",
     "@oldworldcharm/shared": "workspace:*",
-    "drizzle-orm": "^0.29.1",
+    "drizzle-orm": "^0.44.6",
     "fastify": "^4.24.3",
     "fastify-plugin": "^5.1.0",
     "pino": "^10.0.0",
+    "pino-pretty": "^13.1.2",
     "postgres": "^3.4.3",
     "redis": "^4.6.11",
     "sharp": "^0.33.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
+    "@types/node": "^22.10.0",
     "@types/sharp": "^0.32.0",
-    "drizzle-kit": "^0.20.6",
+    "drizzle-kit": "^0.31.0",
     "tsx": "^4.6.2",
-    "typescript": "^5.3.0",
+    "typescript": "^5.9.3",
     "vitest": "^1.0.4"
   }
 }

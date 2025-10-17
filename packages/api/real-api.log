@@ -1,0 +1,22 @@
+🎉 Minimal API server is running!
+📡 Server: http://localhost:3001
+📊 Health: http://localhost:3001/health
+📄 Pages: http://localhost:3001/api/pages
+
+✅ Database backend is fully operational!
+[07:17:08 UTC] [32mINFO[39m: [36mServer listening at http://0.0.0.0:3001[39m
+[07:17:21 UTC] [32mINFO[39m: [36mincoming request[39m
+    [35mreqId[39m: "req-1"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/health",
+      "hostname": "localhost:3001",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 58758
+    }
+[07:17:21 UTC] [32mINFO[39m: [36mrequest completed[39m
+    [35mreqId[39m: "req-1"
+    [35mres[39m: {
+      "statusCode": 200
+    }
+    [35mresponseTime[39m: 6.80333399772644

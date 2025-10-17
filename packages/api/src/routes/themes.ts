@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import { eq, desc, asc, and, like, sql } from 'drizzle-orm';
-import { db, themes } from '../db/index.js';
+import { db, themes } from '../db/index';
 import {
   ThemeColorsSchema,
   ThemeTypographySchema,

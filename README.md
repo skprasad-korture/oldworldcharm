@@ -76,17 +76,18 @@ cd oldworldcharm
 pnpm install
 
 # Start database services
-docker-compose up -d
+docker-compose up -d postgres redis
 
-# Set up database
+# Set up database (automated)
 cd packages/api
-pnpm db:migrate
-pnpm db:seed
+pnpm db:setup
 
 # Start development servers
 cd ../..
 pnpm dev
 ```
+
+📖 **Detailed Setup Guide**: See [SETUP.md](SETUP.md) for comprehensive instructions and troubleshooting.
 
 ### Development Commands
 

@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import { eq, desc, asc, and, or, like, sql } from 'drizzle-orm';
-import { db, pages, pageVersions } from '../db/index.js';
+import { db, pages, pageVersions } from '../db/index';
 import {
   PageStatusSchema,
   SEODataSchema,

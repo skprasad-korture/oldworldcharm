@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import { eq, desc, asc, and, or, like, sql } from 'drizzle-orm';
-import { db, contentTemplates } from '../db/index.js';
+import { db, contentTemplates } from '../db/index';
 import { ComponentInstanceSchema } from '@oldworldcharm/shared';
 
 // Request schemas for template endpoints

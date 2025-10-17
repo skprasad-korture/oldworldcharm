@@ -1,5 +1,5 @@
 import { eq, desc, and, sql } from 'drizzle-orm';
-import { db, rssFeeds, pages, blogPosts } from '../db/index.js';
+import { db, rssFeeds, pages, blogPosts } from '../db/index';
 import type { BlogPost } from '@oldworldcharm/shared';
 
 export interface RSSFeed {

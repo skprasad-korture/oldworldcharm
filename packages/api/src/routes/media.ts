@@ -1,8 +1,8 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import { eq, desc, asc, and, like, sql, inArray, or } from 'drizzle-orm';
-import { db, mediaAssets } from '../db/index.js';
-import { mediaService } from '../services/media-service.js';
+import { db, mediaAssets } from '../db/index';
+import { mediaService } from '../services/media-service';
 import path from 'path';
 import fs from 'fs/promises';
 import { createWriteStream } from 'fs';

@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
-import { SocialService } from '../services/social-service.js';
-import { BlogService } from '../services/blog-service.js';
+import { SocialService } from '../services/social-service';
+import { BlogService } from '../services/blog-service';
 
 // Request schemas for social endpoints
 const RecordShareSchema = z.object({

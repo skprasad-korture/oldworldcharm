@@ -1,5 +1,5 @@
 import { eq, desc, asc, and, or, like, sql } from 'drizzle-orm';
-import { db, comments, pages, blogPosts } from '../db/index.js';
+import { db, comments, pages, blogPosts } from '../db/index';
 
 export interface Comment {
   id: string;

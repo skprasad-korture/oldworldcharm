@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { ABTestService } from '../services/ab-test-service.js';
-import type { ABTest, ABTestVariant } from '@shared/types';
+import { ABTestService } from '../services/ab-test-service';
+import type { ABTest, ABTestVariant } from '@oldworldcharm/shared';
 
 // Mock the database and Redis dependencies
 vi.mock('../db/connection.js', () => ({

@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
-import { RSSService } from '../services/rss-service.js';
+import { RSSService } from '../services/rss-service';
 
 // Request schemas for RSS endpoints
 const CreateRSSFeedSchema = z.object({

@@ -1,8 +1,8 @@
 import { eq, and, desc, asc } from 'drizzle-orm';
-import { db } from '../db/connection.js';
-import { abTests, abTestResults, userSessions } from '../db/schema.js';
-import { ABTestManager } from '../db/redis.js';
-import type { ABTest, ABTestVariant, ABTestResults } from '@shared/types';
+import { db } from '../db/connection';
+import { abTests, abTestResults, userSessions } from '../db/schema';
+import { ABTestManager } from '../db/redis';
+import type { ABTest, ABTestVariant, ABTestResults } from '@oldworldcharm/shared';
 
 
 export class ABTestService {

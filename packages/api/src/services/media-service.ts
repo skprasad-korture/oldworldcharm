@@ -1,5 +1,5 @@
 import { eq, sql, inArray, or } from 'drizzle-orm';
-import { db, mediaAssets, pages } from '../db/index.js';
+import { db, mediaAssets, pages } from '../db/index';
 import path from 'path';
 import fs from 'fs/promises';
 import sharp from 'sharp';

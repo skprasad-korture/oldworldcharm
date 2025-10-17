@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { checkDatabaseConnection, checkRedisConnection } from '../db/index.js';
+import { checkDatabaseConnection, checkRedisConnection } from '../db/index';
 
 export default async function healthRoutes(fastify: FastifyInstance) {
   // Basic health check

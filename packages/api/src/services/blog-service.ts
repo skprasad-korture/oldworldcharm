@@ -1,5 +1,5 @@
 import { eq, desc, asc, and, or, like, sql } from 'drizzle-orm';
-import { db, pages, blogPosts } from '../db/index.js';
+import { db, pages, blogPosts } from '../db/index';
 import type { BlogPost, ComponentInstance } from '@oldworldcharm/shared';
 
 export interface BlogPostFilters {
