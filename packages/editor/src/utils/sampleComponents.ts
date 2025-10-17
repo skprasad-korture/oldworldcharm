@@ -217,5 +217,172 @@ export function registerSampleComponents() {
     allowedChildren: ['container', 'card', 'text', 'heading', 'image', 'button'],
   });
 
+  // Card component
+  componentRegistry.register({
+    id: 'card',
+    type: 'card',
+    displayName: 'Card',
+    category: 'layout',
+    component: () => null,
+    defaultProps: {
+      title: 'Card Title',
+      description: 'Card description goes here',
+      showHeader: true,
+      showFooter: false,
+    },
+    propSchema: z.object({
+      title: z.string().default('Card Title'),
+      description: z.string().default('Card description goes here'),
+      showHeader: z.boolean().default(true),
+      showFooter: z.boolean().default(false),
+    }),
+    metadata: {
+      description: 'A flexible card container component',
+      tags: ['layout', 'container', 'content'],
+      isContainer: true,
+    },
+    isContainer: true,
+  });
+
+  // Badge component
+  componentRegistry.register({
+    id: 'badge',
+    type: 'badge',
+    displayName: 'Badge',
+    category: 'data-display',
+    component: () => null,
+    defaultProps: {
+      text: 'Badge',
+      variant: 'default',
+    },
+    propSchema: z.object({
+      text: z.string().default('Badge'),
+      variant: z.enum(['default', 'secondary', 'destructive', 'outline']).default('default'),
+    }),
+    metadata: {
+      description: 'A small status indicator component',
+      tags: ['status', 'indicator', 'label'],
+      isContainer: false,
+    },
+    isContainer: false,
+  });
+
+  // Alert component
+  componentRegistry.register({
+    id: 'alert',
+    type: 'alert',
+    displayName: 'Alert',
+    category: 'feedback',
+    component: () => null,
+    defaultProps: {
+      title: 'Alert Title',
+      description: 'This is an alert message',
+      variant: 'default',
+    },
+    propSchema: z.object({
+      title: z.string().default('Alert Title'),
+      description: z.string().default('This is an alert message'),
+      variant: z.enum(['default', 'destructive']).default('default'),
+    }),
+    metadata: {
+      description: 'An alert message component',
+      tags: ['feedback', 'notification', 'message'],
+      isContainer: false,
+    },
+    isContainer: false,
+  });
+
+  // Separator component
+  componentRegistry.register({
+    id: 'separator',
+    type: 'separator',
+    displayName: 'Separator',
+    category: 'layout',
+    component: () => null,
+    defaultProps: {
+      orientation: 'horizontal',
+    },
+    propSchema: z.object({
+      orientation: z.enum(['horizontal', 'vertical']).default('horizontal'),
+    }),
+    metadata: {
+      description: 'A visual separator line',
+      tags: ['layout', 'divider', 'separator'],
+      isContainer: false,
+    },
+    isContainer: false,
+  });
+
+  // Avatar component
+  componentRegistry.register({
+    id: 'avatar',
+    type: 'avatar',
+    displayName: 'Avatar',
+    category: 'data-display',
+    component: () => null,
+    defaultProps: {
+      src: '',
+      alt: 'Avatar',
+      fallback: 'A',
+      size: 'default',
+    },
+    propSchema: z.object({
+      src: z.string().default(''),
+      alt: z.string().default('Avatar'),
+      fallback: z.string().default('A'),
+      size: z.enum(['sm', 'default', 'lg']).default('default'),
+    }),
+    metadata: {
+      description: 'A user avatar image component',
+      tags: ['user', 'profile', 'image'],
+      isContainer: false,
+    },
+    isContainer: false,
+  });
+
+  // Progress component
+  componentRegistry.register({
+    id: 'progress',
+    type: 'progress',
+    displayName: 'Progress',
+    category: 'feedback',
+    component: () => null,
+    defaultProps: {
+      value: 50,
+      max: 100,
+    },
+    propSchema: z.object({
+      value: z.number().min(0).default(50),
+      max: z.number().min(1).default(100),
+    }),
+    metadata: {
+      description: 'A progress indicator component',
+      tags: ['progress', 'loading', 'indicator'],
+      isContainer: false,
+    },
+    isContainer: false,
+  });
+
+  // Skeleton component
+  componentRegistry.register({
+    id: 'skeleton',
+    type: 'skeleton',
+    displayName: 'Skeleton',
+    category: 'feedback',
+    component: () => null,
+    defaultProps: {
+      className: 'h-4 w-full',
+    },
+    propSchema: z.object({
+      className: z.string().default('h-4 w-full'),
+    }),
+    metadata: {
+      description: 'A loading skeleton placeholder',
+      tags: ['loading', 'placeholder', 'skeleton'],
+      isContainer: false,
+    },
+    isContainer: false,
+  });
+
   console.log('Sample components registered successfully');
 }

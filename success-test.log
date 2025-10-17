@@ -1,0 +1,56 @@
+
+> oldworldcharm@0.1.0 dev /Users/skp/Code/shadcn-website-builder
+> pnpm -r --parallel dev
+
+Scope: 3 of 4 workspace projects
+packages/api dev$ tsx watch src/index.ts
+packages/editor dev$ vite
+packages/shared dev$ tsc --watch
+packages/shared dev: [2J[3J[H10:26:03 PM - Starting compilation in watch mode...
+packages/editor dev: Port 5173 is in use, trying another one...
+packages/editor dev: Port 5174 is in use, trying another one...
+packages/editor dev: Port 5175 is in use, trying another one...
+packages/editor dev: Port 5176 is in use, trying another one...
+packages/editor dev: Port 5177 is in use, trying another one...
+packages/editor dev: Port 5178 is in use, trying another one...
+packages/editor dev:   VITE v7.1.10  ready in 967 ms
+packages/editor dev:   ➜  Local:   http://localhost:5179/
+packages/editor dev:   ➜  Network: use --host to expose
+packages/shared dev: 10:26:04 PM - Found 0 errors. Watching for file changes.
+packages/api dev: {"level":30,"time":1760720164673,"pid":84028,"hostname":"SKs-Mac-mini.local","msg":"Server listening at http://0.0.0.0:3001"}
+packages/api dev: 🏛️ Visual Website Builder API server running
+packages/api dev: 📡 Server: http://localhost:3001
+packages/api dev: 📊 Health: http://localhost:3001/health
+packages/api dev: 📚 Docs: http://localhost:3001/docs
+packages/api dev: 🔐 Auth: http://localhost:3001/api/auth
+packages/editor dev: warn - No utility classes were detected in your source files. If this is unexpected, double-check the `content` option in your Tailwind CSS configuration.
+packages/editor dev: warn - https://tailwindcss.com/docs/content-configuration
+packages/api dev: {"level":30,"time":1760720394114,"pid":84028,"hostname":"SKs-Mac-mini.local","reqId":"req-1","req":{"method":"GET","url":"/","hostname":"localhost:3001","remoteAddress":"127.0.0.1","remotePort":54990},"msg":"incoming request"}
+packages/api dev: {"level":30,"time":1760720394121,"pid":84028,"hostname":"SKs-Mac-mini.local","method":"GET","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","ip":"127.0.0.1","msg":"Incoming request"}
+packages/api dev: {"level":30,"time":1760720394174,"pid":84028,"hostname":"SKs-Mac-mini.local","method":"GET","url":"/","statusCode":404,"responseTime":58.598166942596436,"msg":"Request completed"}
+packages/api dev: (node:84028) [FSTDEP020] DeprecationWarning: You are using the deprecated "reply.getResponseTime()" method. Use the "reply.elapsedTime" property instead. Method "reply.getResponseTime()" will be removed in `fastify@5`.
+packages/api dev: (Use `node --trace-deprecation ...` to show where the warning was created)
+packages/api dev: {"level":30,"time":1760720394174,"pid":84028,"hostname":"SKs-Mac-mini.local","reqId":"req-1","res":{"statusCode":404},"responseTime":58.598166942596436,"msg":"request completed"}
+packages/api dev: {"level":30,"time":1760720394263,"pid":84028,"hostname":"SKs-Mac-mini.local","reqId":"req-2","req":{"method":"GET","url":"/favicon.ico","hostname":"localhost:3001","remoteAddress":"127.0.0.1","remotePort":54990},"msg":"incoming request"}
+packages/api dev: {"level":30,"time":1760720394264,"pid":84028,"hostname":"SKs-Mac-mini.local","method":"GET","url":"/favicon.ico","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","ip":"127.0.0.1","msg":"Incoming request"}
+packages/api dev: {"level":30,"time":1760720394265,"pid":84028,"hostname":"SKs-Mac-mini.local","method":"GET","url":"/favicon.ico","statusCode":404,"responseTime":1.8497090339660645,"msg":"Request completed"}
+packages/api dev: {"level":30,"time":1760720394265,"pid":84028,"hostname":"SKs-Mac-mini.local","reqId":"req-2","res":{"statusCode":404},"responseTime":1.8497090339660645,"msg":"request completed"}
+packages/api dev: {"level":30,"time":1760720401044,"pid":84028,"hostname":"SKs-Mac-mini.local","reqId":"req-3","req":{"method":"GET","url":"/doc","hostname":"localhost:3001","remoteAddress":"127.0.0.1","remotePort":55033},"msg":"incoming request"}
+packages/api dev: {"level":30,"time":1760720401045,"pid":84028,"hostname":"SKs-Mac-mini.local","method":"GET","url":"/doc","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","ip":"127.0.0.1","msg":"Incoming request"}
+packages/api dev: {"level":30,"time":1760720401050,"pid":84028,"hostname":"SKs-Mac-mini.local","method":"GET","url":"/doc","statusCode":404,"responseTime":5.894958019256592,"msg":"Request completed"}
+packages/api dev: {"level":30,"time":1760720401050,"pid":84028,"hostname":"SKs-Mac-mini.local","reqId":"req-3","res":{"statusCode":404},"responseTime":5.894958019256592,"msg":"request completed"}
+packages/api dev: {"level":30,"time":1760720406170,"pid":84028,"hostname":"SKs-Mac-mini.local","reqId":"req-4","req":{"method":"GET","url":"/api","hostname":"localhost:3001","remoteAddress":"127.0.0.1","remotePort":55062},"msg":"incoming request"}
+packages/api dev: {"level":30,"time":1760720406171,"pid":84028,"hostname":"SKs-Mac-mini.local","method":"GET","url":"/api","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","ip":"127.0.0.1","msg":"Incoming request"}
+packages/api dev: {"level":30,"time":1760720406181,"pid":84028,"hostname":"SKs-Mac-mini.local","method":"GET","url":"/api","statusCode":404,"responseTime":10.560082912445068,"msg":"Request completed"}
+packages/api dev: {"level":30,"time":1760720406181,"pid":84028,"hostname":"SKs-Mac-mini.local","reqId":"req-4","res":{"statusCode":404},"responseTime":10.560082912445068,"msg":"request completed"}
+packages/editor dev: 10:30:32 PM [vite] vite.config.ts changed, restarting server...
+packages/editor dev: 10:30:32 PM [vite] server restarted.
+packages/api dev: 🛑 Shutting down gracefully...
+packages/api dev: Database connection closed
+packages/api dev: Redis connection closed
+packages/api dev: ✅ Graceful shutdown completed
+packages/shared dev: Failed
+/Users/skp/Code/shadcn-website-builder/packages/shared:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @oldworldcharm/shared@0.1.0 dev: `tsc --watch`
+Command failed with signal "SIGTERM"
+ ELIFECYCLE  Command failed.

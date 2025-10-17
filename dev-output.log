@@ -1,0 +1,57 @@
+
+> oldworldcharm@0.1.0 dev /Users/skp/Code/shadcn-website-builder
+> pnpm -r --parallel dev
+
+Scope: 3 of 4 workspace projects
+packages/api dev$ tsx watch src/index.ts
+packages/editor dev$ vite
+packages/shared dev$ tsc --watch
+packages/shared dev: [2J[3J[H10:11:16 PM - Starting compilation in watch mode...
+packages/editor dev: Port 5173 is in use, trying another one...
+packages/editor dev: Port 5174 is in use, trying another one...
+packages/editor dev: Port 5175 is in use, trying another one...
+packages/editor dev: Port 5176 is in use, trying another one...
+packages/editor dev: Port 5177 is in use, trying another one...
+packages/editor dev: Port 5178 is in use, trying another one...
+packages/editor dev: Port 5179 is in use, trying another one...
+packages/editor dev: Port 5180 is in use, trying another one...
+packages/editor dev:   VITE v7.1.10  ready in 486 ms
+packages/editor dev:   ➜  Local:   http://localhost:5181/
+packages/editor dev:   ➜  Network: use --host to expose
+packages/shared dev: 10:11:17 PM - Found 0 errors. Watching for file changes.
+packages/api dev: Failed to start server: FastifyError [Error]: Failed building the serialization schema for POST: /api/pages, due to error Cannot find reference "#/components/schemas/Error"
+packages/api dev:     at Boot.<anonymous> (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/fastify@4.29.1/node_modules/fastify/lib/route.js:429:21)
+packages/api dev:     at Object.onceWrapper (node:events:632:28)
+packages/api dev:     at Boot.emit (node:events:530:35)
+packages/api dev:     at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/avvio@8.4.0/node_modules/avvio/boot.js:102:12
+packages/api dev:     at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/avvio@8.4.0/node_modules/avvio/boot.js:437:7
+packages/api dev:     at done (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/avvio@8.4.0/node_modules/avvio/lib/plugin.js:226:5)
+packages/api dev:     at check (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/avvio@8.4.0/node_modules/avvio/lib/plugin.js:250:9)
+packages/api dev:     at node:internal/process/task_queues:151:7
+packages/api dev:     at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+packages/api dev:     at AsyncResource.runMicrotask (node:internal/process/task_queues:148:8) {
+packages/api dev:   code: 'FST_ERR_SCH_SERIALIZATION_BUILD',
+packages/api dev:   statusCode: 500
+packages/api dev: }
+packages/api dev: 10:15:34 PM [tsx] change in ./src/routes/themes.ts Rerunning...
+packages/api dev: Failed to start server: FastifyError [Error]: Failed building the validation schema for POST: /api/seo/analyze, due to error schema is invalid: data/required must be array
+packages/api dev:     at Boot.<anonymous> (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/fastify@4.29.1/node_modules/fastify/lib/route.js:420:21)
+packages/api dev:     at Object.onceWrapper (node:events:632:28)
+packages/api dev:     at Boot.emit (node:events:530:35)
+packages/api dev:     at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/avvio@8.4.0/node_modules/avvio/boot.js:102:12
+packages/api dev:     at /Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/avvio@8.4.0/node_modules/avvio/boot.js:437:7
+packages/api dev:     at done (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/avvio@8.4.0/node_modules/avvio/lib/plugin.js:226:5)
+packages/api dev:     at check (/Users/skp/Code/shadcn-website-builder/node_modules/.pnpm/avvio@8.4.0/node_modules/avvio/lib/plugin.js:250:9)
+packages/api dev:     at node:internal/process/task_queues:151:7
+packages/api dev:     at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+packages/api dev:     at AsyncResource.runMicrotask (node:internal/process/task_queues:148:8) {
+packages/api dev:   code: 'FST_ERR_SCH_VALIDATION_BUILD',
+packages/api dev:   statusCode: 500
+packages/api dev: }
+packages/api dev: c
+packages/api dev: Failed
+/Users/skp/Code/shadcn-website-builder/packages/api:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @oldworldcharm/api@0.1.0 dev: `tsx watch src/index.ts`
+Exit status 15
+packages/shared dev: Failed
+ ELIFECYCLE  Command failed.

@@ -76,8 +76,6 @@ export default async function authRoutes(fastify: FastifyInstance) {
               timestamp: { type: 'string', format: 'date-time' },
             },
           },
-          400: { $ref: '#/components/schemas/Error' },
-          401: { $ref: '#/components/schemas/Error' },
         },
       },
       preHandler: fastify.validate({ body: LoginSchema }),
@@ -174,8 +172,7 @@ export default async function authRoutes(fastify: FastifyInstance) {
               timestamp: { type: 'string', format: 'date-time' },
             },
           },
-          400: { $ref: '#/components/schemas/Error' },
-          409: { $ref: '#/components/schemas/Error' },
+
         },
       },
       preHandler: fastify.validate({ body: RegisterSchema }),
@@ -309,7 +306,7 @@ export default async function authRoutes(fastify: FastifyInstance) {
               timestamp: { type: 'string', format: 'date-time' },
             },
           },
-          401: { $ref: '#/components/schemas/Error' },
+
         },
       },
       preHandler: fastify.authenticate,
@@ -369,8 +366,7 @@ export default async function authRoutes(fastify: FastifyInstance) {
               timestamp: { type: 'string', format: 'date-time' },
             },
           },
-          400: { $ref: '#/components/schemas/Error' },
-          401: { $ref: '#/components/schemas/Error' },
+
         },
       },
       preHandler: fastify.validate({ body: RefreshTokenSchema }),

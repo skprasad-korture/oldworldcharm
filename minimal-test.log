@@ -1,0 +1,37 @@
+
+> oldworldcharm@0.1.0 dev /Users/skp/Code/shadcn-website-builder
+> pnpm -r --parallel dev
+
+Scope: 3 of 4 workspace projects
+packages/api dev$ tsx watch src/index.ts
+packages/editor dev$ vite
+packages/shared dev$ tsc --watch
+packages/shared dev: [2J[3J[H10:22:44 PM - Starting compilation in watch mode...
+packages/editor dev: Port 5173 is in use, trying another one...
+packages/editor dev: Port 5174 is in use, trying another one...
+packages/editor dev: Port 5175 is in use, trying another one...
+packages/editor dev: Port 5176 is in use, trying another one...
+packages/editor dev: Port 5177 is in use, trying another one...
+packages/editor dev: Port 5178 is in use, trying another one...
+packages/editor dev:   VITE v7.1.10  ready in 150 ms
+packages/editor dev:   ➜  Local:   http://localhost:5179/
+packages/editor dev:   ➜  Network: use --host to expose
+packages/shared dev: 10:22:44 PM - Found 0 errors. Watching for file changes.
+packages/api dev: Failed to start server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3001
+packages/api dev:     at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+packages/api dev:     at listenInCluster (node:net:1996:12)
+packages/api dev:     at node:net:2205:7
+packages/api dev:     at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+packages/api dev:   code: 'EADDRINUSE',
+packages/api dev:   errno: -48,
+packages/api dev:   syscall: 'listen',
+packages/api dev:   address: '0.0.0.0',
+packages/api dev:   port: 3001
+packages/api dev: }
+packages/api dev: Failed
+/Users/skp/Code/shadcn-website-builder/packages/api:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @oldworldcharm/api@0.1.0 dev: `tsx watch src/index.ts`
+Exit status 15
+packages/shared dev: Failed
+packages/editor dev: Failed
+ ELIFECYCLE  Command failed.

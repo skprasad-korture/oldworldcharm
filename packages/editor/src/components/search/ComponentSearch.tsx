@@ -35,7 +35,7 @@ export const ComponentSearch: React.FC<ComponentSearchProps> = ({
   const [query, setQuery] = useState(initialQuery);
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [filters, setFilters] = useState<PaletteFilters>({});
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Debounced search

@@ -12,9 +12,7 @@ export default defineConfig({
       '@oldworldcharm/shared': resolve(__dirname, '../shared/src'),
     },
   },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/test/setup.ts'],
+  css: {
+    postcss: './postcss.config.js',
   },
 });

@@ -1,7 +1,9 @@
 // Individual component item in the palette
-import React, { useState } from 'react';
+import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { ComponentItemProps, ComponentDragData } from './types';
+import { useEditorStore } from '../../store/editorStore';
+import { createComponentInstance } from '../../utils/componentUtils';
 
 /**
  * Individual component item in the palette
@@ -33,8 +35,15 @@ export const ComponentItem: React.FC<ComponentItemProps> = ({
     data: dragData,
   });
 
+  const { addComponent } = useEditorStore();
+
   const handleClick = () => {
     onSelect?.(component);
+    // Add component to canvas when clicked
+    const newComponent = createComponentInstance(component.type, component.defaultProps);
+    if (newComponent) {
+      addComponent(newComponent);
+    }
   };
 
   // Call the onDragStart callback when dragging starts

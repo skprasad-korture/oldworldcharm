@@ -1,0 +1,43 @@
+
+> oldworldcharm@0.1.0 dev /Users/skp/Code/shadcn-website-builder
+> pnpm -r --parallel dev
+
+Scope: 3 of 4 workspace projects
+packages/api dev$ tsx watch src/index.ts
+packages/editor dev$ vite
+packages/shared dev$ tsc --watch
+packages/shared dev: [2J[3J[H10:35:46 PM - Starting compilation in watch mode...
+packages/editor dev: Port 5173 is in use, trying another one...
+packages/editor dev: Port 5174 is in use, trying another one...
+packages/editor dev: Port 5175 is in use, trying another one...
+packages/editor dev: Port 5176 is in use, trying another one...
+packages/editor dev: Port 5177 is in use, trying another one...
+packages/editor dev: Port 5178 is in use, trying another one...
+packages/editor dev:   VITE v7.1.10  ready in 394 ms
+packages/editor dev:   ➜  Local:   http://localhost:5179/
+packages/editor dev:   ➜  Network: use --host to expose
+packages/shared dev: 10:35:47 PM - Found 0 errors. Watching for file changes.
+packages/api dev: {"level":30,"time":1760720748078,"pid":92640,"hostname":"SKs-Mac-mini.local","msg":"Server listening at http://0.0.0.0:3001"}
+packages/api dev: 🏛️ Visual Website Builder API server running
+packages/api dev: 📡 Server: http://localhost:3001
+packages/api dev: 📊 Health: http://localhost:3001/health
+packages/api dev: 📚 Docs: http://localhost:3001/docs
+packages/api dev: 🔐 Auth: http://localhost:3001/api/auth
+packages/editor dev: warn - No utility classes were detected in your source files. If this is unexpected, double-check the `content` option in your Tailwind CSS configuration.
+packages/editor dev: warn - https://tailwindcss.com/docs/content-configuration
+packages/editor dev: 10:39:02 PM [vite] (client) hmr update /src/main.tsx
+packages/editor dev: 10:39:02 PM [vite] (client) hmr invalidate /src/main.tsx Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+packages/editor dev: 10:39:02 PM [vite] (client) page reload src/main.tsx
+packages/editor dev: 10:41:26 PM [vite] (client) hmr update /src/main.tsx
+packages/editor dev: 10:41:26 PM [vite] (client) hmr update /src/main.tsx
+packages/editor dev: 10:41:26 PM [vite] (client) hmr invalidate /src/main.tsx Could not Fast Refresh ("true" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+packages/editor dev: 10:41:26 PM [vite] (client) page reload src/main.tsx
+packages/api dev: 🛑 Shutting down gracefully...
+packages/api dev: Database connection closed
+packages/shared dev: Failed
+/Users/skp/Code/shadcn-website-builder/packages/shared:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @oldworldcharm/shared@0.1.0 dev: `tsc --watch`
+Command failed with signal "SIGTERM"
+packages/api dev: Redis connection closed
+packages/api dev: ✅ Graceful shutdown completed
+ ELIFECYCLE  Command failed.

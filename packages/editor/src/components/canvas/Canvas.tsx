@@ -14,7 +14,8 @@ import { useEditorStore } from '../../store/editorStore';
 import { CanvasComponent } from './CanvasComponent';
 import { DropZone } from './DropZone';
 import { DragPreview } from './DragPreview';
-import { createComponentInstanceFromDrag, getDragData } from '../../utils/dragDrop';
+import { createComponentInstanceFromDrag } from '../../utils/dragDrop';
+import { ComponentDragData } from '../palette/types';
 
 export interface CanvasProps {
   className?: string;
@@ -56,7 +57,7 @@ export function Canvas({ className = '' }: CanvasProps) {
     // Check if dragging from palette or canvas
     if (active.data.current?.source === 'palette') {
       // Dragging from component palette
-      const dragData = active.data.current;
+      const dragData = active.data.current as ComponentDragData;
       const newComponent = createComponentInstanceFromDrag(dragData);
       setDraggedComponent(newComponent);
     } else if (active.data.current?.source === 'canvas') {

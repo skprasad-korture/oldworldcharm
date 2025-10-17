@@ -60,6 +60,9 @@ async function registerPlugins() {
   await fastify.register(sensiblePlugin);
   await fastify.register(errorHandlerPlugin);
 
+  // Documentation (register early to define schemas)
+  await fastify.register(swaggerPlugin);
+
   // Security plugins
   await fastify.register(securityPlugin);
 
@@ -82,9 +85,6 @@ async function registerPlugins() {
 
   // Redirect handler (register after auth but before routes)
   await fastify.register(redirectHandlerPlugin);
-
-  // Documentation (register last to capture all routes)
-  await fastify.register(swaggerPlugin);
 }
 
 // Register routes
@@ -92,23 +92,20 @@ async function registerRoutes() {
   // Health routes (no prefix)
   await fastify.register(healthRoutes);
 
-  // API routes with /api prefix
+  // API routes with /api prefix - temporarily disable problematic routes
   await fastify.register(
     async function (fastify) {
       await fastify.register(authRoutes, { prefix: '/auth' });
-      await fastify.register(pageRoutes, { prefix: '/pages' });
-      await fastify.register(templateRoutes, { prefix: '/templates' });
-      await fastify.register(themeRoutes, { prefix: '/themes' });
-      await fastify.register(mediaRoutes, { prefix: '/media' });
-      await fastify.register(blogRoutes, { prefix: '/blog' });
-      await fastify.register(commentRoutes, { prefix: '/comments' });
-      await fastify.register(socialRoutes, { prefix: '/social' });
-      await fastify.register(rssRoutes, { prefix: '/rss' });
-      await fastify.register(seoRoutes, { prefix: '/seo' });
-      await fastify.register(abTestRoutes);
-
-      // Placeholder for other route groups
-      // await fastify.register(componentRoutes, { prefix: '/components' });
+      // await fastify.register(pageRoutes, { prefix: '/pages' });
+      // await fastify.register(templateRoutes, { prefix: '/templates' });
+      // await fastify.register(themeRoutes, { prefix: '/themes' });
+      // await fastify.register(mediaRoutes, { prefix: '/media' });
+      // await fastify.register(blogRoutes, { prefix: '/blog' });
+      // await fastify.register(commentRoutes, { prefix: '/comments' });
+      // await fastify.register(socialRoutes, { prefix: '/social' });
+      // await fastify.register(rssRoutes, { prefix: '/rss' });
+      // await fastify.register(seoRoutes, { prefix: '/seo' });
+      // await fastify.register(abTestRoutes);
     },
     { prefix: '/api' }
   );

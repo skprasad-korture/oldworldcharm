@@ -5,7 +5,7 @@ export interface ComponentInstance {
   id: string;
   type: string;
   props: Record<string, unknown>;
-  children?: ComponentInstance[];
+  children: ComponentInstance[];
   metadata?: ComponentMetadata;
 }
 

@@ -70,14 +70,20 @@ const seoRoutes: FastifyPluginAsync = async (fastify) => {
     Body: z.infer<typeof AnalyzePageRequestSchema>;
   }>('/analyze', {
     schema: {
-      body: AnalyzePageRequestSchema,
+      body: {
+        type: 'object',
+        properties: {
+          pageId: { type: 'string', format: 'uuid' },
+          forceReanalysis: { type: 'boolean' },
+        },
+        required: ['pageId'],
+      },
       response: {
-        200: SEOAnalysisSchema,
-        404: {
+        200: {
           type: 'object',
           properties: {
-            error: { type: 'string' },
-            message: { type: 'string' },
+            success: { type: 'boolean' },
+            data: { type: 'object' },
           },
         },
       },
@@ -133,12 +139,11 @@ const seoRoutes: FastifyPluginAsync = async (fastify) => {
         required: ['pageId'],
       },
       response: {
-        200: SEOAnalysisSchema,
-        404: {
+        200: {
           type: 'object',
           properties: {
-            error: { type: 'string' },
-            message: { type: 'string' },
+            success: { type: 'boolean' },
+            data: { type: 'object' },
           },
         },
       },
